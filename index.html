@@ -1,0 +1,173 @@
+<html>
+<title>tbd</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+    html {
+        height: 100%;
+        font-family: sans-serif;
+    }
+
+    body {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        height: calc(100% - 100px);
+        margin: 50px 0;
+        background-color: #ccc;
+    }
+
+    *,
+    :after,
+    :before {
+        box-sizing: border-box;
+    }
+
+    main {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    main section {
+        min-width: 250px;
+        max-width: 50%;
+        height: 100%;
+        text-align: center;
+    }
+
+    main img {
+        box-shadow: 0 0 10px 5px #666;
+    }
+
+    main form {
+        padding: 25px 0 50px 0;
+        text-align: left;
+    }
+
+    main form label {
+        display: block;
+        margin-top: 10px;
+        color: #444;
+        font-weight: bold;
+    }
+
+    main form input,
+    main form select {
+        width: 100%;
+    }
+
+    main form input:invalid {
+        outline: 2px solid #f00;
+        color: #f00;
+    }
+</style>
+<script src="lib/gibberish-aes-1.0.0.min.js"></script>
+<script type="text/javascript" src="lib/qrious.min.js"></script>
+<script type="text/javascript" src="langs/lang-map.js"></script>
+
+
+<body>
+    <div id="langMenu">
+    </div>
+
+    <span id='cHere'>Here is Something</span>
+    <div id='c2'>Here is Something</div>
+
+    <form name="qrForm">
+        <textarea name="plainText">
+  
+  </textarea>
+        <input type="text" name="pwd">
+        <input type="text" name="qrLabel">
+        <textarea name="encrypted">
+  
+  </textarea>
+        <input type="button" value="Go" onclick="doEnc()">
+    </form>
+
+    <img id="qrious" alt="Encrypted QR">
+
+
+
+</body>
+
+<script type="text/javascript">
+
+    var qr = window.qr = new QRious({
+        element: document.getElementById('qrious'),
+        size: 250,
+        value: 'Nothing here!'
+    });
+
+    var langMenu = getElement('langMenu');
+
+    function doEnc() {
+
+
+        var pwd = document.qrForm.pwd.value;
+        var plain = document.qrForm.plainText.value;
+
+        document.qrForm.encrypted.value = GibberishAES.enc(plain, pwd);
+
+        qr.level = 'L';
+        qr.size = 500;
+        qr.value = document.qrForm.qrLabel.value + '\n\nENC BLOCK:\n\n' + document.qrForm.encrypted.value;
+    }
+
+    function setLang(obj) {
+        loadLangFile(obj.id, updateLang);
+    }
+
+    var currentLangCode = '';
+
+    function loadLangFile(langCode, callback) {
+        var head = document.getElementsByTagName('head')[0];
+
+        var langScript = getElement("langFile");
+        if (langScript !== null) {
+            head.removeChild(langScript);
+        }
+
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        currentLangCode = langCode.toLowerCase();
+        script.src = 'langs/' + currentLangCode + '.js?v='+ new Date().getTime();
+        script.id = 'langFile';
+
+        script.onreadystatechange = callback;
+        script.onload = callback;
+
+        head.appendChild(script);
+    }
+
+    function showLangMenu() {
+        var html = '';
+        langsAvailable.forEach(function (lang) {
+
+            html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+        }, this);
+
+        langMenu.innerHTML = html.substring(0, html.length - 3);;
+    }
+
+    var updateLang = function () {
+        var langElements = document.querySelectorAll('[id^=c]');
+        langElements.forEach(function (element) {
+            element.innerHTML = translations[element.id];
+        }, this);
+    };
+
+    function getElement(id) {
+        return document.getElementById(id);
+    }
+
+    showLangMenu();
+    loadLangFile("en", updateLang);
+</script>
+
+</html>
