@@ -1,13 +1,13 @@
 var translations = {
-    cPass: 'Your Passphrase',
-    cPassConfirm: 'Confirm Passphrase',
-    cPlainTextLabel: 'Your Secret to Encrypt',
-    cEncQrData: 'QR Data',
-    cQrLabel: 'QR Label',
-    cQrDescription: 'QR Description',
-    cOptional: '(Optional)<i>test</i>',
-    cGenerate: 'Generate',
-    cEmbedLabel: 'Embed Label in the QR',
+    xtPass: 'Passphrase',
+    xtPassConfirm: 'Confirm Passphrase',
+    xtPlainTextLabel: 'Secret to Encrypt',
+    xtEncQrData: 'QR Data',
+    xtQrLabel: 'QR Label',
+    xtQrDescription: 'QR Description',
+    xtOptional: '(Optional)',
+    xtGenerate: 'Generate',
+    xtEmbedLabel: 'Embed Label in the QR',
 
-    hxPlainTextHint: 'Private key(s) or seed(s) or anything wish to encrypt. Exeeding 1024 characters may result in QR being hard to recognize by ceratian software.',    
+    xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
 }

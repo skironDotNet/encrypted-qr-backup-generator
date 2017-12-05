@@ -65,48 +65,48 @@
 
             <form name="qrForm" autocomplete="off" action="#">
                 <label>
-                    <span id="cPlainTextLabel"></span>
+                    <span id="xtPlainTextLabel"></span>
                 </label>
-                <textarea name="plainText" id="hxPlainTextHint" class="u-full-width" placeholder=""></textarea>
+                <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
 
                 <div class="row">
                     <div class="six columns">
                         <label>
-                            <span id='cQrLabel'></span>
-                            <span id='cOptional'>(Optional)</span>
+                            <span id="xtQrLabel"></span>
+                            <span id="xtOptional">(Optional)</span>
                         </label>
                         <input type="text" name="qrLabel" class="u-full-width">
 
                     </div>
                     <div class="six columns">
                         <label>
-                            <span id="cEmbedLabel"></span>
+                            <span id="xtEmbedLabel"></span>
                         </label>
                         <input type="checkbox" name="isEmbed">
                     </div>
                 </div>
 
                 <label>
-                    <span id='cQrDescription'></span>
-                    <span id='cOptional'></span>
+                    <span id="xtQrDescription"></span>
+                    <span id="xtOptional"></span>
                 </label>
                 <input type="text" name="qrDescription" class="u-full-width">
 
                 <label>
-                    <span id='cPass'></span>
+                    <span id="xtPass"></span>
                 </label>
                 <input type="password" name="pwd" class="u-full-width">
                 <label>
-                    <span id='cPassConfirm'></span>
+                    <span id="xtPassConfirm"></span>
                 </label>
                 <input type="password" name="pwdConfirm" class="u-full-width">
 
 
 
-                <button id="cGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
+                <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
 
                 <label>
-                    <span id='cEncQrData'></span>
+                    <span id="xtEncQrData"></span>
                 </label>
                 <textarea id="encrypted" class="u-full-width" readonly></textarea>
 
@@ -187,12 +187,12 @@
         }
 
         var updateLang = function () {
-            var langElements = document.querySelectorAll('[id^=c]');
+            var langElements = document.querySelectorAll('[id^=xt]');
             langElements.forEach(function (element) {
                 element.innerHTML = translations[element.id];
             }, this);
 
-            langElements = document.querySelectorAll('[id^=hx]');
+            langElements = document.querySelectorAll('[id^=xht]');
             langElements.forEach(function (element) {
                 element.placeholder = translations[element.id];
             }, this);
