@@ -1,4 +1,4 @@
 var translations = {
-    cHere: 'Polski',
-    c2: 'Witam'
+    cPass: 'Twoje Hasło',
+    cPassConfirm: 'Potwierdź Hasło'
 }

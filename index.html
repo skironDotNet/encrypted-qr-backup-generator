@@ -14,7 +14,7 @@
         flex-direction: column;
         height: calc(100% - 100px);
         margin: 50px 0;
-        background-color: #ccc;
+        background-color: #fff;
     }
 
     *,
@@ -65,6 +65,90 @@
         outline: 2px solid #f00;
         color: #f00;
     }
+
+    #main {
+        position: relative;
+        text-align: center;
+        margin: 0px auto;
+        width: 1005px;
+    }
+
+    #langMenu {
+        text-align: right;
+        padding: 0 20px;
+        font-size: 14px;
+        margin-bottom: 35px;
+    }
+
+
+    .text-wallet {
+        width: 842px !important;
+        display: inline-block;
+    }
+
+    .wallet {
+        border: 1px solid #aaa;
+        height: 595px !important;
+        display: inline-block;
+        background: url('backgrounds/graph.jpg');
+        background-size: 100% 100%;
+        margin-top: 25px;
+    }
+
+    .wallet .left {
+        border-right: 1px dashed #bbb;
+        height: 595px !important;
+    }
+
+    .wallet .right {
+        border-left: 1px dashed #ccc;
+        height: 595px !important;
+    }
+
+    .wallet .qrcode {
+        width: 250px !important;
+        height: 250px !important;
+        display: inline-block;
+        padding: 0px;
+    }
+
+    .wallet h4 {
+        margin-top: 50px;
+        font-family: courier !important;
+        z-index: 100;
+    }
+
+    .wallet .base64 {
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        margin: 26px;
+        height: 105px;
+    }
+
+    .wallet .note .name {
+        margin-top: 12px;
+        color: #444;
+        font-weight: bold;
+        font-family: courier;
+    }
+
+    .wallet .note .desc {
+        margin-top: 12px;
+        color: #444;
+        font-family: courier;
+        padding: 6px;
+    }
+
+    .wallet .qrcode img {
+        border: 1px solid #ccc;
+        display: inline;
+        margin-top: 20px;
+    }
+
+    #cOptional {
+        font-weight: normal;
+        font-size: smaller;
+    }
 </style>
 <script src="lib/gibberish-aes-1.0.0.min.js"></script>
 <script type="text/javascript" src="lib/qrious.min.js"></script>
@@ -72,26 +156,58 @@
 
 
 <body>
-    <div id="langMenu">
-    </div>
 
-    <span id='cHere'>Here is Something</span>
-    <div id='c2'>Here is Something</div>
+    <main>
+        <section>
+            <div id="langMenu">
+            </div>
 
-    <form name="qrForm">
-        <textarea name="plainText">
-  
-  </textarea>
-        <input type="text" name="pwd">
-        <input type="text" name="qrLabel">
-        <textarea name="encrypted">
-  
-  </textarea>
-        <input type="button" value="Go" onclick="doEnc()">
-    </form>
+            <form name="qrForm" autocomplete="off">
+                <label>
+                    <span id="cPlainSecret"></span>
+                </label>
+                <textarea name="plainText">d</textarea>
 
-    <img id="qrious" alt="Encrypted QR">
+                <label>
+                    <span id='cQrLabel'></span>
+                    <span id='cOptional'>(Optional)</span>
+                </label>
+                <input type="text" name="qrLabel">
 
+                <label>
+                    <span id='cQrDescription'></span>
+                    <span id='cOptional'>(Optional)</span>
+                </label>
+                <input type="text" name="qrDescription">
+
+                <label>
+                    <span id='cPass'></span>
+                </label>
+                <input type="text" name="pwd">
+                <label>
+                    <span id='cPassConfirm'></span>
+                </label>
+                <input type="text" name="pwdConfirm">
+
+
+
+                <button id="cGenerate" onclick="doEnc()">dfdsaf</button>
+
+
+            </form>
+
+
+            <label>
+                <span id='cEncQrData'></span>
+            </label>
+            <textarea id="encrypted"></textarea>
+            <img id="qrious" alt="Encrypted QR">
+
+        </section>
+
+
+
+    </main>
 
 
 </body>
@@ -111,12 +227,13 @@
 
         var pwd = document.qrForm.pwd.value;
         var plain = document.qrForm.plainText.value;
+        var encrypted = GibberishAES.enc(plain, pwd);
 
-        document.qrForm.encrypted.value = GibberishAES.enc(plain, pwd);
+        getElement('encrypted').value = encrypted
 
         qr.level = 'L';
         qr.size = 500;
-        qr.value = document.qrForm.qrLabel.value + '\n\nENC BLOCK:\n\n' + document.qrForm.encrypted.value;
+        qr.value = document.qrForm.qrLabel.value + '\n\nENC BLOCK:\n\n' + encrypted;
     }
 
     function setLang(obj) {
@@ -136,7 +253,7 @@
         var script = document.createElement('script');
         script.type = 'text/javascript';
         currentLangCode = langCode.toLowerCase();
-        script.src = 'langs/' + currentLangCode + '.js?v='+ new Date().getTime();
+        script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
         script.id = 'langFile';
 
         script.onreadystatechange = callback;
