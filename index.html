@@ -1,290 +1,209 @@
-<html>
-<title>tbd</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style>
-    html {
-        height: 100%;
-        font-family: sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    body {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        height: calc(100% - 100px);
-        margin: 50px 0;
-        background-color: #fff;
-    }
+<head>
 
-    *,
-    :after,
-    :before {
-        box-sizing: border-box;
-    }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TBD</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    main {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        height: 100%;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    main section {
-        min-width: 250px;
-        max-width: 50%;
-        height: 100%;
-        text-align: center;
-    }
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
-    main img {
-        box-shadow: 0 0 10px 5px #666;
-    }
+    <style>
+        body {
+            background-color: rgb(233, 233, 233)
+        }
 
-    main form {
-        padding: 25px 0 50px 0;
-        text-align: left;
-    }
+        label {
+            margin-bottom: 0px;
+        }
 
-    main form label {
-        display: block;
-        margin-top: 10px;
-        color: #444;
-        font-weight: bold;
-    }
+        #langMenu {
+            text-align: right;
+            padding: 0 20px;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
 
-    main form input,
-    main form select {
-        width: 100%;
-    }
+        #cOptional {
+            font-weight: normal;
+            font-size: smaller;
+        }
 
-    main form input:invalid {
-        outline: 2px solid #f00;
-        color: #f00;
-    }
+        input[type="text"],
+        input[type="password"] {
+            height: 30px;
+            padding: 3px 5px;
+        }
 
-    #main {
-        position: relative;
-        text-align: center;
-        margin: 0px auto;
-        width: 1005px;
-    }
+        textarea {
+            padding: 3px 5px;
+            font-family: Arial;
+            font-size: 12px;
+            line-height: 14px;
+        }
 
-    #langMenu {
-        text-align: right;
-        padding: 0 20px;
-        font-size: 14px;
-        margin-bottom: 35px;
-    }
+        input {
+            margin-bottom: 8px;
+        }
+    </style>
+    <script src="lib/gibberish-aes-1.0.0.min.js"></script>
+    <script type="text/javascript" src="lib/qrious.min.js"></script>
+    <script type="text/javascript" src="langs/lang-map.js"></script>
 
 
-    .text-wallet {
-        width: 842px !important;
-        display: inline-block;
-    }
+    <body>
 
-    .wallet {
-        border: 1px solid #aaa;
-        height: 595px !important;
-        display: inline-block;
-        background: url('backgrounds/graph.jpg');
-        background-size: 100% 100%;
-        margin-top: 25px;
-    }
-
-    .wallet .left {
-        border-right: 1px dashed #bbb;
-        height: 595px !important;
-    }
-
-    .wallet .right {
-        border-left: 1px dashed #ccc;
-        height: 595px !important;
-    }
-
-    .wallet .qrcode {
-        width: 250px !important;
-        height: 250px !important;
-        display: inline-block;
-        padding: 0px;
-    }
-
-    .wallet h4 {
-        margin-top: 50px;
-        font-family: courier !important;
-        z-index: 100;
-    }
-
-    .wallet .base64 {
-        word-break: break-all !important;
-        word-wrap: break-word !important;
-        margin: 26px;
-        height: 105px;
-    }
-
-    .wallet .note .name {
-        margin-top: 12px;
-        color: #444;
-        font-weight: bold;
-        font-family: courier;
-    }
-
-    .wallet .note .desc {
-        margin-top: 12px;
-        color: #444;
-        font-family: courier;
-        padding: 6px;
-    }
-
-    .wallet .qrcode img {
-        border: 1px solid #ccc;
-        display: inline;
-        margin-top: 20px;
-    }
-
-    #cOptional {
-        font-weight: normal;
-        font-size: smaller;
-    }
-</style>
-<script src="lib/gibberish-aes-1.0.0.min.js"></script>
-<script type="text/javascript" src="lib/qrious.min.js"></script>
-<script type="text/javascript" src="langs/lang-map.js"></script>
-
-
-<body>
-
-    <main>
-        <section>
+        <div class="container">
             <div id="langMenu">
             </div>
 
-            <form name="qrForm" autocomplete="off">
+            <form name="qrForm" autocomplete="off" action="#">
                 <label>
-                    <span id="cPlainSecret"></span>
+                    <span id="cPlainTextLabel"></span>
                 </label>
-                <textarea name="plainText">d</textarea>
+                <textarea name="plainText" id="hxPlainTextHint" class="u-full-width" placeholder=""></textarea>
 
-                <label>
-                    <span id='cQrLabel'></span>
-                    <span id='cOptional'>(Optional)</span>
-                </label>
-                <input type="text" name="qrLabel">
+                <div class="row">
+                    <div class="six columns">
+                        <label>
+                            <span id='cQrLabel'></span>
+                            <span id='cOptional'>(Optional)</span>
+                        </label>
+                        <input type="text" name="qrLabel" class="u-full-width">
+
+                    </div>
+                    <div class="six columns">
+                        <label>
+                            <span id="cEmbedLabel"></span>
+                        </label>
+                        <input type="checkbox" name="isEmbed">
+                    </div>
+                </div>
 
                 <label>
                     <span id='cQrDescription'></span>
-                    <span id='cOptional'>(Optional)</span>
+                    <span id='cOptional'></span>
                 </label>
-                <input type="text" name="qrDescription">
+                <input type="text" name="qrDescription" class="u-full-width">
 
                 <label>
                     <span id='cPass'></span>
                 </label>
-                <input type="text" name="pwd">
+                <input type="password" name="pwd" class="u-full-width">
                 <label>
                     <span id='cPassConfirm'></span>
                 </label>
-                <input type="text" name="pwdConfirm">
+                <input type="password" name="pwdConfirm" class="u-full-width">
 
 
 
-                <button id="cGenerate" onclick="doEnc()">dfdsaf</button>
+                <button id="cGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
 
+                <label>
+                    <span id='cEncQrData'></span>
+                </label>
+                <textarea id="encrypted" class="u-full-width" readonly></textarea>
 
+                <img id="qrious" alt="Encrypted QR">
             </form>
+        </div>
+    </body>
 
+    <script type="text/javascript">
 
-            <label>
-                <span id='cEncQrData'></span>
-            </label>
-            <textarea id="encrypted"></textarea>
-            <img id="qrious" alt="Encrypted QR">
+        var qr = window.qr = new QRious({
+            element: document.getElementById('qrious'),
+            size: 250,
+            value: 'Nothing here!'
+        });
 
-        </section>
+        var langMenu = getElement('langMenu');
 
+        function doEnc() {
+            var pwd = document.qrForm.pwd.value;
+            var plain = document.qrForm.plainText.value;
+            var encrypted = GibberishAES.enc(plain, pwd);
+            var encryptedLabeled = encrypted;
 
+            if (document.qrForm.qrLabel.value.length > 0)
+                var encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
 
-    </main>
+            qr.level = 'L';
+            qr.size = 500;
+            if (document.qrForm.isEmbed.checked) {
+                getElement('encrypted').value = encryptedLabeled;
+                qr.value = encryptedLabeled;
+                getElement('encrypted').style.height = '125px';
 
+            }
+            else {
+                getElement('encrypted').value = encrypted;
+                qr.value = encrypted;
+                getElement('encrypted').style.height = '70px';
 
-</body>
-
-<script type="text/javascript">
-
-    var qr = window.qr = new QRious({
-        element: document.getElementById('qrious'),
-        size: 250,
-        value: 'Nothing here!'
-    });
-
-    var langMenu = getElement('langMenu');
-
-    function doEnc() {
-
-
-        var pwd = document.qrForm.pwd.value;
-        var plain = document.qrForm.plainText.value;
-        var encrypted = GibberishAES.enc(plain, pwd);
-
-        getElement('encrypted').value = encrypted
-
-        qr.level = 'L';
-        qr.size = 500;
-        qr.value = document.qrForm.qrLabel.value + '\n\nENC BLOCK:\n\n' + encrypted;
-    }
-
-    function setLang(obj) {
-        loadLangFile(obj.id, updateLang);
-    }
-
-    var currentLangCode = '';
-
-    function loadLangFile(langCode, callback) {
-        var head = document.getElementsByTagName('head')[0];
-
-        var langScript = getElement("langFile");
-        if (langScript !== null) {
-            head.removeChild(langScript);
+            }
         }
 
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        currentLangCode = langCode.toLowerCase();
-        script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
-        script.id = 'langFile';
+        function setLang(obj) {
+            loadLangFile(obj.id, updateLang);
+        }
 
-        script.onreadystatechange = callback;
-        script.onload = callback;
+        var currentLangCode = '';
 
-        head.appendChild(script);
-    }
+        function loadLangFile(langCode, callback) {
+            var head = document.getElementsByTagName('head')[0];
 
-    function showLangMenu() {
-        var html = '';
-        langsAvailable.forEach(function (lang) {
+            var langScript = getElement("langFile");
+            if (langScript !== null) {
+                head.removeChild(langScript);
+            }
 
-            html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
-        }, this);
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            currentLangCode = langCode.toLowerCase();
+            script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
+            script.id = 'langFile';
 
-        langMenu.innerHTML = html.substring(0, html.length - 3);;
-    }
+            script.onreadystatechange = callback;
+            script.onload = callback;
 
-    var updateLang = function () {
-        var langElements = document.querySelectorAll('[id^=c]');
-        langElements.forEach(function (element) {
-            element.innerHTML = translations[element.id];
-        }, this);
-    };
+            head.appendChild(script);
+        }
 
-    function getElement(id) {
-        return document.getElementById(id);
-    }
+        function showLangMenu() {
+            var html = '';
+            langsAvailable.forEach(function (lang) {
 
-    showLangMenu();
-    loadLangFile("en", updateLang);
-</script>
+                html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+            }, this);
+
+            langMenu.innerHTML = html.substring(0, html.length - 3);;
+        }
+
+        var updateLang = function () {
+            var langElements = document.querySelectorAll('[id^=c]');
+            langElements.forEach(function (element) {
+                element.innerHTML = translations[element.id];
+            }, this);
+
+            langElements = document.querySelectorAll('[id^=hx]');
+            langElements.forEach(function (element) {
+                element.placeholder = translations[element.id];
+            }, this);
+        };
+
+        function getElement(id) {
+            return document.getElementById(id);
+        }
+
+        showLangMenu();
+        loadLangFile("en", updateLang);
+    </script>
 
 </html>
