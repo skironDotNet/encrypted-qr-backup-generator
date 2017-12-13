@@ -51,6 +51,15 @@
         input {
             margin-bottom: 8px;
         }
+
+        a {
+            text-decoration: none;
+            color: rgb(61, 107, 0)
+        }
+
+        .selected {
+            font-weight: bold;
+        }
     </style>
     <script src="lib/gibberish-aes-1.0.0.min.js"></script>
     <script type="text/javascript" src="lib/qrious.min.js"></script>
@@ -60,6 +69,7 @@
     <body>
 
         <div class="container">
+            encrypt | decrypt | plain
             <div id="langMenu">
             </div>
 
@@ -108,9 +118,9 @@
                 <label>
                     <span id="xtEncQrData"></span>
                 </label>
-                <textarea id="encrypted" class="u-full-width" readonly></textarea>
+                <textarea id="qrData" class="u-full-width" readonly></textarea>
 
-                <img id="qrious" alt="Encrypted QR">
+                <img id="qrious" alt="Encrypted QR" hidden>
             </form>
         </div>
     </body>
@@ -122,6 +132,24 @@
             size: 250,
             value: 'Nothing here!'
         });
+
+        var qrData = getElement('qrData');
+
+        document.qrForm.plainText.addEventListener("change", clearEncResult);
+        document.qrForm.plainText.addEventListener("keyup", clearEncResult);
+
+        document.qrForm.qrLabel.addEventListener("change", clearEncResultIfEmbed);
+        document.qrForm.qrLabel.addEventListener("keyup", clearEncResultIfEmbed);
+
+        function clearEncResult() {
+            qr.element.style.display = 'none';
+            qrData.value = '';
+            qr.value = 'Nothing here!';
+        }
+
+        function clearEncResultIfEmbed() {
+            if (document.qrForm.isEmbed.checked) { clearEncResult(); }
+        }
 
         var langMenu = getElement('langMenu');
 
@@ -137,17 +165,18 @@
             qr.level = 'L';
             qr.size = 500;
             if (document.qrForm.isEmbed.checked) {
-                getElement('encrypted').value = encryptedLabeled;
+                qrData.value = encryptedLabeled;
                 qr.value = encryptedLabeled;
-                getElement('encrypted').style.height = '125px';
+                qrData.style.height = '125px';
 
             }
             else {
-                getElement('encrypted').value = encrypted;
+                qrData.value = encrypted;
                 qr.value = encrypted;
-                getElement('encrypted').style.height = '70px';
-
+                qrData.style.height = '70px';
             }
+
+            qr.element.style.display = 'block';
         }
 
         function setLang(obj) {
@@ -157,6 +186,8 @@
         var currentLangCode = '';
 
         function loadLangFile(langCode, callback) {
+
+            showLangMenu(langCode);
             var head = document.getElementsByTagName('head')[0];
 
             var langScript = getElement("langFile");
@@ -176,11 +207,13 @@
             head.appendChild(script);
         }
 
-        function showLangMenu() {
+        function showLangMenu(langSelected) {
             var html = '';
             langsAvailable.forEach(function (lang) {
-
-                html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                if (langSelected == lang.Code)
+                    html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                else
+                    html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
             }, this);
 
             langMenu.innerHTML = html.substring(0, html.length - 3);;
@@ -202,7 +235,6 @@
             return document.getElementById(id);
         }
 
-        showLangMenu();
         loadLangFile("en", updateLang);
     </script>
 
