@@ -11,6 +11,9 @@ var translations = {
     xtEncrypt: "Encrypt",
     xtDecrypt: "Decrypt",
     xtNoEncryption: "No Encryption",
+    xtClose: "Close",
+    xtSaveQr: "Save QR",
+    xtPrint: "Print",
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
 }

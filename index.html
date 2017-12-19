@@ -78,6 +78,36 @@
         button {
             color: white;
         }
+
+        .qrResult {
+            /* display: none; */
+        }
+
+        .result-controls {
+            text-align: right;
+        }
+
+        .button.button-page {
+            color: #fff;
+            background-color: rgb(31, 155, 0);
+            border-color: rgb(31, 155, 0)
+        }
+
+        .qrHolder {
+            background-color: white;
+            border: 1px solid grey;
+            padding: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        #qrious {
+            border: 1px solid #ccc;
+        }
+
+        #qrResultLabel {
+            font-weight: bold;
+        }
     </style>
     <script src="lib/gibberish-aes-1.0.0.min.js"></script>
     <script type="text/javascript" src="lib/qrious.min.js"></script>
@@ -92,7 +122,7 @@
 
                 <div id="langMenu"> </div>
                 <div id="modes">
-                    <button id="xtEncrypt" class="button-primary" onclick="setMode(this)"></button>
+                    <button id="xtEncrypt" class="button button-page" onclick="setMode(this)" disabled="disabled"></button>
                     <button id="xtDecrypt" onclick="setMode(this)"></button>
                     <button id="xtNoEncryption" onclick="setMode(this)"></button>
                 </div>
@@ -109,7 +139,6 @@
                     <span id="xtPlainTextLabel"></span>
                 </label>
                 <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
-
                 <div class="row">
                     <div class="six columns">
                         <label>
@@ -145,15 +174,33 @@
 
 
                 <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
-                <!-- <button id="xtSaveQr" type="button" onclick="" class="button"></button>
-                <button id="xtPrint" type="button" onclick="" class="button"></button> -->
 
+            </form>
+            <form name="qrResult" class="qrResult" autocomplete="off" action="#">
+                <div class="row">
+                    <div class="nine columns">
+                        <div class="qrHolder">
+                            <img id="qrious" alt="Encrypted QR">
+                            <div id=qrResultLabel>Label</div>
+                            <div id=qrResultDescription>Desctiypoim of sdflkjhsfd sdkfjhsdf sdkfjhsdf sdflkjhsfd </div>
+                        </div>
+                    </div>
+                    <div class="three columns result-controls">
+                        <div>
+                            <button id="xtSaveQr" type="button" onclick="" class="button-primary"></button>
+                        </div>
+                        <div>
+                            <button id="xtPrint" type="button" onclick="" class="button-primary"></button>
+                        </div>
+                        <div>
+                            <button id="xtClose" type="button" onclick="" class="button-primary"></button>
+                        </div>
+                    </div>
+                </div>
                 <label>
                     <span id="xtEncQrData"></span>
                 </label>
                 <textarea id="qrData" class="u-full-width" readonly></textarea>
-
-                <img id="qrious" alt="Encrypted QR" hidden>
             </form>
         </div>
     </body>
@@ -168,23 +215,23 @@
 
         var qrData = getElement('qrData');
 
-        document.qrForm.plainText.addEventListener("change", clearEncResult);
-        document.qrForm.plainText.addEventListener("keyup", clearEncResult);
+        // document.qrForm.plainText.addEventListener("change", clearEncResult);
+        // document.qrForm.plainText.addEventListener("keyup", clearEncResult);
 
-        document.qrForm.qrLabel.addEventListener("change", clearEncResultIfEmbed);
-        document.qrForm.qrLabel.addEventListener("keyup", clearEncResultIfEmbed);
+        // document.qrForm.qrLabel.addEventListener("change", clearEncResultIfEmbed);
+        // document.qrForm.qrLabel.addEventListener("keyup", clearEncResultIfEmbed);
 
-        document.qrForm.isEmbed.addEventListener("change", clearEncResult);
+        // document.qrForm.isEmbed.addEventListener("change", clearEncResult);
 
-        function clearEncResult() {
-            qr.element.style.display = 'none';
-            qrData.value = '';
-            qr.value = 'Nothing here!';
-        }
+        // function clearEncResult() {
+        //     qr.element.style.display = 'none';
+        //     qrData.value = '';
+        //     qr.value = 'Nothing here!';
+        // }
 
-        function clearEncResultIfEmbed() {
-            if (document.qrForm.isEmbed.checked) { clearEncResult(); }
-        }
+        // function clearEncResultIfEmbed() {
+        //     if (document.qrForm.isEmbed.checked) { clearEncResult(); }
+        // }
 
         var langMenu = getElement('langMenu');
 
@@ -211,7 +258,8 @@
                 qrData.style.height = '70px';
             }
 
-            qr.element.style.display = 'block';
+            document.qrForm.style.display = 'none';
+            document.qrResult.style.display = 'block';
         }
 
         function setLang(obj) {
@@ -273,8 +321,11 @@
         function setMode(obj) {
             getElement("modes").childNodes.forEach((node) => {
                 node.className = "";
+                node.disabled = false;
             })
-            getElement(obj.id).className = "button-primary";
+            var currButton = getElement(obj.id)
+            currButton.className = "button button-page";
+            currButton.disabled = true;
         }
 
         loadLangFile("en", updateLang);
