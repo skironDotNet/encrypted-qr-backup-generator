@@ -48,17 +48,35 @@
             line-height: 14px;
         }
 
+        textarea,
         input {
             margin-bottom: 8px;
         }
 
         a {
             text-decoration: none;
-            color: rgb(61, 107, 0)
+            color: #829D5D
         }
 
         .selected {
             font-weight: bold;
+        }
+
+        .navbar {
+            position: relative;
+            min-height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .navbar-inverse {
+            border-radius: 0px;
+            padding: 6px;
+            color: #eee;
+            background-color: #5D5D5D;
+        }
+
+        button {
+            color: white;
         }
     </style>
     <script src="lib/gibberish-aes-1.0.0.min.js"></script>
@@ -68,10 +86,23 @@
 
     <body>
 
-        <div class="container">
-            encrypt | decrypt | plain
-            <div id="langMenu">
+        <div class="navbar navbar-inverse text-center">
+
+            <div class="container">
+
+                <div id="langMenu"> </div>
+                <div id="modes">
+                    <button id="xtEncrypt" class="button-primary" onclick="setMode(this)"></button>
+                    <button id="xtDecrypt" onclick="setMode(this)"></button>
+                    <button id="xtNoEncryption" onclick="setMode(this)"></button>
+                </div>
             </div>
+        </div>
+
+        <div class="container">
+
+
+
 
             <form name="qrForm" autocomplete="off" action="#">
                 <label>
@@ -114,6 +145,8 @@
 
 
                 <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
+                <!-- <button id="xtSaveQr" type="button" onclick="" class="button"></button>
+                <button id="xtPrint" type="button" onclick="" class="button"></button> -->
 
                 <label>
                     <span id="xtEncQrData"></span>
@@ -140,6 +173,8 @@
 
         document.qrForm.qrLabel.addEventListener("change", clearEncResultIfEmbed);
         document.qrForm.qrLabel.addEventListener("keyup", clearEncResultIfEmbed);
+
+        document.qrForm.isEmbed.addEventListener("change", clearEncResult);
 
         function clearEncResult() {
             qr.element.style.display = 'none';
@@ -233,6 +268,13 @@
 
         function getElement(id) {
             return document.getElementById(id);
+        }
+
+        function setMode(obj) {
+            getElement("modes").childNodes.forEach((node) => {
+                node.className = "";
+            })
+            getElement(obj.id).className = "button-primary";
         }
 
         loadLangFile("en", updateLang);
