@@ -79,10 +79,6 @@
             color: white;
         }
 
-        .qrResult {
-            /* display: none; */
-        }
-
         .result-controls {
             text-align: right;
         }
@@ -95,18 +91,21 @@
 
         .qrHolder {
             background-color: white;
-            border: 1px solid grey;
+            border: 1px dashed grey;
             padding: 20px;
             display: inline-block;
             margin-bottom: 20px;
-        }
-
-        #qrious {
-            border: 1px solid #ccc;
+            text-align: center;
         }
 
         #qrResultLabel {
             font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #qrResultDescription {
+            word-wrap: break-word;
+            margin-top: 20px;
         }
     </style>
     <script src="lib/gibberish-aes-1.0.0.min.js"></script>
@@ -117,7 +116,6 @@
     <body>
 
         <div class="navbar navbar-inverse text-center">
-
             <div class="container">
 
                 <div id="langMenu"> </div>
@@ -130,10 +128,6 @@
         </div>
 
         <div class="container">
-
-
-
-
             <form name="qrForm" autocomplete="off" action="#">
                 <label>
                     <span id="xtPlainTextLabel"></span>
@@ -146,7 +140,6 @@
                             <span id="xtOptional">(Optional)</span>
                         </label>
                         <input type="text" name="qrLabel" class="u-full-width">
-
                     </div>
                     <div class="six columns">
                         <label>
@@ -155,13 +148,11 @@
                         <input type="checkbox" name="isEmbed">
                     </div>
                 </div>
-
                 <label>
                     <span id="xtQrDescription"></span>
                     <span id="xtOptional"></span>
                 </label>
                 <input type="text" name="qrDescription" class="u-full-width">
-
                 <label>
                     <span id="xtPass"></span>
                 </label>
@@ -170,22 +161,35 @@
                     <span id="xtPassConfirm"></span>
                 </label>
                 <input type="password" name="pwdConfirm" class="u-full-width">
-
-
-
-                <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
-
+                <div class="row">
+                    <div class="six columns">
+                        <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
+                    </div>
+                    <div class="six columns">
+                        <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
+                    </div>
+                </div>
             </form>
-            <form name="qrResult" class="qrResult" autocomplete="off" action="#">
+
+            <form name="qrResult" class="qrResult" autocomplete="off" action="#" hidden>
+
                 <div class="row">
                     <div class="nine columns">
                         <div class="qrHolder">
-                            <img id="qrious" alt="Encrypted QR">
                             <div id=qrResultLabel>Label</div>
-                            <div id=qrResultDescription>Desctiypoim of sdflkjhsfd sdkfjhsdf sdkfjhsdf sdflkjhsfd </div>
+
+                            <img id="qrious" alt="Encrypted QR">
+                            <div id="qrResultDescription">Description</div>
                         </div>
                     </div>
+
                     <div class="three columns result-controls">
+                        <div style="display: inline-block">
+                            <label>
+                                <span id="xtAdjustQrSize" class="u-pull-left"></span>
+                            </label>
+                            <input id="adjustQrSize" type="number" onchange="adjustQr()">
+                        </div>
                         <div>
                             <button id="xtSaveQr" type="button" onclick="" class="button-primary"></button>
                         </div>
@@ -193,15 +197,18 @@
                             <button id="xtPrint" type="button" onclick="" class="button-primary"></button>
                         </div>
                         <div>
-                            <button id="xtClose" type="button" onclick="" class="button-primary"></button>
+                            <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
                         </div>
                     </div>
                 </div>
+
                 <label>
                     <span id="xtEncQrData"></span>
                 </label>
                 <textarea id="qrData" class="u-full-width" readonly></textarea>
+
             </form>
+
         </div>
     </body>
 
@@ -209,31 +216,16 @@
 
         var qr = window.qr = new QRious({
             element: document.getElementById('qrious'),
-            size: 250,
+            size: 100,
             value: 'Nothing here!'
         });
 
         var qrData = getElement('qrData');
 
-        // document.qrForm.plainText.addEventListener("change", clearEncResult);
-        // document.qrForm.plainText.addEventListener("keyup", clearEncResult);
-
-        // document.qrForm.qrLabel.addEventListener("change", clearEncResultIfEmbed);
-        // document.qrForm.qrLabel.addEventListener("keyup", clearEncResultIfEmbed);
-
-        // document.qrForm.isEmbed.addEventListener("change", clearEncResult);
-
-        // function clearEncResult() {
-        //     qr.element.style.display = 'none';
-        //     qrData.value = '';
-        //     qr.value = 'Nothing here!';
-        // }
-
-        // function clearEncResultIfEmbed() {
-        //     if (document.qrForm.isEmbed.checked) { clearEncResult(); }
-        // }
-
         var langMenu = getElement('langMenu');
+        var resultLabel = getElement("qrResultLabel");
+        var resultDesc = getElement("qrResultDescription");
+        var adjustQrSize = getElement('adjustQrSize');
 
         function doEnc() {
             var pwd = document.qrForm.pwd.value;
@@ -241,25 +233,40 @@
             var encrypted = GibberishAES.enc(plain, pwd);
             var encryptedLabeled = encrypted;
 
-            if (document.qrForm.qrLabel.value.length > 0)
+            if (document.qrForm.qrLabel.value.length > 0) {
                 var encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
+            }
+
+            var dataLineCount = encryptedLabeled.split(/\r\n|\r|\n/).length;
 
             qr.level = 'L';
-            qr.size = 500;
-            if (document.qrForm.isEmbed.checked) {
-                qrData.value = encryptedLabeled;
-                qr.value = encryptedLabeled;
-                qrData.style.height = '125px';
+            qr.size = 100 + dataLineCount * 15;
+            adjustQrSize.value = qr.size;
+            qr.value = encryptedLabeled;
+
+            qrData.value = encryptedLabeled;
+            qrData.style.height = dataLineCount * 15 + 'px';
+
+            if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
+                resultLabel.innerText = document.qrForm.qrLabel.value;
+                resultLabel.style.display = 'block';
+            }
+            else {
+                resultLabel.style.display = 'none';
+
+            }
+
+            if (document.qrForm.qrDescription.value.length > 0) {
+                resultDesc.innerText = document.qrForm.qrDescription.value;
+                resultDesc.style.display = 'block';
 
             }
             else {
-                qrData.value = encrypted;
-                qr.value = encrypted;
-                qrData.style.height = '70px';
+                resultDesc.style.display = 'none';
+
             }
 
-            document.qrForm.style.display = 'none';
-            document.qrResult.style.display = 'block';
+            showResult(true);
         }
 
         function setLang(obj) {
@@ -326,6 +333,25 @@
             var currButton = getElement(obj.id)
             currButton.className = "button button-page";
             currButton.disabled = true;
+        }
+
+        function showResult(bool) {
+            if (bool) {
+                document.qrForm.style.display = 'none';
+                document.qrResult.style.display = 'block';
+            }
+            else {
+                document.qrForm.style.display = 'block';
+                document.qrResult.style.display = 'none';
+            }
+        }
+
+        function clearForm() {
+            document.qrForm.reset();
+        }
+
+        function adjustQr() {
+            qr.size = adjustQrSize.value;
         }
 
         loadLangFile("en", updateLang);

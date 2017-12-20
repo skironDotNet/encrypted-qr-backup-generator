@@ -7,6 +7,7 @@ var translations = {
     xtQrDescription: 'QR Description',
     xtOptional: '(Optional)',
     xtGenerate: 'Generate',
+    xtClearForm: 'Clear Form',
     xtEmbedLabel: 'Embed Label in the QR',
     xtEncrypt: "Encrypt",
     xtDecrypt: "Decrypt",
@@ -14,6 +15,7 @@ var translations = {
     xtClose: "Close",
     xtSaveQr: "Save QR",
     xtPrint: "Print",
+    xtAdjustQrSize: "QR Size",
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
 }
