@@ -21,5 +21,4 @@ var translations = {
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
-    xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
 }
