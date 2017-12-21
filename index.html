@@ -107,6 +107,24 @@
             word-wrap: break-word;
             margin-top: 20px;
         }
+
+        img {
+            vertical-align: top;
+        }
+
+        .validationError {
+            font-size: small;
+            color: red;
+            line-height: 1.2;
+            vertical-align: top;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
     </style>
     <script src="lib/gibberish-aes-1.0.0.min.js"></script>
     <script type="text/javascript" src="lib/qrious.min.js"></script>
@@ -154,13 +172,14 @@
                 </label>
                 <input type="text" name="qrDescription" class="u-full-width">
                 <label>
-                    <span id="xtPass"></span>
+                    <span id="xtPharse"></span>
                 </label>
-                <input type="password" name="pwd" class="u-full-width">
+                <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width">
                 <label>
-                    <span id="xtPassConfirm"></span>
+                    <span id="xtPharseConfirm"></span>
                 </label>
-                <input type="password" name="pwdConfirm" class="u-full-width">
+                <input type="password" name="pharseConfirm" class="u-full-width">
+                <div id="validationError" class="validationError center"></div>
                 <div class="row">
                     <div class="six columns">
                         <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
@@ -177,8 +196,7 @@
                     <div class="nine columns">
                         <div class="qrHolder">
                             <div id=qrResultLabel>Label</div>
-
-                            <img id="qrious" alt="Encrypted QR">
+                            <img id="qrious" alt="Encrypted QR" />
                             <div id="qrResultDescription">Description</div>
                         </div>
                     </div>
@@ -226,11 +244,17 @@
         var resultLabel = getElement("qrResultLabel");
         var resultDesc = getElement("qrResultDescription");
         var adjustQrSize = getElement('adjustQrSize');
+        var validationError = getElement('validationError');
 
         function doEnc() {
-            var pwd = document.qrForm.pwd.value;
+            var pharse = document.qrForm.pharse.value;
+            var pharseConfim = document.qrForm.pharseConfirm.value;
+
+            if (!validatePharse(pharse, pharseConfim))
+                return;
+
             var plain = document.qrForm.plainText.value;
-            var encrypted = GibberishAES.enc(plain, pwd);
+            var encrypted = GibberishAES.enc(plain, pharse);
             var encryptedLabeled = encrypted;
 
             if (document.qrForm.qrLabel.value.length > 0) {
@@ -274,7 +298,8 @@
         }
 
         var currentLangCode = '';
-
+        var currentValidationError = '';
+        
         function loadLangFile(langCode, callback) {
 
             showLangMenu(langCode);
@@ -319,6 +344,10 @@
             langElements.forEach(function (element) {
                 element.placeholder = translations[element.id];
             }, this);
+
+            if (currentValidationError.length > 0) {
+                validationError.textContent = translations[currentValidationError];
+            }
         };
 
         function getElement(id) {
@@ -348,10 +377,37 @@
 
         function clearForm() {
             document.qrForm.reset();
+            clearValidationError();
         }
 
         function adjustQr() {
+            if (adjustQrSize.value < 100)
+                adjustQrSize.value = 100;
+
             qr.size = adjustQrSize.value;
+        }
+
+        function validatePharse(pharse, pharseConfirm) {
+            clearValidationError();
+
+            if (pharse.length < 25) {
+                validationError.textContent = translations.xtErrPharseTooShort;
+                currentValidationError = 'xtErrPharseTooShort';
+                return false;
+            }
+            if (pharse != pharseConfirm) {
+
+                validationError.textContent = translations.xtErrPharseNotMatch;
+                currentValidationError = 'xtErrPharseNotMatch';
+                return false;
+            }
+
+            return true;
+        }
+
+        function clearValidationError() {
+            validationError.textContent = '';
+            currentValidationError = '';
         }
 
         loadLangFile("en", updateLang);

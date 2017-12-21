@@ -1,6 +1,6 @@
 var translations = {
-    xtPass: 'Twoje Hasło',
-    xtPassConfirm: 'Potwierdź Hasło',
+    xtPharse: 'Mocne Hasło',
+    xtPharseConfirm: 'Potwierdź Hasło',
     xtPlainTextLabel: 'Sekret do zaszyfrowania',
     xtEncQrData: 'Dane QR',
     xtQrLabel: 'Etykieta QR',
@@ -9,13 +9,17 @@ var translations = {
     xtGenerate: 'Generuj',
     xtClearForm: 'Wyczyść Formularz',
     xtEmbedLabel: 'Umieść Etykietę w QR',
-    xtEncrypt: "Szyfruj",
-    xtDecrypt: "Odszyfruj",
-    xtNoEncryption: "Bez szyfrowania",
-    xtClose: "Zamknij",
-    xtSaveQr: "Zapisz QR",
-    xtPrint: "Drukuj",
-    xtAdjustQrSize: "Rozmiar QR",
+    xtEncrypt: 'Szyfruj',
+    xtDecrypt: 'Odszyfruj',
+    xtNoEncryption: 'Bez szyfrowania',
+    xtClose: 'Zamknij',
+    xtSaveQr: 'Zapisz QR',
+    xtPrint: 'Drukuj',
+    xtAdjustQrSize: 'Rozmiar QR',
+    xtErrPharseTooShort: 'Mocne hasło za krótkie!',
+    xtErrPharseNotMatch: 'Mocne hasło nie pasuje do Potwierdź Hasło!',
 
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
+    xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
+    
 }
