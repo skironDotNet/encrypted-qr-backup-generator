@@ -240,7 +240,6 @@
 
         var qrData = getElement('qrData');
 
-        var langMenu = getElement('langMenu');
         var resultLabel = getElement("qrResultLabel");
         var resultDesc = getElement("qrResultDescription");
         var adjustQrSize = getElement('adjustQrSize');
@@ -292,63 +291,6 @@
 
             showResult(true);
         }
-
-        function setLang(obj) {
-            loadLangFile(obj.id, updateLang);
-        }
-
-        var currentLangCode = '';
-        var currentValidationError = '';
-        
-        function loadLangFile(langCode, callback) {
-
-            showLangMenu(langCode);
-            var head = document.getElementsByTagName('head')[0];
-
-            var langScript = getElement("langFile");
-            if (langScript !== null) {
-                head.removeChild(langScript);
-            }
-
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            currentLangCode = langCode.toLowerCase();
-            script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
-            script.id = 'langFile';
-
-            script.onreadystatechange = callback;
-            script.onload = callback;
-
-            head.appendChild(script);
-        }
-
-        function showLangMenu(langSelected) {
-            var html = '';
-            langsAvailable.forEach(function (lang) {
-                if (langSelected == lang.Code)
-                    html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
-                else
-                    html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
-            }, this);
-
-            langMenu.innerHTML = html.substring(0, html.length - 3);;
-        }
-
-        var updateLang = function () {
-            var langElements = document.querySelectorAll('[id^=xt]');
-            langElements.forEach(function (element) {
-                element.innerHTML = translations[element.id];
-            }, this);
-
-            langElements = document.querySelectorAll('[id^=xht]');
-            langElements.forEach(function (element) {
-                element.placeholder = translations[element.id];
-            }, this);
-
-            if (currentValidationError.length > 0) {
-                validationError.textContent = translations[currentValidationError];
-            }
-        };
 
         function getElement(id) {
             return document.getElementById(id);
@@ -410,7 +352,69 @@
             currentValidationError = '';
         }
 
+        /* Simple Lang engine by Pawel Cioch */
+
+        var langMenu = getElement('langMenu');
+        var currentLangCode = '';
+        var currentValidationError = '';
+
+        function setLang(obj) {
+            loadLangFile(obj.id, updateLang);
+        }
+
+        function loadLangFile(langCode, callback) {
+
+            showLangMenu(langCode);
+            var head = document.getElementsByTagName('head')[0];
+
+            var langScript = getElement("langFile");
+            if (langScript !== null) {
+                head.removeChild(langScript);
+            }
+
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            currentLangCode = langCode.toLowerCase();
+            script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
+            script.id = 'langFile';
+
+            script.onreadystatechange = callback;
+            script.onload = callback;
+
+            head.appendChild(script);
+        }
+
+        function showLangMenu(langSelected) {
+            var html = '';
+            langsAvailable.forEach(function (lang) {
+                if (langSelected == lang.Code)
+                    html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                else
+                    html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+            }, this);
+
+            langMenu.innerHTML = html.substring(0, html.length - 3);;
+        }
+
+        var updateLang = function () {
+            var langElements = document.querySelectorAll('[id^=xt]');
+            langElements.forEach(function (element) {
+                element.innerHTML = translations[element.id];
+            }, this);
+
+            langElements = document.querySelectorAll('[id^=xht]');
+            langElements.forEach(function (element) {
+                element.placeholder = translations[element.id];
+            }, this);
+
+            if (currentValidationError.length > 0) {
+                validationError.textContent = translations[currentValidationError];
+            }
+        };
+
         loadLangFile("en", updateLang);
+
+        /*** End Lang Engine ***/
     </script>
 
 </html>
