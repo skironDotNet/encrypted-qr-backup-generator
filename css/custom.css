@@ -113,6 +113,12 @@ img {
   display: none;
 }
 
+footer {
+  font-family: Arial;
+ font-size: small;
+  text-align: center;
+}
+
 @media print {
   body {
     background-color: white;
@@ -134,6 +140,10 @@ img {
     display: block;
     text-align: center;
     margin-top: 10px;
+  }
+
+  footer {
+    display: none;
   }
 }
 
