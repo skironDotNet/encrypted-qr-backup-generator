@@ -160,6 +160,7 @@
         var resultDesc = getElement("qrResultDescription");
         var adjustQrSize = getElement('adjustQrSize');
         var validationError = getElement('validationError');
+        var saveDialog = getElement('saveOverlay');
 
         function doEnc() {
             var pharse = document.qrForm.pharse.value;
@@ -271,10 +272,34 @@
         }
 
         function invokeSaveQr() {
+            if (isCanvasSupported()) {
+                showSaveDialog(true);
+            }
+            else {
+                saveQrImage(); //when canvas not supported save the image only automatically
+            }
         }
 
         function saveQr() {
+            showSaveDialog(false);
+        }
 
+        function saveQrImage() {
+
+        }
+
+        function saveQrArea() {
+
+        }
+
+        function showSaveDialog(bool) {
+            if (bool) {
+                saveDialog.style.display = 'block';
+            }
+            else {
+                saveDialog.style.display = 'none';
+
+            }
         }
 
         function isCanvasSupported() {

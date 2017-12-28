@@ -167,6 +167,7 @@ footer {
   border: 2px solid rgb(153, 153, 153);
   box-sizing: border-box;
   padding: 0px;
+  display: none;
 }
 
 .resave {
