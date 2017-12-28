@@ -117,7 +117,11 @@
             </form>
 
             <footer>
-                <div class="copyright">&copy; 2017 Pawel Cioch | <a href="#"><span id="xtDownloadSource">Download from GitHub</span></a></div>
+                <div class="copyright">&copy; 2017 Pawel Cioch |
+                    <a href="#">
+                        <span id="xtDownloadSource">Download from GitHub</span>
+                    </a>
+                </div>
                 <div>
                     <span id="xtCopyOthers">JavaScript copyrights are included in the source.</span>
                     <span id="xtNoWarranty">No warranty.</span>
@@ -221,6 +225,9 @@
             if (adjustQrSize.value < 100)
                 adjustQrSize.value = 100;
 
+            if (adjustQrSize.value > 600)
+                adjustQrSize.value = 600;
+
             qr.size = adjustQrSize.value;
         }
 
@@ -247,8 +254,7 @@
             currentValidationError = '';
         }
 
-        function saveQr()
-        {
+        function saveQr() {
 
         }
 
