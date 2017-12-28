@@ -81,11 +81,12 @@
             <form name="qrResult" class="qrResult" autocomplete="off" action="#" hidden>
 
                 <div class="row">
-                    <div class="nine columns">
+                    <div id="printQr" class="nine columns">
                         <div class="qrHolder">
                             <div id=qrResultLabel>Label</div>
                             <img id="qrious" alt="Encrypted QR" />
                             <div id="qrResultDescription">Description</div>
+                            <div id="qrPrintDate"></div>
                         </div>
                     </div>
 
@@ -175,6 +176,7 @@
                 resultDesc.style.display = 'none';
             }
 
+            getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
             showResult(true);
         }
 
