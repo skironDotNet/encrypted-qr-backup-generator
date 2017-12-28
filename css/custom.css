@@ -1,0 +1,110 @@
+body {
+    background-color: rgb(233, 233, 233)
+}
+
+label {
+    margin-bottom: 0px;
+}
+
+#langMenu {
+    text-align: right;
+    padding: 0 20px;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+#cOptional {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+input[type="text"],
+input[type="password"] {
+    height: 30px;
+    padding: 3px 5px;
+}
+
+textarea {
+    padding: 3px 5px;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+textarea,
+input {
+    margin-bottom: 8px;
+}
+
+a {
+    text-decoration: none;
+    color: #829D5D
+}
+
+.selected {
+    font-weight: bold;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+}
+
+.navbar-inverse {
+    border-radius: 0px;
+    padding: 6px;
+    color: #eee;
+    background-color: #5D5D5D;
+}
+
+button {
+    color: white;
+}
+
+.result-controls {
+    text-align: right;
+}
+
+.button.button-page {
+    color: #fff;
+    background-color: rgb(31, 155, 0);
+    border-color: rgb(31, 155, 0)
+}
+
+.qrHolder {
+    background-color: white;
+    border: 1px dashed grey;
+    padding: 20px;
+    display: inline-block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#qrResultLabel {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#qrResultDescription {
+    word-wrap: break-word;
+    margin-top: 20px;
+}
+
+img {
+    vertical-align: top;
+}
+
+.validationError {
+    font-size: small;
+    color: red;
+    line-height: 1.2;
+    vertical-align: top;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
