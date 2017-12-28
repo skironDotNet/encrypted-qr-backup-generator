@@ -115,7 +115,7 @@ img {
 
 footer {
   font-family: Arial;
- font-size: small;
+  font-size: small;
   text-align: center;
 }
 
@@ -151,4 +151,45 @@ footer {
   margin-top: 1in;
   margin-left: 0.5in;
   margin-right: 0.5in;
+}
+
+#saveOverlay {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  height: 190px;
+  margin-top: -95px;
+  background-color: rgb(238, 245, 238);
+  border-radius: 4px;
+  border: 2px solid rgb(153, 153, 153);
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+.resave {
+  margin-top: 30px;
+}
+
+#xtQrAreaWithDetails,
+#xtQrImageOnly {
+  display: inline;
+  margin-left: 8px;
+}
+
+#xtSaveTypeCaption {
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  margin-top: 0px;
+  background-color: #5d5d5d;
+  text-align: center;
+  color: rgb(231, 231, 231);
+  line-height: 200%;
+}
+
+.saveOverlayBody {
+  padding: 18px;
 }

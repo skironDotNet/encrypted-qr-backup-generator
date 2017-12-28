@@ -98,7 +98,7 @@
                             <input id="adjustQrSize" type="number" onchange="adjustQr()">
                         </div>
                         <div>
-                            <button id="xtSaveQr" type="button" onclick="saveQr()" class="button-primary"></button>
+                            <button id="xtSaveQr" type="button" onclick="invokeSaveQr()" class="button-primary"></button>
                         </div>
                         <div>
                             <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
@@ -127,6 +127,22 @@
                     <span id="xtNoWarranty">No warranty.</span>
                 </div>
             </footer>
+            <div id="saveOverlay">
+                <div id="xtSaveTypeCaption"></div>
+                <div class="saveOverlayBody">
+                    <div>
+                        <input id="qrPrintable" name="imgType" type="radio" value="1" checked="checked">
+                        <label id="xtQrAreaWithDetails" for="qrPrintable"></label>
+                    </div>
+                    <div>
+                        <input id="qrImageOnly" name="imgType" type="radio" value="0">
+                        <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                    </div>
+                    <div class="resave center">
+                        <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary"></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 
@@ -254,8 +270,16 @@
             currentValidationError = '';
         }
 
+        function invokeSaveQr() {
+        }
+
         function saveQr() {
 
+        }
+
+        function isCanvasSupported() {
+            var elem = document.createElement('canvas');
+            return !!(elem.getContext && elem.getContext('2d'));
         }
 
         /* Simple Lang engine by Pawel Cioch */
