@@ -98,7 +98,7 @@
                             <input id="adjustQrSize" type="number" onchange="adjustQr()">
                         </div>
                         <div>
-                            <button id="xtSaveQr" type="button" onclick="" class="button-primary"></button>
+                            <button id="xtSaveQr" type="button" onclick="saveQr()" class="button-primary"></button>
                         </div>
                         <div>
                             <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
@@ -117,7 +117,6 @@
             </form>
 
             <footer>
-                
                 <div class="copyright">&copy; 2017 Pawel Cioch | <a href="#"><span id="xtDownloadSource">Download from GitHub</span></a></div>
                 <div>
                     <span id="xtCopyOthers">JavaScript copyrights are included in the source.</span>
@@ -246,6 +245,11 @@
         function clearValidationError() {
             validationError.textContent = '';
             currentValidationError = '';
+        }
+
+        function saveQr()
+        {
+
         }
 
         /* Simple Lang engine by Pawel Cioch */
