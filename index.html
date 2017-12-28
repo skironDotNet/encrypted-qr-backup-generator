@@ -307,7 +307,13 @@
             return !!(elem.getContext && elem.getContext('2d'));
         }
 
-        /* Simple Lang engine by Pawel Cioch */
+        //https://stackoverflow.com/a/11767598
+        function getCookie(cookiename) {
+            var cookiestring = RegExp("" + cookiename + "[^;]+").exec(document.cookie);
+            return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : "");
+        }
+
+        /*** Simple Lang engine by Pawel Cioch ***/
 
         var langMenu = getElement('langMenu');
         var currentLangCode = '';
@@ -318,6 +324,12 @@
         }
 
         function loadLangFile(langCode, callback) {
+            if (langCode == null) {
+                langCode = getCookie('qrLang');
+                if (langCode.length != 2) {
+                    langCode = 'en';
+                }
+            }
 
             showLangMenu(langCode);
             var head = document.getElementsByTagName('head')[0];
@@ -337,6 +349,7 @@
             script.onload = callback;
 
             head.appendChild(script);
+            document.cookie = 'qrLang=' + currentLangCode;
         }
 
         function showLangMenu(langSelected) {
@@ -367,7 +380,7 @@
             }
         };
 
-        loadLangFile("en", updateLang);
+        loadLangFile(null, updateLang);
 
         /*** End Lang Engine ***/
     </script>
