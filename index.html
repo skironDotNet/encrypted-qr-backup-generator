@@ -145,8 +145,8 @@
             var encrypted = GibberishAES.enc(plain, pharse);
             var encryptedLabeled = encrypted;
 
-            if (document.qrForm.qrLabel.value.length > 0) {
-                var encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
+            if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
+                encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
             }
 
             var dataLineCount = encryptedLabeled.split(/\r\n|\r|\n/).length;
