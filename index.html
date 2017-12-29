@@ -128,23 +128,25 @@
                     <span id="xtNoWarranty">No warranty.</span>
                 </div>
             </footer>
-            <div id="saveOverlay">
-                <div id="xtSaveDialogCaption"></div>
-                <div class="saveOverlayBody">
-                    <div hidden>
-                        <input id="qrPrintable" name="imgType" type="radio" value="1" checked="checked">
-                        <label id="xtQrAreaWithDetails" for="qrPrintable"></label>
-                    </div>
-                    <div hidden>
-                        <input id="qrImageOnly" name="imgType" type="radio" value="0">
-                        <label id="xtQrImageOnly" for="qrImageOnly"></label>
-                    </div>
-                    <div>
-                        <label id="xtFileName" for="qrFileName"></label>
-                        <input id="qrFileName" type="text">
-                    </div>
-                    <div class="resave center">
-                        <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary"></button>
+            <div class="printHide">
+                <div id="saveOverlay">
+                    <div id="xtSaveDialogCaption"></div>
+                    <div class="saveOverlayBody">
+                        <div hidden>
+                            <input id="qrPrintable" name="imgType" type="radio" value="1" checked="checked">
+                            <label id="xtQrAreaWithDetails" for="qrPrintable"></label>
+                        </div>
+                        <div hidden>
+                            <input id="qrImageOnly" name="imgType" type="radio" value="0">
+                            <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                        </div>
+                        <div>
+                            <label id="xtFileName" for="qrFileName"></label>
+                            <input id="qrFileName" type="text">
+                        </div>
+                        <div class="resave center">
+                            <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,6 +154,10 @@
     </body>
 
     <script type="text/javascript">
+
+        document.onmouseup = () => {
+            showSaveDialog(false); //hide dialog when click elsewhere to avoid disabling overlay
+        }
 
         var qr = window.qr = new QRious({
             element: document.getElementById('qrious'),

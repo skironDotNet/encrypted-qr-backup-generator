@@ -127,7 +127,8 @@ footer {
   .navbar,
   .result-controls,
   #xtEncQrData,
-  #qrData {
+  #qrData,
+  .printHide {
     display: none;
   }
 
