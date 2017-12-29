@@ -343,12 +343,6 @@
             return !!(elem.getContext && elem.getContext('2d'));
         }
 
-        //https://stackoverflow.com/a/11767598
-        function getCookie(cookiename) {
-            var cookiestring = RegExp("" + cookiename + "[^;]+").exec(document.cookie);
-            return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : "");
-        }
-
         /*** Simple Lang engine by Pawel Cioch ***/
 
         var langMenu = getElement('langMenu');
@@ -361,8 +355,8 @@
 
         function loadLangFile(langCode, callback) {
             if (langCode == null) {
-                langCode = getCookie('qrLang');
-                if (langCode.length != 2) {
+                langCode = localStorage.getItem('qrlang');
+                if (langCode == null || langCode.length != 2) {
                     langCode = defaultLanguageCode;
                 }
             }
@@ -385,7 +379,7 @@
             script.onload = callback;
 
             head.appendChild(script);
-            document.cookie = 'qrLang=' + currentLangCode;
+            localStorage.setItem("qrlang", currentLangCode);
         }
 
         function showLangMenu(langSelected) {
