@@ -21,10 +21,11 @@ var translations = {
     xtCopyOthers: 'Prawa autorskie JavaScript załączone w kodach żródłowych.',
     xtNoWarranty: 'Bez gwarancji.',
     xtDownloadSource: 'Pobierz z GitHub',
-    xtSaveTypeCaption: 'Co Zapisać?',
+    xtSaveDialogCaption: 'Szczegóły',
     xtQrAreaWithDetails: 'Obszar QR ze szczegółami',
     xtQrImageOnly: 'Tylko obrazek QR',
     xtSaveConfirm: 'Zapisz',
+    xtFileName: 'Nazwa pliku',
 
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',

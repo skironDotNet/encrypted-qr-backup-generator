@@ -129,15 +129,19 @@
                 </div>
             </footer>
             <div id="saveOverlay">
-                <div id="xtSaveTypeCaption"></div>
+                <div id="xtSaveDialogCaption"></div>
                 <div class="saveOverlayBody">
-                    <div>
+                    <div hidden>
                         <input id="qrPrintable" name="imgType" type="radio" value="1" checked="checked">
                         <label id="xtQrAreaWithDetails" for="qrPrintable"></label>
                     </div>
-                    <div>
+                    <div hidden>
                         <input id="qrImageOnly" name="imgType" type="radio" value="0">
                         <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                    </div>
+                    <div>
+                        <label id="xtFileName" for="qrFileName"></label>
+                        <input id="qrFileName" type="text">
                     </div>
                     <div class="resave center">
                         <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary"></button>
@@ -280,18 +284,27 @@
             //     saveQrImage(); //when canvas not supported save the image only automatically
             // }
 
-            saveQrImage(); //temp save qr only, need to figure out canvas rendering
+            getElement('qrFileName').value = getDefaultFileName();
+            showSaveDialog(true);
         }
 
         function saveQr() {
             showSaveDialog(false);
+            saveQrImage(getElement('qrFileName').value);
         }
 
-        function saveQrImage() {
+        function saveQrImage(fileName) {
+            if (fileName.length < 1) {
+                fileName = getDefaultFileName();
+            }
             var down = getElement('qrDownload');
             down.href = qr.element.src;
-            down.download = 'qr-' + new Date().getTime() + '.png'; //could do poup for custom name
+            down.download = fileName.replace('.png', '') + '.png';
             down.click();
+        }
+
+        function getDefaultFileName() {
+            return 'qr-' + new Date().getTime() + '.png';
         }
 
         function saveQrArea() {

@@ -21,10 +21,11 @@ var translations = {
     xtCopyOthers: 'JavaScript copyrights are included in the source.',
     xtNoWarranty: 'No warranty.',
     xtDownloadSource: 'Download from GitHub',
-    xtSaveTypeCaption: 'What to Save?',
+    xtSaveDialogCaption: 'Details',
     xtQrAreaWithDetails: 'QR area with details',
     xtQrImageOnly: 'QR image only',
     xtSaveConfirm: 'Save',
+    xtFileName: 'File name',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
