@@ -72,25 +72,6 @@ button {
   border-color: rgb(31, 155, 0);
 }
 
-.qrHolder {
-  background-color: white;
-  border: 1px dashed grey;
-  padding: 20px;
-  display: inline-block;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-#qrResultLabel {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-#qrResultDescription {
-  word-wrap: break-word;
-  margin-top: 20px;
-}
-
 img {
   vertical-align: top;
 }
