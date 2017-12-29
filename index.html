@@ -106,6 +106,7 @@
                         <div>
                             <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
                         </div>
+                        <a id="qrDownload" href="" download="" hidden></a>
                     </div>
                 </div>
 
@@ -272,12 +273,14 @@
         }
 
         function invokeSaveQr() {
-            if (isCanvasSupported()) {
-                showSaveDialog(true);
-            }
-            else {
-                saveQrImage(); //when canvas not supported save the image only automatically
-            }
+            // if (isCanvasSupported()) {
+            //     showSaveDialog(true);
+            // }
+            // else {
+            //     saveQrImage(); //when canvas not supported save the image only automatically
+            // }
+
+            saveQrImage(); //temp save qr only, need to figure out canvas rendering
         }
 
         function saveQr() {
@@ -285,11 +288,25 @@
         }
 
         function saveQrImage() {
-
+            var down = getElement('qrDownload');
+            down.href = qr.element.src;
+            down.download = 'qr-' + new Date().getTime() + '.png'; //could do poup for custom name
+            down.click();
         }
 
         function saveQrArea() {
 
+            /* var canvas = getElement('canvas');
+ 
+ 
+             var context = canvas.getContext('2d');
+             context.drawWindow(getElement('qrHolder'));
+             var mypng = context.toDataURL('image/png');
+ 
+ 
+             canvas.download({
+                 fileName: 'my-file.png'
+             });*/
         }
 
         function showSaveDialog(bool) {
@@ -298,7 +315,6 @@
             }
             else {
                 saveDialog.style.display = 'none';
-
             }
         }
 
