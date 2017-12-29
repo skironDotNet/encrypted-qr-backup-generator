@@ -118,6 +118,10 @@
             </form>
 
             <footer>
+                <div class="securityCheck">
+                    <span id="xtNotOffline"></span>
+                </div>
+
                 <div class="copyright">&copy; 2017 Pawel Cioch |
                     <a href="#">
                         <span id="xtDownloadSource">Download from GitHub</span>
@@ -337,6 +341,20 @@
             }
         }
 
+        function isOffline() {
+            return false; //window.location.protocol == 'file:';
+        }
+
+        function securityCheck() {
+            var secOffline = getElement('xtNotOffline')
+            if (!isOffline()) {
+                secOffline.style.display = 'block';
+            }
+            else {
+                secOffline.style.display = 'none';
+            }
+        }
+
         //https://stackoverflow.com/a/2746983
         function isCanvasSupported() {
             var elem = document.createElement('canvas');
@@ -413,6 +431,8 @@
         loadLangFile(null, updateLang);
 
         /*** End Lang Engine ***/
+
+        securityCheck();
     </script>
 
 </html>

@@ -195,3 +195,14 @@ footer {
 .saveOverlayBody {
   padding: 18px;
 }
+
+.securityCheck {
+  color: #ca1a1a;
+}
+
+#xtNotOffline {
+  font-weight: bold;
+  display: none;
+  margin: 30px auto;
+  max-width: 500px;
+}
