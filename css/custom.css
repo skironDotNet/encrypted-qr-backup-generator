@@ -140,10 +140,9 @@ footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 300px;
-  margin-left: -150px;
-  height: 190px;
-  margin-top: -95px;
+  width: 400px;
+  margin-left: -200px;
+  margin-top: -150px;
   background-color: rgb(238, 245, 238);
   border-radius: 4px;
   border: 2px solid rgb(153, 153, 153);
