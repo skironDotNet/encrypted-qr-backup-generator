@@ -84,12 +84,12 @@
                     <div id="printQr" class="nine columns">
                         <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial">
                             <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px;">Label</div>
-                            <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" /> 
+                            <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
                             <div id="qrResultDescription" style="word-wrap: break-word; margin-top: 20px;">Description</div>
                             <div id="qrPrintDate" style="margin-top: 20px;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="three columns result-controls">
                         <div style="display: inline-block">
                             <label>
@@ -136,45 +136,32 @@
                 <div id="saveOverlay">
                     <div id="xtSaveDialogCaption"></div>
                     <div class="saveOverlayBody">
-                        <div>
-                            <input id="qrPrintable" name="imgType" type="radio" value="1" checked="checked">
-                            <label id="xtQrAreaWithDetails" for="qrPrintable"></label>
-                        </div>
-                        <div>
-                            <input id="qrImageOnly" name="imgType" type="radio" value="0">
-                            <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                        <div id="hideNoCanvas" hidden>
+                            <div>
+                                <input id="qrAreaWithDetails" name="imgType" type="radio" value="1" checked="checked">
+                                <label id="xtQrAreaWithDetails" for="qrAreaWithDetails"></label>
+                            </div>
+                            <div>
+                                <input id="qrImageOnly" name="imgType" type="radio" value="0">
+                                <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                            </div>
                         </div>
                         <div style="margin-top: 10px">
                             <label id="xtFileName" for="qrFileName"></label>
                             <input id="qrFileName" type="text">
                         </div>
-                        <div class="resave center">
-                            <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary"></button>
+                        <div style="margin-top: 10px">
+                            <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary u-pull-right"></button>
+                            <button id="xtClose" type="button" onclick="showSaveDialog(false)" class="button u-pull-left"></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="346" height="255" id="svg"> 
-            <foreignObject width="100%" height="100%"> 
-            <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 15px; background-color: #ffffff"> 
- <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial">
-                             <div id="qrResultLabel" style="font-weight: bold; margin-bottom: 15px; display: block;">Test etykieta</div>
-                             <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAACCCAYAAACKAxD9AAADpElEQVR4nO3WwY7DIAyE4b7/S3sP7SWrKsHMGJzmH6kniLHhW2lfQUhEvHY3QHoECCQigEA+AQKJCCCQT4BAIuICwuv1Wvpzn39Vz51s/d33e+ilc6NAAILlfPWhsgECEKbq777fQy/OwbJx13dejKP+nWACobA+EAYDhD73C4TC+o+BsPoi1HrqPN36cd4vEBLzdOsHCEAAAhCAkD7fnd2QgDDYHxBy9Q97KwcHAhCAAIQ+EFY/RHaeTvcLBCC8996l0ZH+gJCrf9h7l0ZH+gNCrv5hr9KomuqLu1p3n+/uVw0QgJCuDwQgvPe6Cs0ECH3uNwWh+pcd5NfWV9/voZfTRSAAoUOjT1sHQpOH2L3eFsLuKIPNfL/6vE5p3R0Q1qV1d0BYl9bdAWFdpH8W3fsvmzXv796fmkx9IDTuTw0QBvd3708NEAb3d+9PjQ2CUtix3/1Q6nnZeuq6e/9p76nNQEjVU9eBAAQgAKEhhN0PoQ7qhqXOq/ZbeT4QFs6r9gsEIAABCA0hqA/h3q9GhahCc0OV7uJ0EQhAGGn8sjgQpPNW3g8QgPCufbooHqxejLpfTfVDd/rDAkKifyAAAQhAAEI61YOvfhj3xbvPd/4hAAEI71rS1/+LAQEIEUD4WQjqYJeHi4PuPq8aevW8h71KISAAYWoQtX52vfo8IEwOotbPrlef91gIlY2MZPX5u2Fkz1MCBOF7IADh6zoQBr9XA4SbQHBf3O6HqH7I7Lq730Mt50FAAMLQIEAAwlA9IPwIBDXVF7G6/9WwgQAEeT4gFPYPhMkA4aYQqgdTo8JS51n9sMr9AiGxHwhAmJoHCKbv1QChKYRsuj2k2v/qeVK9KoMAIdcPEIAABCA8AIJ7EDVuqCoc90+9j9O9mUJAAAIQGvzU+zjdmykEhIdC2B31olS4Kx9iph8nJCAkzlP7V78HAhCAAIQGENyNqBddfV51v+51Z4Ag1M/26153BghC/Wy/7nVngCDUz/brXncmBcF+uBlCdf/V0N3zZs4HgtAvEEwBQu28QCjqHwiTB6sP5b5I9/6r76t/zgCh8DwgAAEIQABCOQT3w1b3t/sPI7MfCEB471UKAQEIX9eBAISSwVfHDbMbxNPZKy8GCEAAwkQ9dz9AmAwQJi9GzcpBO0SFVPmHBoSFAcJkfSAA4es6EJpAqP65L8I9T3V99T6UAKFRfSAAAQhAuAEE8pwAgUQEEMgnQCARAQTyCRBIRACBfPIHVozDO6S0m3gAAAAASUVORK5CYII=" width="130" height="130" />
-                             <div id="qrResultDescription" style="overflow-wrap: break-word; margin-top: 20px; display: block;">dsaFFDSA DSF DSFDSFDSF dsfsdfdsfdsfdsf</div>
-                             <div id="qrPrintDate" style="margin-top: 20px;">12/29/2017</div>
-                         </div>
-            </div> 
-            </foreignObject> 
-            </svg>
-        <div></div>
+        <div id="cover"></div>
     </body>
 
     <script type="text/javascript">
-
-        // document.onmouseup = () => {
-        //     showSaveDialog(false); //hide dialog when click elsewhere to avoid disabling overlay
-        // }
 
         var qr = window.qr = new QRious({
             element: document.getElementById('qrious'),
@@ -189,6 +176,8 @@
         var adjustQrSize = getElement('adjustQrSize');
         var validationError = getElement('validationError');
         var saveDialog = getElement('saveOverlay');
+        var hideNoCanvas = getElement('hideNoCanvas');
+        var cover = getElement('cover');
 
         function doEnc() {
             var pharse = document.qrForm.pharse.value;
@@ -301,39 +290,19 @@
 
 
         function invokeSaveQr() {
-            // if (isCanvasSupported()) {
-            //     showSaveDialog(true);
-            // }
-            // else {
-            //     saveQrImage(); //when canvas not supported save the image only automatically
-            // }
-
             getElement('qrFileName').value = getDefaultFileName();
-            // showSaveDialog(true);
-
-            var qrHolder = getElement('qrHolder');
-            /*var svg = htmlToSvg(qrHolder.clientWidth, qrHolder.clientHeight, qrHolder.outerHTML);
-            var DOMURL = window.URL || window.webkitURL || window;
-
-            var url = DOMURL.createObjectURL(svg);
-            var i = getElement('testimg');
-            i.src = url;
-            document.body.appendChild(svg);
-            var imgData = svgToImageData(svg);
-            //alert(qr.element.src);
-            testcc = canvas.toDataURL();
-            alert(testcc);*/
-
-            //var x = htmlToImgData(qrHolder)
-
-
-            //saveQrImage(getElement('qrFileName').value, x);
-            saveQrArea(qrHolder);
+            showSaveDialog(true);
         }
 
         function saveQr() {
             showSaveDialog(false);
-            saveQrImage(getElement('qrFileName').value, qr.element.src);
+            if (getElement('qrAreaWithDetails').checked) {
+                var qrHolder = getElement('qrHolder');
+                saveQrArea(qrHolder);
+            }
+            else {
+                saveQrImage(getElement('qrFileName').value, qr.element.src);
+            }
         }
 
         function saveQrImage(fileName, imageData) {
@@ -350,105 +319,28 @@
             return 'qr-' + new Date().getTime() + '.png';
         }
 
-        function saveQrArea(htmlNode) {
-            var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
-
-            var xsvg = getElement('svg');
-            var DOMURL = window.URL || window.webkitURL || window;
-
-            var imgX = htmlNode.childNodes[3];
-          /*  imgX.src = htmlNode.childNodes[3].src;
-
-var labelH = htmlNode.childNodes[1].clientHeight;
-var labelM = htmlNode.childNodes[1].style.margin-bottom;*/
-            //var imgSrcBase64 = htmlNode.childNodes[3].src.replace("data:image/png;base64,","");
-            //var blob = b64toBlob(b64Data, 'image/png');
-
-//             var contentType = 'image/png';
-// var b64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
-
-// var blob = b64toBlob(b64Data, contentType);
-//             var blobUrl = DOMURL.createObjectURL(blob);
-
-            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.clientWidth+10 + '" height="' + htmlNode.clientHeight+20 + '">' +
-                '<foreignObject width="100%" height="100%">' +
-                '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 15px; background-color: #ffffff">' +
-                html +
-                '</div>' +
-                '</foreignObject>' +
-                '</svg>';
-
-                //document.lastChild.innerHTML = data;
-
-            var canvas = document.createElement('canvas');
-            canvas.width = 400;
-            canvas.height = 400;
-            var ctx = canvas.getContext('2d');
-
-          
-
-            var img = new Image();
-            var svg = new Blob([data], { type: 'image/svg+xml' });
-            var url = DOMURL.createObjectURL(svg);
-
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0);
-                ctx.drawImage(imgX, (htmlNode.clientWidth/2) - (imgX.clientWidth/2), imgX.offsetTop);
-                DOMURL.revokeObjectURL(url);
-               saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
-            }
-
-            img.src  = url
-            //document.lastChild.appendChild(img)
-            //document.lastChild.appendChild(imgX)
-        }
-
-     /*   function b64toBlob(b64Data, contentType, sliceSize) {
-  contentType = contentType || '';
-  sliceSize = sliceSize || 512;
-
-  var byteCharacters = atob(b64Data);
-  var byteArrays = [];
-
-  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    var byteNumbers = new Array(slice.length);
-    for (var i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    var byteArray = new Uint8Array(byteNumbers);
-
-    byteArrays.push(byteArray);
-  }
-    
-  var blob = new Blob(byteArrays, {type: contentType});
-  return blob;
-}
-
-
-var contentType = 'image/png';
-var b64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
-
-var blob = b64toBlob(b64Data, contentType);
-var blobUrl = URL.createObjectURL(blob);
-
-var img = document.createElement('img');
-img.src = blobUrl;
-document.body.appendChild(img);
-*/
         function showSaveDialog(bool) {
             if (bool) {
-                saveDialog.style.display = 'block';
+                show(saveDialog);
+                show(cover);
+
+                if (isCanvasSupported()) {
+                    hideNoCanvas.style.display = 'block';
+                    getElement('qrAreaWithDetails').checked = true;
+                }
+                else {
+                    hideNoCanvas.style.display = 'none';
+                    getElement('qrImageOnly').checked = true;
+                }
             }
             else {
-                saveDialog.style.display = 'none';
+                hide(saveDialog);
+                hide(cover)
             }
         }
 
         function isOffline() {
-            return false; //window.location.protocol == 'file:';
+            window.location.protocol == 'file:';
         }
 
         function securityCheck() {
@@ -461,6 +353,14 @@ document.body.appendChild(img);
             }
         }
 
+        function show(element) {
+            element.style.display = 'block';
+        }
+
+        function hide(element) {
+            element.style.display = 'none';
+        }
+
         //https://stackoverflow.com/a/2746983
         function isCanvasSupported() {
             var elem = document.createElement('canvas');
@@ -468,57 +368,32 @@ document.body.appendChild(img);
         }
 
         /*** Simple micro engine HTML to SVG and Image by Pawel Cioch ***/
-        /*** Most of it is adjusted for the purpose of this tool, not an universal library ***/
+        /*** Most of this is adjusted for the purpose of this tool, not an universal library ***/
 
+        function saveQrArea(htmlNode) {
+            var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
 
-     /*   function svgToImageData(svg) {
-            // canvas = document.getElementById('canvas');
-            canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
-            //console.log(svg.width);
-            ctx = canvas.getContext('2d');
-
+            var xsvg = getElement('svg');
             var DOMURL = window.URL || window.webkitURL || window;
 
-            var img = new Image();
-            var url = DOMURL.createObjectURL(svg);
+            var imgX = htmlNode.childNodes[3];
 
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0);
-                DOMURL.revokeObjectURL(url);
-                //testcc = ctx.toDataURL();
+            var correctWidth = 2; //try fail value, not sure why rendering diff than screen, need to research more
+            var correctHeight = 41; //try fail value, not sure why rendering diff than screen, need to research more
 
-                // alert(ctx.toDataURL());
-                //testcc = canvas.toDataURL();
-            }
-
-            img.src = url;
-
-
-        }*/
-
-        function htmlToImgData(htmlNode) {
-
-            html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
-
-            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.clientWidth + '" height="' + htmlNode.clientHeight + '">' +
+            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.clientWidth + correctWidth + '" height="' + htmlNode.clientHeight + correctHeight + '">' +
                 '<foreignObject width="100%" height="100%">' +
-                '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 15px; background-color: #ffffff"' +
+                '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 15px; background-color: #ffffff">' +
                 html +
                 '</div>' +
                 '</foreignObject>' +
                 '</svg>';
 
 
-            var svg = new Blob([data], { type: 'image/svg+xml' });
-
             var canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
+            canvas.width = htmlNode.clientWidth + correctWidth;
+            canvas.height = htmlNode.clientHeight + correctHeight;
             var ctx = canvas.getContext('2d');
-
-            var DOMURL = window.URL || window.webkitURL || window;
 
             var img = new Image();
             var svg = new Blob([data], { type: 'image/svg+xml' });
@@ -526,11 +401,12 @@ document.body.appendChild(img);
 
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
+                ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop);
                 DOMURL.revokeObjectURL(url);
-               return canvas.toDataURL();
+                saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
             }
 
-            img.src = url;
+            img.src = url
         }
 
         /*** End HTML to Image ***/
