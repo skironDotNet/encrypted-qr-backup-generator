@@ -72,6 +72,12 @@ button {
   border-color: rgb(31, 155, 0);
 }
 
+.button.button-page-red {
+  color: #fff;
+  background-color: rgb(216, 6, 6);
+  border-color: rgb(155, 0, 0);
+}
+
 img {
   vertical-align: top;
 }

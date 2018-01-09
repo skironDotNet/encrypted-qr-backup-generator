@@ -37,6 +37,7 @@
             <form name="qrForm" autocomplete="off" action="#">
                 <label>
                     <span id="xtPlainTextLabel"></span>
+                    <span id="xtPlainTextLabel2" hidden></span>
                 </label>
                 <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
                 <div class="row">
@@ -62,15 +63,17 @@
                 <label>
                     <span id="xtPharse"></span>
                 </label>
-                <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width" value="11111111111111111111111111111111111111">
-                <label>
-                    <span id="xtPharseConfirm"></span>
-                </label>
-                <input type="password" name="pharseConfirm" class="u-full-width" value="11111111111111111111111111111111111111">
+                <div id="pharseInputs">
+                    <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width" value="11111111111111111111111111111111111111">
+                    <label>
+                        <span id="xtPharseConfirm"></span>
+                    </label>
+                    <input type="password" name="pharseConfirm" class="u-full-width" value="11111111111111111111111111111111111111">
+                </div>
                 <div id="validationError" class="validationError center"></div>
                 <div class="row">
                     <div class="six columns">
-                        <button id="xtGenerate" type="button" onclick="doEnc()" class="button-primary"></button>
+                        <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
                     </div>
                     <div class="six columns">
                         <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
@@ -178,6 +181,59 @@
             var hideNoCanvas = getElement('hideNoCanvas');
             var cover = getElement('cover');
 
+            function generate() {
+                switch (currentMode) {
+                    case "xtEncrypt":
+                        doEnc();
+                        break;
+                    case "xtDecrypt":
+                        //setDecryptionMode();
+                        break;
+                    case "xtNoEncryption":
+                        doPlain();
+                        break;
+                }
+            }
+
+            function doPlain() {
+                var plain = document.qrForm.plainText.value;
+                var qrValue = plain;
+
+                if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
+                    qrValue = document.qrForm.qrLabel.value + ':\n\n' + plain;
+                }
+
+                var dataLineCount = qrValue.split(/\r\n|\r|\n/).length;
+
+                qr.level = 'L';
+                qr.size = 100 + dataLineCount * 15;
+                adjustQrSize.value = qr.size;
+                qr.value = qrValue;
+
+                qrData.value = qrValue;
+                qrData.style.height = dataLineCount * 15 + 'px';
+
+                if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
+                    resultLabel.innerText = document.qrForm.qrLabel.value;
+                    resultLabel.style.display = 'block';
+                }
+                else {
+                    resultLabel.style.display = 'none';
+                }
+
+                if (document.qrForm.qrDescription.value.length > 0) {
+                    resultDesc.innerText = document.qrForm.qrDescription.value;
+                    resultDesc.style.display = 'block';
+
+                }
+                else {
+                    resultDesc.style.display = 'none';
+                }
+
+                getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
+                showResult(true);
+            }
+
             function doEnc() {
                 var pharse = document.qrForm.pharse.value;
                 var pharseConfim = document.qrForm.pharseConfirm.value;
@@ -228,14 +284,58 @@
                 return document.getElementById(id);
             }
 
+            var currentMode = '';
+
             function setMode(obj) {
+                currentMode = obj.id;
+
+                highlightModeButton(currentMode);
+                switch (currentMode) {
+                    case "xtEncrypt":
+                        setEncryptionMode();
+                        break;
+                    case "xtDecrypt":
+                        setDecryptionMode();
+                        break;
+                    case "xtNoEncryption":
+                        setNoEncyptionMode();
+                        break;
+                }
+            }
+
+            function setEncryptionMode() {
+                hide(xtPlainTextLabel2);
+                show(xtPlainTextLabel);
+                getElement('xhtPlainTextHint').placeholder = translations['xhtPlainTextHint'];
+                show(pharseInputs);
+            }
+
+            function setDecryptionMode() {
+
+            }
+
+            function setNoEncyptionMode() {
+                hide(xtPlainTextLabel);
+                show(xtPlainTextLabel2);
+                getElement('xhtPlainTextHint').placeholder = '';
+                hide(pharseInputs);
+            }
+
+            function highlightModeButton(buttonId) {
                 getElement("modes").childNodes.forEach((node) => {
                     node.className = "";
                     node.disabled = false;
                 })
-                var currButton = getElement(obj.id)
+                var currButton = getElement(buttonId)
                 currButton.className = "button button-page";
                 currButton.disabled = true;
+
+                if (buttonId == 'xtNoEncryption') {
+                    currButton.className = "button button-page-red";
+                }
+
+                showResult(false);
+                clearForm();
             }
 
             function showResult(bool) {
