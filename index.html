@@ -230,7 +230,8 @@
                     resultDesc.style.display = 'none';
                 }
 
-                getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
+                var date = new Date();
+                getElement("qrPrintDate").innerHTML = date.toLocaleFormat('%Y-%m-%d');
                 showResult(true);
             }
 
