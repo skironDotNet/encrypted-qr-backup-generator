@@ -82,11 +82,11 @@
 
                 <div class="row">
                     <div id="printQr" class="nine columns">
-                        <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial">
+                        <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
                             <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px;">Label</div>
                             <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
                             <div id="qrResultDescription" style="word-wrap: break-word; margin-top: 20px;">Description</div>
-                            <div id="qrPrintDate" style="margin-top: 20px;"></div> <!-- clientHeight is incorrect because date div is hidden thus not rendered thus diffrent size -->
+                            <div id="qrPrintDate" style="margin-top: 20px;"></div>
                         </div>
                     </div>
 
@@ -373,15 +373,11 @@
         function saveQrArea(htmlNode) {
             var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
 
-            var xsvg = getElement('svg');
-            var imgX = htmlNode.childNodes[3];
+            //var imgX = htmlNode.childNodes[3];
 
-            var correctWidth = 2; //try fail value, not sure why rendering diff than screen, need to research more
-            var correctHeight = 41; //try fail value, not sure why rendering diff than screen, need to research more
-
-            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.clientWidth + correctWidth + '" height="' + htmlNode.clientHeight + correctHeight + '">' +
+            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
                 '<foreignObject width="100%" height="100%">' +
-                '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 15px; background-color: #ffffff">' +
+                '<div xmlns="http://www.w3.org/1999/xhtml">' +
                 html +
                 '</div>' +
                 '</foreignObject>' +
@@ -389,19 +385,19 @@
 
 
             var canvas = document.createElement('canvas');
-            canvas.width = htmlNode.clientWidth + correctWidth;
-            canvas.height = htmlNode.clientHeight + correctHeight;
+             canvas.width = htmlNode.offsetWidth ;
+             canvas.height = htmlNode.offsetHeight;
             var ctx = canvas.getContext('2d');
 
             var img = new Image();
 
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
-                ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop); //needed for FF but not needed in Chrome as SVG in chrome seems to render internal embed image, didn't test other browsers
+                //ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop); //needed for FF but not needed in Chrome as SVG in chrome seems to render internal embed image, didn't test other browsers
                 saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
             }
 
-            img.src = 'data:image/svg+xml;base64,'+ btoa(data);
+            img.src = 'data:image/svg+xml;base64,' + btoa(data);
         }
 
         /*** End HTML to Image ***/
