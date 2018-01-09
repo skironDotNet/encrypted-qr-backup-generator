@@ -159,329 +159,329 @@
             </div>
         </div>
         <div id="cover"></div>
-    </body>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        var qr = window.qr = new QRious({
-            element: document.getElementById('qrious'),
-            size: 100,
-            value: 'Nothing here!'
-        });
+            var qr = window.qr = new QRious({
+                element: document.getElementById('qrious'),
+                size: 100,
+                value: 'Nothing here!'
+            });
 
-        var qrData = getElement('qrData');
+            var qrData = getElement('qrData');
 
-        var resultLabel = getElement("qrResultLabel");
-        var resultDesc = getElement("qrResultDescription");
-        var adjustQrSize = getElement('adjustQrSize');
-        var validationError = getElement('validationError');
-        var saveDialog = getElement('saveOverlay');
-        var hideNoCanvas = getElement('hideNoCanvas');
-        var cover = getElement('cover');
+            var resultLabel = getElement("qrResultLabel");
+            var resultDesc = getElement("qrResultDescription");
+            var adjustQrSize = getElement('adjustQrSize');
+            var validationError = getElement('validationError');
+            var saveDialog = getElement('saveOverlay');
+            var hideNoCanvas = getElement('hideNoCanvas');
+            var cover = getElement('cover');
 
-        function doEnc() {
-            var pharse = document.qrForm.pharse.value;
-            var pharseConfim = document.qrForm.pharseConfirm.value;
+            function doEnc() {
+                var pharse = document.qrForm.pharse.value;
+                var pharseConfim = document.qrForm.pharseConfirm.value;
 
-            if (!validatePharse(pharse, pharseConfim))
-                return;
+                if (!validatePharse(pharse, pharseConfim))
+                    return;
 
-            var plain = document.qrForm.plainText.value;
-            var encrypted = GibberishAES.enc(plain, pharse);
-            var encryptedLabeled = encrypted;
+                var plain = document.qrForm.plainText.value;
+                var encrypted = GibberishAES.enc(plain, pharse);
+                var encryptedLabeled = encrypted;
 
-            if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
-                encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
-            }
+                if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
+                    encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
+                }
 
-            var dataLineCount = encryptedLabeled.split(/\r\n|\r|\n/).length;
+                var dataLineCount = encryptedLabeled.split(/\r\n|\r|\n/).length;
 
-            qr.level = 'L';
-            qr.size = 100 + dataLineCount * 15;
-            adjustQrSize.value = qr.size;
-            qr.value = encryptedLabeled;
+                qr.level = 'L';
+                qr.size = 100 + dataLineCount * 15;
+                adjustQrSize.value = qr.size;
+                qr.value = encryptedLabeled;
 
-            qrData.value = encryptedLabeled;
-            qrData.style.height = dataLineCount * 15 + 'px';
+                qrData.value = encryptedLabeled;
+                qrData.style.height = dataLineCount * 15 + 'px';
 
-            if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
-                resultLabel.innerText = document.qrForm.qrLabel.value;
-                resultLabel.style.display = 'block';
-            }
-            else {
-                resultLabel.style.display = 'none';
-            }
-
-            if (document.qrForm.qrDescription.value.length > 0) {
-                resultDesc.innerText = document.qrForm.qrDescription.value;
-                resultDesc.style.display = 'block';
-
-            }
-            else {
-                resultDesc.style.display = 'none';
-            }
-
-            getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
-            showResult(true);
-        }
-
-        function getElement(id) {
-            return document.getElementById(id);
-        }
-
-        function setMode(obj) {
-            getElement("modes").childNodes.forEach((node) => {
-                node.className = "";
-                node.disabled = false;
-            })
-            var currButton = getElement(obj.id)
-            currButton.className = "button button-page";
-            currButton.disabled = true;
-        }
-
-        function showResult(bool) {
-            if (bool) {
-                document.qrForm.style.display = 'none';
-                document.qrResult.style.display = 'block';
-            }
-            else {
-                document.qrForm.style.display = 'block';
-                document.qrResult.style.display = 'none';
-            }
-        }
-
-        function clearForm() {
-            document.qrForm.reset();
-            clearValidationError();
-        }
-
-        function adjustQr() {
-            if (adjustQrSize.value < 100)
-                adjustQrSize.value = 100;
-
-            if (adjustQrSize.value > 600)
-                adjustQrSize.value = 600;
-
-            qr.size = adjustQrSize.value;
-        }
-
-        function validatePharse(pharse, pharseConfirm) {
-            clearValidationError();
-
-            if (pharse.length < 25) {
-                validationError.textContent = translations.xtErrPharseTooShort;
-                currentValidationError = 'xtErrPharseTooShort';
-                return false;
-            }
-            if (pharse != pharseConfirm) {
-
-                validationError.textContent = translations.xtErrPharseNotMatch;
-                currentValidationError = 'xtErrPharseNotMatch';
-                return false;
-            }
-
-            return true;
-        }
-
-        function clearValidationError() {
-            validationError.textContent = '';
-            currentValidationError = '';
-        }
-
-
-        function invokeSaveQr() {
-            getElement('qrFileName').value = getDefaultFileName();
-            showSaveDialog(true);
-        }
-
-        function saveQr() {
-            showSaveDialog(false);
-            if (getElement('qrAreaWithDetails').checked) {
-                var qrHolder = getElement('qrHolder');
-                saveQrArea(qrHolder);
-            }
-            else {
-                saveQrImage(getElement('qrFileName').value, qr.element.src);
-            }
-        }
-
-        function saveQrImage(fileName, imageData) {
-            if (fileName.length < 1) {
-                fileName = getDefaultFileName();
-            }
-            var down = getElement('qrDownload');
-            down.href = imageData;
-            down.download = fileName.replace('.png', '') + '.png';
-            down.click();
-        }
-
-        function getDefaultFileName() {
-            return 'qr-' + new Date().getTime() + '.png';
-        }
-
-        function showSaveDialog(bool) {
-            if (bool) {
-                show(saveDialog);
-                show(cover);
-
-                if (isCanvasSupported()) {
-                    hideNoCanvas.style.display = 'block';
-                    getElement('qrAreaWithDetails').checked = true;
+                if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
+                    resultLabel.innerText = document.qrForm.qrLabel.value;
+                    resultLabel.style.display = 'block';
                 }
                 else {
-                    hideNoCanvas.style.display = 'none';
-                    getElement('qrImageOnly').checked = true;
-                }
-            }
-            else {
-                hide(saveDialog);
-                hide(cover)
-            }
-        }
-
-        function isOffline() {
-            return window.location.protocol == 'file:';
-        }
-
-        function securityCheck() {
-            var secOffline = getElement('xtNotOffline')
-            if (!isOffline()) {
-                secOffline.style.display = 'block';
-            }
-            else {
-                secOffline.style.display = 'none';
-            }
-        }
-
-        function show(element) {
-            element.style.display = 'block';
-        }
-
-        function hide(element) {
-            element.style.display = 'none';
-        }
-
-        //https://stackoverflow.com/a/2746983
-        function isCanvasSupported() {
-            var elem = document.createElement('canvas');
-            return !!(elem.getContext && elem.getContext('2d'));
-        }
-
-        /*** Simple micro engine HTML to SVG and Image by Pawel Cioch ***/
-        /*** Most of this is adjusted for the purpose of this tool, not an universal library ***/
-
-        function isFireFox() {
-            return typeof InstallTrigger !== 'undefined';
-        }
-
-        function saveQrArea(htmlNode) {
-            var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
-
-
-            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
-                '<foreignObject width="100%" height="100%">' +
-                '<div xmlns="http://www.w3.org/1999/xhtml">' +
-                html +
-                '</div>' +
-                '</foreignObject>' +
-                '</svg>';
-
-
-            var canvas = document.createElement('canvas');
-            canvas.width = htmlNode.offsetWidth;
-            canvas.height = htmlNode.offsetHeight;
-            var ctx = canvas.getContext('2d');
-
-            var img = new Image();
-
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0);
-
-                if (isFireFox()) {
-                    var imgQr = htmlNode.childNodes[3];
-                    ctx.drawImage(imgQr, (htmlNode.offsetWidth / 2) - (imgQr.offsetHeight / 2), imgQr.offsetTop); //needed for FF, seems like SVG embed image is nor rendered, so appears blank
+                    resultLabel.style.display = 'none';
                 }
 
-                saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
+                if (document.qrForm.qrDescription.value.length > 0) {
+                    resultDesc.innerText = document.qrForm.qrDescription.value;
+                    resultDesc.style.display = 'block';
+
+                }
+                else {
+                    resultDesc.style.display = 'none';
+                }
+
+                getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
+                showResult(true);
             }
 
-            img.src = 'data:image/svg+xml;base64,' + btoa(data);
-        }
+            function getElement(id) {
+                return document.getElementById(id);
+            }
 
-        /*** End HTML to Image ***/
+            function setMode(obj) {
+                getElement("modes").childNodes.forEach((node) => {
+                    node.className = "";
+                    node.disabled = false;
+                })
+                var currButton = getElement(obj.id)
+                currButton.className = "button button-page";
+                currButton.disabled = true;
+            }
 
-        /*** Simple Lang engine by Pawel Cioch ***/
-
-        var langMenu = getElement('langMenu');
-        var currentLangCode = '';
-        var currentValidationError = '';
-
-        function setLang(obj) {
-            loadLangFile(obj.id, updateLang);
-        }
-
-        function loadLangFile(langCode, callback) {
-            if (langCode == null) {
-                langCode = localStorage.getItem('qrlang');
-                if (langCode == null || langCode.length != 2) {
-                    langCode = defaultLanguageCode;
+            function showResult(bool) {
+                if (bool) {
+                    document.qrForm.style.display = 'none';
+                    document.qrResult.style.display = 'block';
+                }
+                else {
+                    document.qrForm.style.display = 'block';
+                    document.qrResult.style.display = 'none';
                 }
             }
 
-            showLangMenu(langCode);
-            var head = document.getElementsByTagName('head')[0];
-
-            var langScript = getElement("langFile");
-            if (langScript !== null) {
-                head.removeChild(langScript);
+            function clearForm() {
+                document.qrForm.reset();
+                clearValidationError();
             }
 
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            currentLangCode = langCode.toLowerCase();
-            script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
-            script.id = 'langFile';
+            function adjustQr() {
+                if (adjustQrSize.value < 100)
+                    adjustQrSize.value = 100;
 
-            script.onreadystatechange = callback;
-            script.onload = callback;
+                if (adjustQrSize.value > 600)
+                    adjustQrSize.value = 600;
 
-            head.appendChild(script);
-            localStorage.setItem("qrlang", currentLangCode);
-        }
-
-        function showLangMenu(langSelected) {
-            var html = '';
-            langsAvailable.forEach(function (lang) {
-                if (langSelected == lang.Code)
-                    html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
-                else
-                    html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
-            }, this);
-
-            langMenu.innerHTML = html.substring(0, html.length - 3);;
-        }
-
-        var updateLang = function () {
-            var langElements = document.querySelectorAll('[id^=xt]');
-            langElements.forEach(function (element) {
-                element.innerHTML = translations[element.id];
-            }, this);
-
-            langElements = document.querySelectorAll('[id^=xht]');
-            langElements.forEach(function (element) {
-                element.placeholder = translations[element.id];
-            }, this);
-
-            if (currentValidationError.length > 0) {
-                validationError.textContent = translations[currentValidationError];
+                qr.size = adjustQrSize.value;
             }
-        };
 
-        loadLangFile(null, updateLang);
+            function validatePharse(pharse, pharseConfirm) {
+                clearValidationError();
 
-        /*** End Lang Engine ***/
+                if (pharse.length < 25) {
+                    validationError.textContent = translations.xtErrPharseTooShort;
+                    currentValidationError = 'xtErrPharseTooShort';
+                    return false;
+                }
+                if (pharse != pharseConfirm) {
 
-        securityCheck();
-    </script>
+                    validationError.textContent = translations.xtErrPharseNotMatch;
+                    currentValidationError = 'xtErrPharseNotMatch';
+                    return false;
+                }
+
+                return true;
+            }
+
+            function clearValidationError() {
+                validationError.textContent = '';
+                currentValidationError = '';
+            }
+
+
+            function invokeSaveQr() {
+                getElement('qrFileName').value = getDefaultFileName();
+                showSaveDialog(true);
+            }
+
+            function saveQr() {
+                showSaveDialog(false);
+                if (getElement('qrAreaWithDetails').checked) {
+                    var qrHolder = getElement('qrHolder');
+                    saveQrArea(qrHolder);
+                }
+                else {
+                    saveQrImage(getElement('qrFileName').value, qr.element.src);
+                }
+            }
+
+            function saveQrImage(fileName, imageData) {
+                if (fileName.length < 1) {
+                    fileName = getDefaultFileName();
+                }
+                var down = getElement('qrDownload');
+                down.href = imageData;
+                down.download = fileName.replace('.png', '') + '.png';
+                down.click();
+            }
+
+            function getDefaultFileName() {
+                return 'qr-' + new Date().getTime() + '.png';
+            }
+
+            function showSaveDialog(bool) {
+                if (bool) {
+                    show(saveDialog);
+                    show(cover);
+
+                    if (isCanvasSupported()) {
+                        hideNoCanvas.style.display = 'block';
+                        getElement('qrAreaWithDetails').checked = true;
+                    }
+                    else {
+                        hideNoCanvas.style.display = 'none';
+                        getElement('qrImageOnly').checked = true;
+                    }
+                }
+                else {
+                    hide(saveDialog);
+                    hide(cover)
+                }
+            }
+
+            function isOffline() {
+                return window.location.protocol == 'file:';
+            }
+
+            function securityCheck() {
+                var secOffline = getElement('xtNotOffline')
+                if (!isOffline()) {
+                    secOffline.style.display = 'block';
+                }
+                else {
+                    secOffline.style.display = 'none';
+                }
+            }
+
+            function show(element) {
+                element.style.display = 'block';
+            }
+
+            function hide(element) {
+                element.style.display = 'none';
+            }
+
+            //https://stackoverflow.com/a/2746983
+            function isCanvasSupported() {
+                var elem = document.createElement('canvas');
+                return !!(elem.getContext && elem.getContext('2d'));
+            }
+
+            /*** Simple micro engine HTML to SVG and Image by Pawel Cioch ***/
+            /*** Most of this is adjusted for the purpose of this tool, not an universal library ***/
+
+            function isFireFox() {
+                return typeof InstallTrigger !== 'undefined';
+            }
+
+            function saveQrArea(htmlNode) {
+                var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
+
+
+                var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
+                    '<foreignObject width="100%" height="100%">' +
+                    '<div xmlns="http://www.w3.org/1999/xhtml">' +
+                    html +
+                    '</div>' +
+                    '</foreignObject>' +
+                    '</svg>';
+
+
+                var canvas = document.createElement('canvas');
+                canvas.width = htmlNode.offsetWidth;
+                canvas.height = htmlNode.offsetHeight;
+                var ctx = canvas.getContext('2d');
+
+                var img = new Image();
+
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0);
+
+                    if (isFireFox()) {
+                        var imgQr = htmlNode.childNodes[3];
+                        ctx.drawImage(imgQr, (htmlNode.offsetWidth / 2) - (imgQr.offsetHeight / 2), imgQr.offsetTop); //needed for FF, seems like SVG embed image is nor rendered, so appears blank
+                    }
+
+                    saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
+                }
+
+                img.src = 'data:image/svg+xml;base64,' + btoa(data);
+            }
+
+            /*** End HTML to Image ***/
+
+            /*** Simple Lang engine by Pawel Cioch ***/
+
+            var langMenu = getElement('langMenu');
+            var currentLangCode = '';
+            var currentValidationError = '';
+
+            function setLang(obj) {
+                loadLangFile(obj.id, updateLang);
+            }
+
+            function loadLangFile(langCode, callback) {
+                if (langCode == null) {
+                    langCode = localStorage.getItem('qrlang');
+                    if (langCode == null || langCode.length != 2) {
+                        langCode = defaultLanguageCode;
+                    }
+                }
+
+                showLangMenu(langCode);
+                var head = document.getElementsByTagName('head')[0];
+
+                var langScript = getElement("langFile");
+                if (langScript !== null) {
+                    head.removeChild(langScript);
+                }
+
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                currentLangCode = langCode.toLowerCase();
+                script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
+                script.id = 'langFile';
+
+                script.onreadystatechange = callback;
+                script.onload = callback;
+
+                head.appendChild(script);
+                localStorage.setItem("qrlang", currentLangCode);
+            }
+
+            function showLangMenu(langSelected) {
+                var html = '';
+                langsAvailable.forEach(function (lang) {
+                    if (langSelected == lang.Code)
+                        html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                    else
+                        html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                }, this);
+
+                langMenu.innerHTML = html.substring(0, html.length - 3);;
+            }
+
+            var updateLang = function () {
+                var langElements = document.querySelectorAll('[id^=xt]');
+                langElements.forEach(function (element) {
+                    element.innerHTML = translations[element.id];
+                }, this);
+
+                langElements = document.querySelectorAll('[id^=xht]');
+                langElements.forEach(function (element) {
+                    element.placeholder = translations[element.id];
+                }, this);
+
+                if (currentValidationError.length > 0) {
+                    validationError.textContent = translations[currentValidationError];
+                }
+            };
+
+            loadLangFile(null, updateLang);
+
+            /*** End Lang Engine ***/
+
+            securityCheck();
+        </script>
+    </body>
 
 </html>
