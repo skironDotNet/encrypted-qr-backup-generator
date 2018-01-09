@@ -197,11 +197,32 @@
 
             function doPlain() {
                 var plain = document.qrForm.plainText.value;
-                var qrValue = plain;
 
                 if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
-                    qrValue = document.qrForm.qrLabel.value + ':\n\n' + plain;
+                    plain = document.qrForm.qrLabel.value + ':\n\n' + plain;
                 }
+
+                fillResultScreen(plain);
+            }
+
+            function doEnc() {
+                var pharse = document.qrForm.pharse.value;
+                var pharseConfim = document.qrForm.pharseConfirm.value;
+
+                if (!validatePharse(pharse, pharseConfim))
+                    return;
+
+                var plain = document.qrForm.plainText.value;
+                var encrypted = GibberishAES.enc(plain, pharse);
+
+                if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
+                    encrypted = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
+                }
+
+                fillResultScreen(encrypted);
+            }
+
+            function fillResultScreen(qrValue) {
 
                 var dataLineCount = qrValue.split(/\r\n|\r|\n/).length;
 
@@ -215,69 +236,22 @@
 
                 if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
                     resultLabel.innerText = document.qrForm.qrLabel.value;
-                    resultLabel.style.display = 'block';
+                    show(resultLabel);
                 }
                 else {
-                    resultLabel.style.display = 'none';
+                    hide(resultLabel);
                 }
 
                 if (document.qrForm.qrDescription.value.length > 0) {
                     resultDesc.innerText = document.qrForm.qrDescription.value;
-                    resultDesc.style.display = 'block';
-
+                    show(resultDesc);
                 }
                 else {
-                    resultDesc.style.display = 'none';
+                    hide(resultDesc);
                 }
 
                 var date = new Date();
                 getElement("qrPrintDate").innerHTML = date.toLocaleFormat('%Y-%m-%d');
-                showResult(true);
-            }
-
-            function doEnc() {
-                var pharse = document.qrForm.pharse.value;
-                var pharseConfim = document.qrForm.pharseConfirm.value;
-
-                if (!validatePharse(pharse, pharseConfim))
-                    return;
-
-                var plain = document.qrForm.plainText.value;
-                var encrypted = GibberishAES.enc(plain, pharse);
-                var encryptedLabeled = encrypted;
-
-                if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
-                    encryptedLabeled = document.qrForm.qrLabel.value + '\n\n-ENC BLOCK-\n\n' + encrypted;
-                }
-
-                var dataLineCount = encryptedLabeled.split(/\r\n|\r|\n/).length;
-
-                qr.level = 'L';
-                qr.size = 100 + dataLineCount * 15;
-                adjustQrSize.value = qr.size;
-                qr.value = encryptedLabeled;
-
-                qrData.value = encryptedLabeled;
-                qrData.style.height = dataLineCount * 15 + 'px';
-
-                if (document.qrForm.qrLabel.value.length > 0 && !document.qrForm.isEmbed.checked) {
-                    resultLabel.innerText = document.qrForm.qrLabel.value;
-                    resultLabel.style.display = 'block';
-                }
-                else {
-                    resultLabel.style.display = 'none';
-                }
-
-                if (document.qrForm.qrDescription.value.length > 0) {
-                    resultDesc.innerText = document.qrForm.qrDescription.value;
-                    resultDesc.style.display = 'block';
-
-                }
-                else {
-                    resultDesc.style.display = 'none';
-                }
-
-                getElement("qrPrintDate").innerHTML = new Date().toLocaleDateString();
                 showResult(true);
             }
 
