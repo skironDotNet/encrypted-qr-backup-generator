@@ -86,7 +86,7 @@
                             <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px;">Label</div>
                             <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
                             <div id="qrResultDescription" style="word-wrap: break-word; margin-top: 20px;">Description</div>
-                            <div id="qrPrintDate" style="margin-top: 20px;"></div>
+                            <div id="qrPrintDate" style="margin-top: 20px;"></div> <!-- clientHeight is incorrect because date div is hidden thus not rendered thus diffrent size -->
                         </div>
                     </div>
 
@@ -397,7 +397,7 @@
 
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
-                ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop);
+                ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop); //needed for FF but not needed in Chrome as SVG in chrome seems to render internal embed image, didn't test other browsers
                 saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
             }
 
