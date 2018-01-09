@@ -370,10 +370,13 @@
         /*** Simple micro engine HTML to SVG and Image by Pawel Cioch ***/
         /*** Most of this is adjusted for the purpose of this tool, not an universal library ***/
 
+        function isFireFox() {
+            return typeof InstallTrigger !== 'undefined';
+        }
+
         function saveQrArea(htmlNode) {
             var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
 
-            //var imgX = htmlNode.childNodes[3];
 
             var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
                 '<foreignObject width="100%" height="100%">' +
@@ -385,15 +388,20 @@
 
 
             var canvas = document.createElement('canvas');
-             canvas.width = htmlNode.offsetWidth ;
-             canvas.height = htmlNode.offsetHeight;
+            canvas.width = htmlNode.offsetWidth;
+            canvas.height = htmlNode.offsetHeight;
             var ctx = canvas.getContext('2d');
 
             var img = new Image();
 
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
-                //ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop); //needed for FF but not needed in Chrome as SVG in chrome seems to render internal embed image, didn't test other browsers
+
+                if (isFireFox()) {
+                    var imgQr = htmlNode.childNodes[3];
+                    ctx.drawImage(imgQr, (htmlNode.offsetWidth / 2) - (imgQr.offsetHeight / 2), imgQr.offsetTop); //needed for FF, seems like SVG embed image is nor rendered, so appears blank
+                }
+
                 saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
             }
 
