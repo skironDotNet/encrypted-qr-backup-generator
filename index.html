@@ -374,8 +374,6 @@
             var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
 
             var xsvg = getElement('svg');
-            var DOMURL = window.URL || window.webkitURL || window;
-
             var imgX = htmlNode.childNodes[3];
 
             var correctWidth = 2; //try fail value, not sure why rendering diff than screen, need to research more
@@ -396,17 +394,14 @@
             var ctx = canvas.getContext('2d');
 
             var img = new Image();
-            var svg = new Blob([data], { type: 'image/svg+xml' });
-            var url = DOMURL.createObjectURL(svg);
 
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
                 ctx.drawImage(imgX, (htmlNode.clientWidth / 2) - (imgX.clientWidth / 2), imgX.offsetTop);
-                DOMURL.revokeObjectURL(url);
                 saveQrImage(getElement('qrFileName').value, canvas.toDataURL());
             }
 
-            img.src = url
+            img.src = 'data:image/svg+xml;base64,'+ btoa(data);
         }
 
         /*** End HTML to Image ***/
