@@ -450,6 +450,7 @@
 
             function saveQrArea(htmlNode) {
                 var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
+                html = html.replace('<br>', '<br />'); //fix <br> to be closed tag XHTML
 
 
                 var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
