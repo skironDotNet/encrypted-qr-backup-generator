@@ -81,8 +81,7 @@
                 </div>
             </form>
 
-            <form name="qrResult" class="qrResult" autocomplete="off" action="#" hidden>
-
+            <div id="qrResult" hidden>
                 <div class="row">
                     <div id="printQr" class="nine columns">
                         <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
@@ -117,8 +116,7 @@
                     <span id="xtEncQrData"></span>
                 </label>
                 <textarea id="qrData" class="u-full-width" readonly></textarea>
-
-            </form>
+            </div>
 
             <footer>
                 <div class="securityCheck">
@@ -315,12 +313,12 @@
 
             function showResult(bool) {
                 if (bool) {
-                    document.qrForm.style.display = 'none';
-                    document.qrResult.style.display = 'block';
+                    hide(qrForm);
+                    show(qrResult);
                 }
                 else {
-                    document.qrForm.style.display = 'block';
-                    document.qrResult.style.display = 'none';
+                    show(qrForm);
+                    hide(qrResult);
                 }
             }
 
@@ -450,7 +448,7 @@
 
             function saveQrArea(htmlNode) {
                 var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
-                html = html.replace(/<br\s*>/gi,'<br />'); //fix <br> to be closed tag XHTML
+                html = html.replace(/<br\s*>/gi, '<br />'); //fix <br> to be closed tag XHTML
 
 
                 var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
