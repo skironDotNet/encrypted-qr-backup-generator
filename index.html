@@ -96,7 +96,7 @@
             </form>
 
             <div id="qrResult" hidden>
-                <div class="row">
+                <div id="qrSection" class="row">
                     <div id="printQr" class="nine columns">
                         <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
                             <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="three columns result-controls">
+                    <div class="three columns right">
                         <div style="display: inline-block">
                             <label>
                                 <span id="xtAdjustQrSize" class="u-pull-left"></span>
@@ -119,17 +119,18 @@
                         <div>
                             <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
                         </div>
-                        <div>
-                            <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
-                        </div>
                         <a id="qrDownload" href="" download="" hidden></a>
                     </div>
                 </div>
 
                 <label>
                     <span id="xtEncQrData"></span>
+                    <span id="xtDecQrData" hidden></span>
                 </label>
                 <textarea id="qrData" class="u-full-width" readonly></textarea>
+                <div class="right">
+                    <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
+                </div>
             </div>
 
             <footer>
@@ -239,7 +240,9 @@
                     return;
 
                 var plain = '';
-                var enc = document.qrForm.qrEncryptedText.value;
+                var encText = document.qrForm.qrEncryptedText.value;
+                var encArr = encText.split('-ENC BLOCK-');
+                var enc = encArr[encArr.length - 1].trim();
 
                 try {
                     plain = GibberishAES.dec(enc, pharse);
@@ -260,6 +263,7 @@
                 qrData.value = plain;
                 qrData.style.height = dataLineCount * 15 + 'px';
                 showResult(true);
+                setResultModeToDecrypt();
             }
 
             function scanFromCamera() {
@@ -300,6 +304,7 @@
 
                 var date = new Date();
                 getElement("qrPrintDate").innerHTML = date.toLocaleFormat('%Y-%m-%d');
+                setResultModeToEncrypt();
                 showResult(true);
             }
 
@@ -334,6 +339,7 @@
                 show(pharseInputs);
                 show(xtGenerate);
                 hide(xtDecrypt);
+                hide(decryptInputs);
             }
 
             function setDecryptionMode() {
@@ -381,6 +387,18 @@
                     show(qrForm);
                     hide(qrResult);
                 }
+            }
+
+            function setResultModeToDecrypt() {
+                hide(qrSection);
+                hide(xtEncQrData);
+                show(xtDecQrData);
+            }
+
+            function setResultModeToEncrypt() {
+                show(qrSection);
+                show(xtEncQrData);
+                hide(xtDecQrData);
             }
 
             function clearForm() {

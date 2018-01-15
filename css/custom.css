@@ -62,10 +62,6 @@ button {
   color: white;
 }
 
-.result-controls {
-  text-align: right;
-}
-
 .button.button-page {
   color: #fff;
   background-color: rgb(31, 155, 0);
@@ -94,6 +90,10 @@ img {
 
 .center {
   text-align: center;
+}
+
+.right{
+  text-align: right;
 }
 
 footer {

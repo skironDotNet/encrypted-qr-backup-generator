@@ -35,6 +35,7 @@ var translations = {
     xtLoadQrImage: 'Załaduj z obrazka QR',
     xtErrWrongPassphrase: "Nie mogę odszyfrować - złe hasło.",
     xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony text nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
+    xtDecQrData: 'Odszyfrowany Sekret',
     
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
