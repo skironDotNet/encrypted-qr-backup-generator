@@ -10,8 +10,8 @@ var translations = {
     xtGenerate: 'Generate',
     xtClearForm: 'Clear Form',
     xtEmbedLabel: 'Embed Label in the QR',
-    xtEncrypt: 'Encrypt',
-    xtDecrypt: 'Decrypt',
+    xtEncryption: 'Encryption',
+    xtDecryption: 'Decryption',
     xtNoEncryption: 'No Encryption',
     xtClose: 'Close',
     xtSaveQr: 'Save QR Image',
@@ -30,7 +30,8 @@ var translations = {
     xtNotOffline: "It appears this tool is running of a live website, which is not recommended for creating valuable QRs. Instead, use the download link at the bottom of this page to download the ZIP file from GitHub and run this tool offline as a 'local' HTML file.",
     xtHeadTitle: "Client-side (offline) tool for creating AES256 encrypted QR backups",
     xtAbout: "About",
-
+    xtDecrypt: 'Decrypt',
+    
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
 }

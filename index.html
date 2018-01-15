@@ -26,8 +26,8 @@
                 <div id="langMenu"></div>
                 <div id="xtHeadTitle"></div>
                 <div id="modes">
-                    <button id="xtEncrypt" class="button button-page" onclick="setMode(this)" disabled="disabled"></button>
-                    <button id="xtDecrypt" onclick="setMode(this)"></button>
+                    <button id="xtEncryption" class="button button-page" onclick="setMode(this)" disabled="disabled"></button>
+                    <button id="xtDecryption" onclick="setMode(this)"></button>
                     <button id="xtNoEncryption" onclick="setMode(this)"></button>
                     <button id="xtAbout" onclick="setMode(this)" class="u-pull-right"></button>
                 </div>
@@ -36,31 +36,36 @@
 
         <div class="container">
             <form name="qrForm" autocomplete="off" action="#">
-                <label>
-                    <span id="xtPlainTextLabel"></span>
-                    <span id="xtPlainTextLabel2" hidden></span>
-                </label>
-                <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
-                <div class="row">
-                    <div class="six columns">
-                        <label>
-                            <span id="xtQrLabel"></span>
-                            <span id="xtOptional">(Optional)</span>
-                        </label>
-                        <input type="text" name="qrLabel" class="u-full-width">
+                <div id="baseInputs">
+                    <label>
+                        <span id="xtPlainTextLabel"></span>
+                        <span id="xtPlainTextLabel2" hidden></span>
+                    </label>
+                    <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
+                    <div class="row">
+                        <div class="six columns">
+                            <label>
+                                <span id="xtQrLabel"></span>
+                                <span id="xtOptional">(Optional)</span>
+                            </label>
+                            <input type="text" name="qrLabel" class="u-full-width">
+                        </div>
+                        <div class="six columns">
+                            <label>
+                                <span id="xtEmbedLabel"></span>
+                            </label>
+                            <input type="checkbox" name="isEmbed">
+                        </div>
                     </div>
-                    <div class="six columns">
-                        <label>
-                            <span id="xtEmbedLabel"></span>
-                        </label>
-                        <input type="checkbox" name="isEmbed">
-                    </div>
+                    <label>
+                        <span id="xtQrDescription"></span>
+                        <span id="xtOptional"></span>
+                    </label>
+                    <textarea name="qrDescription" class="u-full-width"></textarea>
                 </div>
-                <label>
-                    <span id="xtQrDescription"></span>
-                    <span id="xtOptional"></span>
-                </label>
-                <textarea name="qrDescription" class="u-full-width"></textarea>
+                <div id="decryptInputs" hidden>
+                    Decryption inputs - TBD
+                </div>
                 <div id="pharseInputs">
                     <label>
                         <span id="xtPharse"></span>
@@ -75,6 +80,7 @@
                 <div class="row">
                     <div class="six columns">
                         <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
+                        <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary" hidden></button>
                     </div>
                     <div class="six columns">
                         <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
@@ -182,10 +188,10 @@
 
             function generate() {
                 switch (currentMode) {
-                    case "xtEncrypt":
+                    case "xtEncryption":
                         doEnc();
                         break;
-                    case "xtDecrypt":
+                    case "xtDecryption":
                         //setDecryptionMode();
                         break;
                     case "xtNoEncryption":
@@ -258,17 +264,17 @@
                 return document.getElementById(id);
             }
 
-            var currentMode = 'xtEncrypt';
+            var currentMode = 'xtEncryption';
 
             function setMode(obj) {
                 currentMode = obj.id;
 
                 highlightModeButton(currentMode);
                 switch (currentMode) {
-                    case "xtEncrypt":
+                    case "xtEncryption":
                         setEncryptionMode();
                         break;
-                    case "xtDecrypt":
+                    case "xtDecryption":
                         setDecryptionMode();
                         break;
                     case "xtNoEncryption":
@@ -278,21 +284,32 @@
             }
 
             function setEncryptionMode() {
+                show(baseInputs);
                 hide(xtPlainTextLabel2);
                 show(xtPlainTextLabel);
                 getElement('xhtPlainTextHint').placeholder = translations['xhtPlainTextHint'];
                 show(pharseInputs);
+                show(xtGenerate);
+                hide(xtDecrypt);
             }
 
             function setDecryptionMode() {
-
+                hide(baseInputs);
+                show(decryptInputs);
+                show(pharseInputs);
+                hide(xtGenerate);
+                show(xtDecrypt);
             }
 
             function setNoEncyptionMode() {
+                show(baseInputs);
                 hide(xtPlainTextLabel);
                 show(xtPlainTextLabel2);
                 getElement('xhtPlainTextHint').placeholder = '';
                 hide(pharseInputs);
+                hide(decryptInputs);
+                show(xtGenerate);
+                hide(xtDecrypt);
             }
 
             function highlightModeButton(buttonId) {

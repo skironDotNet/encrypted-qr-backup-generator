@@ -10,8 +10,8 @@ var translations = {
     xtGenerate: 'Generuj',
     xtClearForm: 'Wyczyść Formularz',
     xtEmbedLabel: 'Umieść Etykietę w QR',
-    xtEncrypt: 'Szyfruj',
-    xtDecrypt: 'Odszyfruj',
+    xtEncryption: 'Szyfrowanie',
+    xtDecryption: 'Odszyfrowanie',
     xtNoEncryption: 'Bez szyfrowania',
     xtClose: 'Zamknij',
     xtSaveQr: 'Zapisz Obraz QR',
@@ -30,7 +30,8 @@ var translations = {
     xtNotOffline: "Wygląda na to, że to narzędzie załadowane jest z żywej witryny, nie jest to zalecane do tworzenia cennych QR. Zamiast tego, użyj linku na dole tej strony w celu pobrania pliku ZIP z GitHub i uruchom to narzędzie w trybie offline jako 'lokalny' plik HTML.",
     xtHeadTitle: "Narzedzie do tworzenia kopii zapasowych w postaci AES256 szyfrowanych QR po stronie klienta (offline)",
     xtAbout: "About",
-
+    xtDecrypt: 'Odszyfruj',
+    
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
 }
