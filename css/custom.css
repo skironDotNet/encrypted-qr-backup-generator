@@ -205,3 +205,17 @@ footer {
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.decryptFloat {
+  margin-top: -6px;
+  text-align: right;
+}
+
+.scanQr {
+  border: 1px solid gray;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px;
+  background-color: white;
+  margin-bottom: 3px;
+}

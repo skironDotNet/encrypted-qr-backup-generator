@@ -31,7 +31,12 @@ var translations = {
     xtHeadTitle: "Narzedzie do tworzenia kopii zapasowych w postaci AES256 szyfrowanych QR po stronie klienta (offline)",
     xtAbout: "About",
     xtDecrypt: 'Odszyfruj',
-    
+    xtEnterEncryptedKey: 'Zaszyfrowane Dane z QR ',    
+    xtLoadQrImage: 'Załaduj z obrazka QR',
+
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
+    xhtEncryptedKeyHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
+    
+    xttScanQrHint: 'Skanuj kod QR',
 }

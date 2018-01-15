@@ -64,7 +64,14 @@
                     <textarea name="qrDescription" class="u-full-width"></textarea>
                 </div>
                 <div id="decryptInputs" hidden>
-                    Decryption inputs - TBD
+                    <label>
+                        <span id="xtEnterEncryptedKey"></span>
+                    </label>
+                    <textarea name="qrEncryptedKey" id="xhtEncryptedKeyHint" class="u-full-width"></textarea>
+                    <div class="decryptFloat">
+                        <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
+                        <button id="xtLoadQrImage" class="button" onclick="loadQrImage()"></button>
+                    </div>
                 </div>
                 <div id="pharseInputs">
                     <label>
@@ -191,9 +198,6 @@
                     case "xtEncryption":
                         doEnc();
                         break;
-                    case "xtDecryption":
-                        //setDecryptionMode();
-                        break;
                     case "xtNoEncryption":
                         doPlain();
                         break;
@@ -225,6 +229,14 @@
                 }
 
                 fillResultScreen(encrypted);
+            }
+
+            function scanFromCamera() {
+                javascript: alert('Not implemented yet.');
+            }
+
+            function loadQrImage() {
+                scanFromCamera();
             }
 
             function fillResultScreen(qrValue) {
@@ -561,6 +573,11 @@
                 langElements = document.querySelectorAll('[id^=xht]');
                 langElements.forEach(function (element) {
                     element.placeholder = translations[element.id];
+                }, this);
+
+                langElements = document.querySelectorAll('img[id^=xtt]');
+                langElements.forEach(function (element) {
+                    element.title = translations[element.id];
                 }, this);
 
                 if (currentValidationError.length > 0) {

@@ -31,7 +31,12 @@ var translations = {
     xtHeadTitle: "Client-side (offline) tool for creating AES256 encrypted QR backups",
     xtAbout: "About",
     xtDecrypt: 'Decrypt',
+    xtEnterEncryptedKey: 'Encrypted Data From QR',
+    xtLoadQrImage: 'Load from QR Image',
     
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
+    xhtEncryptedKeyHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
+
+    xttScanQrHint: 'Scan QR code',
 }
