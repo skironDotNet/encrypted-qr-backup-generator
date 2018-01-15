@@ -86,9 +86,9 @@
                 <div class="row">
                     <div id="printQr" class="nine columns">
                         <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
-                            <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px;">Label</div>
+                            <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
                             <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
-                            <div id="qrResultDescription" style="word-wrap: break-word; margin-top: 20px;">Description</div>
+                            <div id="qrResultDescription" style="word-break: break-all; margin-top: 20px;">Description</div>
                             <div id="qrPrintDate" style="margin-top: 20px;"></div>
                         </div>
                     </div>
@@ -450,7 +450,7 @@
 
             function saveQrArea(htmlNode) {
                 var html = htmlNode.outerHTML.replace(/(<img [^>]+[^\/])>/gi, '$1 />'); //fix img to be closed tag XHTML
-                html = html.replace('<br>', '<br />'); //fix <br> to be closed tag XHTML
+                html = html.replace(/<br\s*>/gi,'<br />'); //fix <br> to be closed tag XHTML
 
 
                 var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + htmlNode.offsetWidth + '" height="' + htmlNode.offsetHeight + '">' +
