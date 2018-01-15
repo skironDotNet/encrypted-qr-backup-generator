@@ -67,7 +67,7 @@
                     <label>
                         <span id="xtEnterEncryptedKey"></span>
                     </label>
-                    <textarea name="qrEncryptedKey" id="xhtEncryptedKeyHint" class="u-full-width"></textarea>
+                    <textarea name="qrEncryptedText" id="xhtEncryptedTextHint" class="u-full-width"></textarea>
                     <div class="decryptFloat">
                         <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
                         <button id="xtLoadQrImage" class="button" onclick="loadQrImage()"></button>
@@ -231,6 +231,37 @@
                 fillResultScreen(encrypted);
             }
 
+            function decrypt() {
+                var pharse = document.qrForm.pharse.value;
+                var pharseConfim = document.qrForm.pharseConfirm.value;
+
+                if (!validatePharse(pharse, pharseConfim))
+                    return;
+
+                var plain = '';
+                var enc = document.qrForm.qrEncryptedText.value;
+
+                try {
+                    plain = GibberishAES.dec(enc, pharse);
+                }
+                catch (err) {
+                    if (err === 'Decryption error: Maybe bad key') {
+                        showValidationError('xtErrWrongPassphrase');
+                        return;
+                    }
+                    else {
+                        showValidationError('xtErrGenericDecryptError');
+                        return;
+                    }
+                }
+
+                var dataLineCount = plain.split(/\r\n|\r|\n/).length;
+
+                qrData.value = plain;
+                qrData.style.height = dataLineCount * 15 + 'px';
+                showResult(true);
+            }
+
             function scanFromCamera() {
                 javascript: alert('Not implemented yet.');
             }
@@ -371,18 +402,20 @@
                 clearValidationError();
 
                 if (pharse.length < 25) {
-                    validationError.textContent = translations.xtErrPharseTooShort;
-                    currentValidationError = 'xtErrPharseTooShort';
+                    showValidationError('xtErrPharseTooShort');
                     return false;
                 }
                 if (pharse != pharseConfirm) {
-
-                    validationError.textContent = translations.xtErrPharseNotMatch;
-                    currentValidationError = 'xtErrPharseNotMatch';
+                    showValidationError('xtErrPharseNotMatch');
                     return false;
                 }
 
                 return true;
+            }
+
+            function showValidationError(errorId) {
+                validationError.textContent = translations[errorId];
+                currentValidationError = errorId;
             }
 
             function clearValidationError() {

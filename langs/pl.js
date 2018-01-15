@@ -33,10 +33,12 @@ var translations = {
     xtDecrypt: 'Odszyfruj',
     xtEnterEncryptedKey: 'Zaszyfrowane Dane z QR ',    
     xtLoadQrImage: 'Załaduj z obrazka QR',
-
+    xtErrWrongPassphrase: "Nie mogę odszyfrować - złe hasło.",
+    xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony text nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
+    
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
-    xhtEncryptedKeyHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
+    xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
     
     xttScanQrHint: 'Skanuj kod QR',
 }

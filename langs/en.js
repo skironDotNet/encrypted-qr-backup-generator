@@ -33,10 +33,12 @@ var translations = {
     xtDecrypt: 'Decrypt',
     xtEnterEncryptedKey: 'Encrypted Data From QR',
     xtLoadQrImage: 'Load from QR Image',
-    
+    xtErrWrongPassphrase: "Can't decrypt - wrong passpharse.",
+    xtErrGenericDecryptError: "Can't decrypt - likley entered text is not valid AES256 base64 encoded encrypted text",
+
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
-    xhtEncryptedKeyHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
+    xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
     xttScanQrHint: 'Scan QR code',
 }
