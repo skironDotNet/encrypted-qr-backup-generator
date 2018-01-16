@@ -60,6 +60,19 @@ a {
 
 button {
   color: white;
+  background-color: #656565;
+}
+
+.button {
+  background-color: #d7d7d7;
+}
+
+button.button-primary {
+  border-color: #0599c8;
+}
+
+button.button-primary:hover {
+  border-color: rgb(5, 121, 156);
 }
 
 .button.button-page {
@@ -92,7 +105,7 @@ img {
   text-align: center;
 }
 
-.right{
+.right {
   text-align: right;
 }
 
