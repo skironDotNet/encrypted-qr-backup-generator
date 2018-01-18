@@ -20,7 +20,7 @@
     <script type="text/javascript" src="langs/lang-map.js"></script>
 
     <body>
-
+    
         <div class="navbar navbar-inverse text-center">
             <div class="container">
                 <div id="langMenu"></div>
@@ -36,104 +36,111 @@
         </div>
 
         <div class="container">
-            <form name="qrForm" autocomplete="off" action="#" method="POST">
-                <div id="baseInputs">
-                    <label>
-                        <span id="xtPlainTextLabel"></span>
-                        <span id="xtPlainTextLabel2" hidden></span>
-                    </label>
-                    <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
+            <div id="pageTools">
+                <form name="qrForm" autocomplete="off" action="#" method="POST">
+                    <div id="baseInputs">
+                        <label>
+                            <span id="xtPlainTextLabel"></span>
+                            <span id="xtPlainTextLabel2" hidden></span>
+                        </label>
+                        <textarea name="plainText" id="xhtPlainTextHint" class="u-full-width" placeholder=""></textarea>
+                        <div class="row">
+                            <div class="six columns">
+                                <label>
+                                    <span id="xtQrLabel"></span>
+                                    <span id="xtOptional">(Optional)</span>
+                                </label>
+                                <input type="text" name="qrLabel" class="u-full-width">
+                            </div>
+                            <div class="six columns">
+                                <label>
+                                    <span id="xtEmbedLabel"></span>
+                                </label>
+                                <input type="checkbox" name="isEmbed">
+                            </div>
+                        </div>
+                        <label>
+                            <span id="xtQrDescription"></span>
+                            <span id="xtOptional"></span>
+                        </label>
+                        <textarea name="qrDescription" class="u-full-width"></textarea>
+                    </div>
+                    <div id="decryptInputs" hidden>
+                        <label>
+                            <span id="xtEnterEncryptedKey"></span>
+                        </label>
+                        <textarea name="qrEncryptedText" id="xhtEncryptedTextHint" class="u-full-width"></textarea>
+                        <div class="decryptFloat">
+                            <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
+                            <button id="xtLoadQrImage" type="button" class="button" onclick="loadQrImage()"></button>
+                        </div>
+                    </div>
+                    <div id="pharseInputs">
+                        <label>
+                            <span id="xtPharse"></span>
+                        </label>
+                        <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width">
+                        <label>
+                            <span id="xtPharseConfirm"></span>
+                        </label>
+                        <input type="password" name="pharseConfirm" class="u-full-width">
+                    </div>
+                    <div id="validationError" class="validationError center"></div>
                     <div class="row">
                         <div class="six columns">
-                            <label>
-                                <span id="xtQrLabel"></span>
-                                <span id="xtOptional">(Optional)</span>
-                            </label>
-                            <input type="text" name="qrLabel" class="u-full-width">
+                            <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
+                            <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary" hidden></button>
                         </div>
                         <div class="six columns">
-                            <label>
-                                <span id="xtEmbedLabel"></span>
-                            </label>
-                            <input type="checkbox" name="isEmbed">
+                            <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
                         </div>
                     </div>
-                    <label>
-                        <span id="xtQrDescription"></span>
-                        <span id="xtOptional"></span>
-                    </label>
-                    <textarea name="qrDescription" class="u-full-width"></textarea>
-                </div>
-                <div id="decryptInputs" hidden>
-                    <label>
-                        <span id="xtEnterEncryptedKey"></span>
-                    </label>
-                    <textarea name="qrEncryptedText" id="xhtEncryptedTextHint" class="u-full-width"></textarea>
-                    <div class="decryptFloat">
-                        <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
-                        <button id="xtLoadQrImage" type="button" class="button" onclick="loadQrImage()"></button>
-                    </div>
-                </div>
-                <div id="pharseInputs">
-                    <label>
-                        <span id="xtPharse"></span>
-                    </label>
-                    <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width">
-                    <label>
-                        <span id="xtPharseConfirm"></span>
-                    </label>
-                    <input type="password" name="pharseConfirm" class="u-full-width">
-                </div>
-                <div id="validationError" class="validationError center"></div>
-                <div class="row">
-                    <div class="six columns">
-                        <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
-                        <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary" hidden></button>
-                    </div>
-                    <div class="six columns">
-                        <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
-                    </div>
-                </div>
-            </form>
+                </form>
 
-            <div id="qrResult" hidden>
-                <div id="qrSection" class="row">
-                    <div id="printQr" class="nine columns">
-                        <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
-                            <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
-                            <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
-                            <div id="qrResultDescription" style="word-break: break-all; margin-top: 20px;">Description</div>
-                            <div id="qrPrintDate" style="margin-top: 20px;"></div>
+                <div id="qrResult" hidden>
+                    <div id="qrSection" class="row">
+                        <div id="printQr" class="nine columns">
+                            <div id="qrHolder" style="background-color: white; border: 1px dashed grey; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
+                                <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
+                                <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
+                                <div id="qrResultDescription" style="word-break: break-all; margin-top: 20px;">Description</div>
+                                <div id="qrPrintDate" style="margin-top: 20px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="three columns right">
+                            <div style="display: inline-block">
+                                <label>
+                                    <span id="xtAdjustQrSize" class="u-pull-left"></span>
+                                </label>
+                                <input id="adjustQrSize" type="number" onchange="adjustQr()">
+                            </div>
+                            <div>
+                                <button id="xtSaveQr" type="button" onclick="invokeSaveQr()" class="button-primary"></button>
+                            </div>
+                            <div>
+                                <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
+                            </div>
+                            <a id="qrDownload" href="" download="" hidden></a>
                         </div>
                     </div>
 
-                    <div class="three columns right">
-                        <div style="display: inline-block">
-                            <label>
-                                <span id="xtAdjustQrSize" class="u-pull-left"></span>
-                            </label>
-                            <input id="adjustQrSize" type="number" onchange="adjustQr()">
-                        </div>
-                        <div>
-                            <button id="xtSaveQr" type="button" onclick="invokeSaveQr()" class="button-primary"></button>
-                        </div>
-                        <div>
-                            <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
-                        </div>
-                        <a id="qrDownload" href="" download="" hidden></a>
+                    <label>
+                        <span id="xtEncQrData"></span>
+                        <span id="xtDecQrData" hidden></span>
+                    </label>
+                    <textarea id="qrData" class="u-full-width" readonly></textarea>
+                    <div class="right">
+                        <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
                     </div>
-                </div>
-
-                <label>
-                    <span id="xtEncQrData"></span>
-                    <span id="xtDecQrData" hidden></span>
-                </label>
-                <textarea id="qrData" class="u-full-width" readonly></textarea>
-                <div class="right">
-                    <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
                 </div>
             </div>
-
+            <div id="pageInfo" hidden>
+                Info
+            </div>
+            <div id="pageDonate" hidden>
+                Donate
+            </div>
             <footer>
                 <div class="securityCheck">
                     <span id="xtNotOffline"></span>
@@ -322,13 +329,36 @@
                 switch (currentMode) {
                     case "xtEncryption":
                         setEncryptionMode();
+                        showPage('Tools');
                         break;
                     case "xtDecryption":
                         setDecryptionMode();
+                        showPage('Tools');
                         break;
                     case "xtNoEncryption":
                         setNoEncyptionMode();
+                        showPage('Tools');
                         break;
+                    case "xtInfo":
+                        showPage('Info');
+                        break;
+                    case "xtDonate":
+                        showPage('Donate');
+                        break;
+                }
+            }
+
+            var pages = ['Tools', 'Info', 'Donate'];
+
+            function showPage(pageName) {
+                for (var i = 0; i < pages.length; i++) {
+                    var pageNode = getElement('page' + pages[i]);
+                    if (pages[i] == pageName) {
+                        show(pageNode);
+                    }
+                    else {
+                        hide(pageNode);
+                    }
                 }
             }
 
