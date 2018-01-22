@@ -233,3 +233,149 @@ footer {
   background-color: white;
   margin-bottom: 3px;
 }
+
+td div {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bold;
+  display: inline-block;
+  word-break: break-all;
+}
+
+td {
+  padding: 8px;
+}
+
+table {
+  margin-bottom: 125px; /* fit QR under */
+  font-family: "Courier New";
+}
+
+/*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
+.sprite {
+  background-image: url(../images/coin-logos.png);
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.sprite-aeon {
+  width: 32px;
+  height: 32px;
+  background-position: -5px -5px;
+}
+
+.sprite-bitcoin {
+  width: 32px;
+  height: 32px;
+  background-position: -47px -5px;
+}
+
+.sprite-bitcoin-gold {
+  width: 32px;
+  height: 32px;
+  background-position: -89px -5px;
+}
+
+.sprite-bitcoinz {
+  width: 32px;
+  height: 32px;
+  background-position: -131px -5px;
+}
+
+.sprite-dash {
+  width: 32px;
+  height: 32px;
+  background-position: -5px -47px;
+}
+
+.sprite-digibyte {
+  width: 32px;
+  height: 32px;
+  background-position: -47px -47px;
+}
+
+.sprite-dnotes {
+  width: 32px;
+  height: 32px;
+  background-position: -89px -47px;
+}
+
+.sprite-dogecoin {
+  width: 32px;
+  height: 32px;
+  background-position: -131px -47px;
+}
+
+.sprite-florincoin {
+  width: 32px;
+  height: 32px;
+  background-position: -5px -89px;
+}
+
+.sprite-hush {
+  width: 32px;
+  height: 32px;
+  background-position: -47px -89px;
+}
+
+.sprite-litecoin {
+  width: 32px;
+  height: 32px;
+  background-position: -89px -89px;
+}
+
+.sprite-monero {
+  width: 32px;
+  height: 32px;
+  background-position: -131px -89px;
+}
+
+.sprite-namecoin {
+  width: 32px;
+  height: 32px;
+  background-position: -5px -131px;
+}
+
+.sprite-pivx {
+  width: 32px;
+  height: 32px;
+  background-position: -47px -131px;
+}
+
+.sprite-reddcoin {
+  width: 32px;
+  height: 32px;
+  background-position: -89px -131px;
+}
+
+.sprite-stellar {
+  width: 32px;
+  height: 32px;
+  background-position: -131px -131px;
+}
+
+.sprite-stratis {
+  width: 32px;
+  height: 32px;
+  background-position: -173px -5px;
+}
+
+.sprite-syscoin {
+  width: 32px;
+  height: 32px;
+  background-position: -173px -47px;
+}
+
+.sprite-verge {
+  width: 32px;
+  height: 32px;
+  background-position: -173px -89px;
+}
+
+.sprite-vertcoin {
+  width: 32px;
+  height: 32px;
+  background-position: -173px -131px;
+}
+
+/*** End Coin Sprites ***/

@@ -37,6 +37,7 @@ var translations = {
     xtErrGenericDecryptError: "Can't decrypt - likley entered text is not valid AES256 base64 encoded encrypted text",
     xtDecQrData: 'Decrypted Secret',
     xtDonate: 'Donate',
+    xtDonationHeader: 'tbd',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',

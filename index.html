@@ -20,7 +20,7 @@
     <script type="text/javascript" src="langs/lang-map.js"></script>
 
     <body>
-    
+
         <div class="navbar navbar-inverse text-center">
             <div class="container">
                 <div id="langMenu"></div>
@@ -139,7 +139,192 @@
                 Info
             </div>
             <div id="pageDonate" hidden>
-                Donate
+                <span id="xtDonationHeader"></span>
+                <table onmouseout="hideDonateQr()">
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-bitcoin"></i>
+                        </td>
+                        <td>Bitcoin (BTC)
+                            <br>Cash (BCH)
+                        </td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>13La7Ly7ZX4h7xfksSFJyZokdXaSKdCkee</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-litecoin"></i>
+                        </td>
+                        <td>LiteCoin (LTC)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>LMZXNZGweBJkNmMv3aEcFasWqjwiWCWsyo</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-monero"></i>
+                        </td>
+                        <td>Monero (XMR)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>4AVYbSPHYP9gZRLkdpXNuNAKVQNymntPJUSTguyXziF9WgJppVpKFoHJQVjJkZQ6NhTMzGz6gSjNGaCQvswMgLe9MhGVXRw</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-hush"></i>
+                        </td>
+                        <td>Hush (HUSH)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>t1ax5FySDgh8bAyVD5h5GJidvPDhrnbtEvT</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-bitcoinz"></i>
+                        </td>
+                        <td>BitcoinZ (BTCZ)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>t1d9WkK7babSPfd3VsxKPHAkTR7aWfpzYQB</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-dash"></i>
+                        </td>
+                        <td>Dash (DASH)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>Xd2Qwbd1XEHHGuGLjKZXq6VYTsA8MNwV4m</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-pivx"></i>
+                        </td>
+                        <td>PIVX (PIVX)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>D7UfebukrvxyexrMc2EsXKyMWfJjfPfCnE</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-verge"></i>
+                        </td>
+                        <td>Verge (XVG)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>D7UfebukrvxyexrMc2EsXKyMWfJjfPfCnE</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-digibyte"></i>
+                        </td>
+                        <td>DigiByte (DGB)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>D7UfebukrvxyexrMc2EsXKyMWfJjfPfCnE</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-syscoin"></i>
+                        </td>
+                        <td>Syscoin (SYS)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>13La7Ly7ZX4h7xfksSFJyZokdXaSKdCkee</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-stellar"></i>
+                        </td>
+                        <td>Stellar (XLM)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>GDVMJK62FYXFKQC7FOVLP2HKX5QDWSIET6XWTIIEP3QY2S65CCBDNYNL</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-stratis"></i>
+                        </td>
+                        <td>Stratis (STRAT)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>SPda9BkGHtFteGTDQsEPXTxKHJos6pBVMe</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-aeon"></i>
+                        </td>
+                        <td>Aeon (AEON)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>WmtwWaaFimBed3WE776ScG9EUR4ATq38ZZPZPU62QpJdBpc2wnzjjJhht3qo9AYnYUFVHG3osdQHshSXLUmF4a961QGH25FGt</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-bitcoin-gold"></i>
+                        </td>
+                        <td>Bitcoin Gold (BTG)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>GLBVXUJ4YNfzCRy3oNuRQL9eYhNHQkbPkd</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-namecoin"></i>
+                        </td>
+                        <td>Namecoin (NMC)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>MxuwJzU6UuAFeVvG9FZtC5xfMkyVNKHwuk</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-vertcoin"></i>
+                        </td>
+                        <td>Vertcoin (VTC)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>VcLQ248ZyKxuBjZucDtwQU8cKLsQppQghx</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-dnotes"></i>
+                        </td>
+                        <td>DNotes (NOTE)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>DWpGdiD3a7RrUPzSdSaC1TF99AZgSWgYqq</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-florincoin"></i>
+                        </td>
+                        <td>FlorinCoin (FLO)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>F8Aga9QCQqHMk8Ynj7uTwxLHfBbTFVPsie</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-dogecoin"></i>
+                        </td>
+                        <td>Dogecoin (DOGE)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>D7UfebukrvxyexrMc2EsXKyMWfJjfPfCnE</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-reddcoin"></i>
+                        </td>
+                        <td>ReddCoin (RDD)</td>
+                        <td onmouseover="showDonateQr(this)">
+                            <div>RaxNAy9gsXL91QB3N2ZkZDQk2JHyjhCRhD</div>
+                        </td>
+                    </tr>
+                </table>
+                <img id="donateQr" style="position: absolute; display: none" />
             </div>
             <footer>
                 <div class="securityCheck">
@@ -190,6 +375,12 @@
                 element: document.getElementById('qrious'),
                 size: 100,
                 value: 'Nothing here!'
+            });
+
+            var donateQr = window.donateQr = new QRious({
+                element: document.getElementById('donateQr'),
+                size: 124,
+                value: '',
             });
 
             var qrData = getElement('qrData');
@@ -543,6 +734,40 @@
 
             function hide(element) {
                 element.style.display = 'none';
+            }
+
+            var prevAddressNode = null;
+
+            function showDonateQr(sourceObj) {
+
+
+                if (prevAddressNode != null) {
+                    prevAddressNode.style.backgroundColor = '';
+                }
+                prevAddressNode = sourceObj.children[0];
+
+                donateQr.value = sourceObj.innerText;
+                // donateQr.element.style.left = (sourceObj.offsetLeft + sourceObj.offsetWidth) + "px";
+                donateQr.element.style.left = (sourceObj.offsetLeft + prevAddressNode.offsetLeft) + "px";
+
+                //the sums of top location gives correct QR location
+                donateQr.element.style.top =
+                    (sourceObj.parentNode.parentNode.parentNode.offsetTop +     //table top location
+                        sourceObj.offsetTop +                                   //table row top location
+                        prevAddressNode.offsetTop +                            //<div>text</div> top location
+                        prevAddressNode.offsetHeight                            //text height
+                    ) + "px";
+
+                prevAddressNode.style.backgroundColor = 'white';
+                show(donateQr.element);
+            }
+
+            function hideDonateQr() {
+                if (prevAddressNode != null) {
+                    prevAddressNode.style.backgroundColor = '';
+                }
+
+                hide(donateQr.element);
             }
 
             //https://stackoverflow.com/a/2746983

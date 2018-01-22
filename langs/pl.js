@@ -37,6 +37,7 @@ var translations = {
     xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony text nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
     xtDecQrData: 'Odszyfrowany Sekret',
     xtDonate: 'Podarój',
+    xtDonationHeader: '',
     
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
