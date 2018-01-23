@@ -123,9 +123,8 @@ footer {
 
   .navbar,
   .result-controls,
-  #xtEncQrData,
-  #qrData,
-  .printHide {
+  .printHide,
+  footer {
     display: none;
   }
 
@@ -138,10 +137,6 @@ footer {
     display: block;
     text-align: center;
     margin-top: 10px;
-  }
-
-  footer {
-    display: none;
   }
 }
 

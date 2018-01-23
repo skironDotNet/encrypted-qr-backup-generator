@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        <div class="three columns right">
+                        <div class="three columns right printHide">
                             <div style="display: inline-block">
                                 <label>
                                     <span id="xtAdjustQrSize" class="u-pull-left"></span>
@@ -124,14 +124,15 @@
                             <a id="qrDownload" href="" download="" hidden></a>
                         </div>
                     </div>
-
-                    <label>
-                        <span id="xtEncQrData"></span>
-                        <span id="xtDecQrData" hidden></span>
-                    </label>
-                    <textarea id="qrData" class="u-full-width" readonly></textarea>
-                    <div class="right">
-                        <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
+                    <div class="printHide">
+                        <label>
+                            <span id="xtEncQrData"></span>
+                            <span id="xtDecQrData" hidden></span>
+                        </label>
+                        <textarea id="qrData" class="u-full-width" readonly></textarea>
+                        <div class="right">
+                            <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
+                        </div>
                     </div>
                 </div>
             </div>
