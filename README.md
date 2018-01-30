@@ -4,7 +4,13 @@
 
 The idea for creating this tool came for the idea for safely storing private keys of the crypto-currencies that don't have generators.
 
-If so called Brain Wallet can be generated elsewhere there is no need to use this tool, but it may be a good idea to store the seed of Electrum wallet. In theory we should remember the seed ourselves and it's already a brain wallet, but some people may already remember long passpharse and this can be reused to backup anything else, using this tool.  
+If so called Brain Wallet can be generated elsewhere there is no need to use this tool, but it may be a good idea to store the seed of Electrum wallet. In theory we should remember the seed ourselves and it's already a brain wallet, but some people may already remember long passpharse and this can be reused to backup anything else, using this tool.
+
+#### Browser Compatibility
+
+Developed under **Firefox**, tested in **Chrome**, quick tested in **Opera**. Other browsers not supported. Most safe users would run from Linux with built in Firefox. 
+
+Sorry Mac/Safari users, haven't tested, but likely the `HTML to SVG to Image` part won't work, this means saving "QR area with details" likely won't work, alongside with other "saving" functionality. You should be able to print still. 
 
 ### HOW IT WORKS
 
