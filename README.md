@@ -2,12 +2,14 @@
 
 ### ABOUT THIS TOOL
 
-The idea for creating this tool came for the idea for safely storing private keys of the currencies that does not have generators. If so called Brain Wallet can be generated elsewhere there is no need to use this tool, but it may be a good idea to store the seed of Electrum wallet. In theory we should remember the seed ourselves and it's already a brain wallet, but some people may already remember long passpharse and this can be reused to backup anything else, using this tool.  
+The idea for creating this tool came for the idea for safely storing private keys of the crypto-currencies that don't have generators.
+
+If so called Brain Wallet can be generated elsewhere there is no need to use this tool, but it may be a good idea to store the seed of Electrum wallet. In theory we should remember the seed ourselves and it's already a brain wallet, but some people may already remember long passpharse and this can be reused to backup anything else, using this tool.  
 
 ### HOW IT WORKS
 
 Entered plain text is being encrypted using JavaScript implementation of OpenSSL library.
-Encryption algorithm used is AES-256-CBC. The text encrypted into binary form is converted into Base64 string and is a source for the QR image. This way once printed on the paper it can be easy read back by a camera, but remains encrypted.
+Encryption algorithm used is AES-256-CBC. The text encrypted into binary form is converted into Base64 string and is a source for the QR image. Once printed on the paper it can be easy read back by a camera, but remains encrypted.
 
 Decryption is the exact reversal of that process.   
 
@@ -35,7 +37,7 @@ Decrypt to console:
 
 Copyright (c) 2018, Pawel Cioch
 
-Any libraries included in this project Copyright (c) to their respective owners. Names and licenses if available attached in the source code repository. 
+Any libraries included in this project Copyright (c) to their respective authors. Names and licenses if available attached in the source code repository. 
 
 
 Redistribution and use in source and binary forms, with or without modification, are
