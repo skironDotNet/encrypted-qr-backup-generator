@@ -104,7 +104,7 @@
                                 <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
                                 <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
                                 <div id="qrResultDescription" style="word-break: break-all; margin-top: 20px;">Description</div>
-                                <div id="qrPrintDate" style="margin-top: 20px;"></div>
+                                <div id="qrPrintDate" style="margin-top: 20px; font-size: small;"></div>
                             </div>
                         </div>
 
@@ -114,6 +114,10 @@
                                     <span id="xtAdjustQrSize" class="u-pull-left"></span>
                                 </label>
                                 <input id="adjustQrSize" type="number" onchange="adjustQr()">
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <b id="xtHideDate">Hide Date</b>
+                                <input id="hideDate" type="checkbox" onchange="hideDate()" style="margin: 5px;">
                             </div>
                             <div>
                                 <button id="xtSaveQr" type="button" onclick="invokeSaveQr()" class="button-primary"></button>
@@ -503,7 +507,7 @@
                 }
 
                 var date = new Date();
-                getElement("qrPrintDate").innerHTML = date.toLocaleFormat('%Y-%m-%d');
+                getElement("qrPrintDate").innerHTML = translations['xtQrDateCreatedLabel'] + getDateString(date);
                 setResultModeToEncrypt();
                 showResult(true);
             }
@@ -552,6 +556,20 @@
                         hide(pageNode);
                     }
                 }
+            }
+
+            function hideDate() {
+                if (getElement('hideDate').checked) {
+                    hide(qrPrintDate)
+                }
+                else {
+                    show(qrPrintDate)
+                }
+            }
+
+            function getDateString(d) {
+                var datestring = d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                return datestring;
             }
 
             function setEncryptionMode() {
