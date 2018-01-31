@@ -14,7 +14,8 @@ var translations = {
     xtDecryption: 'Odszyfrowanie',
     xtNoEncryption: 'Bez szyfrowania',
     xtClose: 'Zamknij',
-    xtSaveQr: 'Zapisz Obraz QR',
+    xtSaveQrImage: 'Zapisz Obraz QR',
+    xtSaveQrHtml: 'Zapisz jako HTML',
     xtPrint: 'Drukuj',
     xtAdjustQrSize: 'Rozmiar QR',
     xtErrPharseTooShort: 'Mocne hasło za krótkie!',
@@ -31,7 +32,7 @@ var translations = {
     xtHeadTitle: "Narzedzie do tworzenia kopii zapasowych w postaci AES256 szyfrowanych QR po stronie klienta (offline)",
     xtInfo: "Info",
     xtDecrypt: 'Odszyfruj',
-    xtEnterEncryptedKey: 'Zaszyfrowane Dane z QR ',    
+    xtEnterEncryptedKey: 'Zaszyfrowane Dane z QR ',
     xtLoadQrImage: 'Załaduj z obrazka QR',
     xtErrWrongPassphrase: "Nie mogę odszyfrować - złe hasło.",
     xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony text nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
@@ -40,10 +41,10 @@ var translations = {
     xtDonationHeader: '',
     xtHideDate: 'Ukryj Datę',
     xtQrDateCreatedLabel: 'Utworzono: ',
-    
+
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzię ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minumum 5 słow (lub 25 znaków) żeby móc nazwać mocnym.',
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
-    
+
     xttScanQrHint: 'Skanuj kod QR',
 }
