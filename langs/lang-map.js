@@ -1,4 +1,4 @@
-//set your default lang here for offline persistance. Cookies does not for file:/// so it must be set here
+//set your default lang here for offline persistance. Just in case the use of localstorage won't persist that
 var defaultLanguageCode = "en";
 
 var langsAvailable = [
