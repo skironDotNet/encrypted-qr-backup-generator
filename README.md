@@ -37,7 +37,19 @@ Decrypt to console:
 	
 		openssl aes-256-cbc -d -a -in encrypted.txt
 
+### TECHNICAL APPROACH
 
+The most important thing for security tools is making sure they are as secure as technology allows, so I have had a few considerations.
+
+- no AJAX no XMLHttpRequest Object, this means no JQuery library, all used libraries checked for the reference XMLHttpRequest
+- minimize use of libraries, so most of the code self written, except where makes no sense, qr generator, openSSL, and the like.
+- minimalistic UI, so no bootstrap, yet avoid building from scratch, thanks to [http://getskeleton.com/](http://getskeleton.com/ "http://getskeleton.com/")
+
+Originally it supposed to be a single file application, but as css, and js kept growing, I decided to "modularize" sort of say. The tricky part was multilingual approach, I use DOM manipulation to force the browser to use is it's built in mechanism to load translation js file.
+
+The biggest challenge of multilingual was Info/About/FAQ page, I didn't want to put HTML into js file with translations. Also using variable per sentence would be an overkill, so I wanted to use HTML fragments but avoid XMLHttpRequest Object again, so used iframe to let the browser reload HTML per language.
+
+At the a single file tool could be created by bundling it together, including images, but I don't think it's necessary. It may be in fact easier to trust a set of files easy to review rather than one big combo.    
 
 ### LICENSE
 
