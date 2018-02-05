@@ -38,7 +38,7 @@ var translations = {
     xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony text nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
     xtDecQrData: 'Odszyfrowany Sekret',
     xtDonate: 'Podarój',
-    xtDonationHeader: '',
+    xtDonationHeader: '<b>Jeżeli uważasz, że to jest przydatne narzędzie, rozważ małą daninę do autora. Każda krypto ofiara pomoże w utrzymaniu tego narzędzia oraz w tworzeniu nowych. Dzięki!</b>',
     xtHideDate: 'Ukryj Datę',
     xtQrDateCreatedLabel: 'Utworzono: ',
 

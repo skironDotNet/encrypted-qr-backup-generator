@@ -38,7 +38,7 @@ var translations = {
     xtErrGenericDecryptError: "Can't decrypt - likley entered text is not valid AES256 base64 encoded encrypted text",
     xtDecQrData: 'Decrypted Secret',
     xtDonate: 'Donate',
-    xtDonationHeader: 'tbd',
+    xtDonationHeader: '<b>If you think this tool is useful, consider a donation to the author. Any donation will help to maintain this tool and to develop new tools in the future. Thanks!</b>',
     xtHideDate: 'Hide the Date',
     xtQrDateCreatedLabel: 'Created: ',
 
