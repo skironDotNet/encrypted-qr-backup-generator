@@ -51,6 +51,18 @@ The biggest challenge of multilingual was Info/About/FAQ page, I didn't want to 
 
 At the a single file tool could be created by bundling it together, including images, but I don't think it's necessary. It may be in fact easier to trust a set of files easy to review rather than one big combo.    
 
+**Translations**
+
+Please fork to add a translation. All is located in `langs` folder and should be obvious. Translation authors will be added to this page.
+
+- English: Pawel Cioch
+- Polish: Pawel Cioch
+- German: ...
+- Spanish: ...
+- ...
+
+
+
 ### LICENSE
 
 Copyright (c) 2018, Pawel Cioch
