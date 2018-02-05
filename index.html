@@ -144,7 +144,9 @@
                 </div>
             </div>
             <div id="pageInfo" hidden>
-                Info
+                <iframe id="infoFrame" src="" height="0"></iframe>
+                <!-- This can be used in FF without postMessage -->
+                <!-- <iframe id="infoFrame" src="" onload="setIframeHeight()" scrolling="no"></iframe>  -->
             </div>
             <div id="pageDonate" hidden>
                 <span id="xtDonationHeader"></span>
@@ -400,11 +402,18 @@
             var saveDialog = getElement('saveOverlay');
             var hideNoCanvas = getElement('hideNoCanvas');
             var cover = getElement('cover');
+            var infoFrame = getElement('infoFrame');
 
             const smImage = 1;
             const smHtml = 2;
             var qrSavingMode = smImage;
             var qrfileName = getElement('qrFileName');
+
+            window.addEventListener("message", receiveMessage, false);
+
+            function receiveMessage(event) {
+                infoFrame.height = event.data;
+            }
 
             function generate() {
                 switch (currentMode) {
@@ -563,6 +572,11 @@
                     else {
                         hide(pageNode);
                     }
+                }
+
+                if (pageName == 'Info') {
+                    infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
+                    infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
                 }
             }
 
@@ -833,6 +847,26 @@
                 hide(donateQr.element);
             }
 
+            /*
+
+            //Useful only in FF, Chrome will prevent access to iframe content for local file due to origin bug
+            function setIframeHeight() {
+                var x = getElement('infoFrame');
+                x.height = 0; //need to reset because iframe keeps previous scrollHeight
+                x.height = getDocHeight(x.contentWindow.document);
+            }
+
+            function getDocHeight(doc) {
+                doc = doc || document;
+                // stackoverflow.com/questions/1145850/
+                var body = doc.body, html = doc.documentElement;
+                var height = Math.max(body.scrollHeight, body.offsetHeight,
+                    html.clientHeight, html.scrollHeight, html.offsetHeight);
+                return height;
+            }
+
+            */
+
             //https://stackoverflow.com/a/2746983
             function isCanvasSupported() {
                 var elem = document.createElement('canvas');
@@ -894,6 +928,10 @@
             }
 
             function loadLangFile(langCode, callback) {
+                if (currentLangCode == langCode) {
+                    return;
+                }
+
                 if (langCode == null) {
                     langCode = localStorage.getItem('qrlang');
                     if (langCode == null || langCode.length != 2) {
@@ -953,6 +991,9 @@
                 if (currentValidationError.length > 0) {
                     validationError.textContent = translations[currentValidationError];
                 }
+
+                infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
+                infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
             };
 
             loadLangFile(null, updateLang);

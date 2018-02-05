@@ -246,6 +246,12 @@ table {
   font-family: "Courier New";
 }
 
+iframe {
+  width: 100%;
+  background-color: white;
+  border: none;
+}
+
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {
   background-image: url(../images/coin-logos.png);
