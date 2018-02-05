@@ -575,8 +575,7 @@
                 }
 
                 if (pageName == 'Info') {
-                    infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
-                    infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
+                    loadInfoPage();
                 }
             }
 
@@ -867,6 +866,11 @@
 
             */
 
+            function loadInfoPage(){
+                infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
+                infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
+            }
+
             //https://stackoverflow.com/a/2746983
             function isCanvasSupported() {
                 var elem = document.createElement('canvas');
@@ -992,8 +996,7 @@
                     validationError.textContent = translations[currentValidationError];
                 }
 
-                infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
-                infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
+loadInfoPage();
             };
 
             loadLangFile(null, updateLang);
