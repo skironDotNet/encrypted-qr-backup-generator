@@ -29,7 +29,7 @@ var translations = {
     xtSaveConfirm: 'Zapisz',
     xtFileName: 'Nazwa pliku',
     xtNotOffline: "Wygląda na to, że to narzędzie załadowane jest z żywej witryny, nie jest to zalecane do tworzenia cennych QR. Zamiast tego, użyj linku na dole tej strony w celu pobrania pliku ZIP z GitHub i uruchom to narzędzie w trybie offline jako 'lokalny' plik HTML.",
-    xtHeadTitle: "Uniwersalny Off-line QR Generator do Zaszyfrowanych Papierowych Kopii Zapasowych",
+    xtHeadTitle: "Uniwersalny (off-line) Generator QR do Zaszyfrowanych Papierowych Kopii Zapasowych",
     xtInfo: "Info",
     xtDecrypt: 'Odszyfruj',
     xtEnterEncryptedKey: 'Zaszyfrowane Dane z QR ',
