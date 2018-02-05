@@ -252,6 +252,14 @@ iframe {
   border: none;
 }
 
+#ver {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  font-size: small;
+}
+
+
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {
   background-image: url(../images/coin-logos.png);
