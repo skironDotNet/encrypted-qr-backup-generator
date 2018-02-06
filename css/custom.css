@@ -266,6 +266,36 @@ iframe {
   padding: 20px;
   border-radius: 5px;
 }
+
+.qa {
+  border-top: 1px solid #d8d7d7;
+}
+
+.q {
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.a {
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+.command {
+  border: 1px solid #d6d6d6;
+  border-radius: 3px;
+  background-color: #f3f3f3;
+  padding: 4px 14px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.qa-more {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {
   background-image: url(../images/coin-logos.png);
