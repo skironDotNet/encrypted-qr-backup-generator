@@ -29,7 +29,7 @@ var translations = {
     xtSaveConfirm: 'Save',
     xtFileName: 'File name',
     xtNotOffline: "It appears this tool is running of a live website, which is not recommended for creating valuable QRs. Instead, use the download link at the bottom of this page to download the ZIP file from GitHub and run this tool offline as a 'local' HTML file.",
-    xtHeadTitle: "Universal (off-line) QR Generator for Encrypted Paper Backups",
+    xtHeadTitle: "Universal Offline QR Generator for Encrypted Paper Backups",
     xtInfo: "Info",
     xtDecrypt: 'Decrypt',
     xtEnterEncryptedKey: 'Encrypted Data From QR',
