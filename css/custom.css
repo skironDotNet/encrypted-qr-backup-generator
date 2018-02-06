@@ -244,7 +244,7 @@ td {
 }
 
 table {
-  margin-bottom: 125px; /* fit QR under */
+  margin-bottom: 100px; /* fit QR under */
   font-family: "Courier New";
 }
 

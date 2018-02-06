@@ -824,8 +824,7 @@
                 prevAddressNode = sourceObj.children[0];
 
                 donateQr.value = sourceObj.innerText;
-                // donateQr.element.style.left = (sourceObj.offsetLeft + sourceObj.offsetWidth) + "px";
-                donateQr.element.style.left = (sourceObj.offsetLeft + prevAddressNode.offsetLeft) + "px";
+                donateQr.element.style.left = (sourceObj.offsetLeft + sourceObj.offsetParent.offsetLeft + prevAddressNode.offsetLeft) + "px";
 
                 //the sums of top location gives correct QR location
                 donateQr.element.style.top =
