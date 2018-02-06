@@ -114,6 +114,8 @@ footer {
   font-family: Arial;
   font-size: small;
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 @media print {
@@ -259,7 +261,11 @@ iframe {
   font-size: small;
 }
 
-
+.page{
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 5px;
+}
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {
   background-image: url(../images/coin-logos.png);
