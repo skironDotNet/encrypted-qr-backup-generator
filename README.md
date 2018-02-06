@@ -1,4 +1,4 @@
-## Universal Off-line Client-Side QR Generator for Encrypted Paper Backups
+## Universal offline QR generator for creating encrypted paper backups.
 
 ### ABOUT THIS TOOL
 
