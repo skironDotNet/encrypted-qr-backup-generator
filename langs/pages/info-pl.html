@@ -1,6 +1,106 @@
 <html>
-<body onload="parent.postMessage(document.documentElement.offsetHeight, '*')">
-    <div style="display:block; height: 100px; background-color:red;">Info PL</div>
+<link rel="stylesheet" href="../../css/normalize.css">
+<link rel="stylesheet" href="../../css/skeleton.css">
+<link rel="stylesheet" href="../../css/custom.css">
+
+<body onload="parent.postMessage(document.documentElement.offsetHeight, '*');">
+    <div class="page">
+        <h4>O tym</h4>
+        <p>Głównym celem tego narzędzia jest tworzenie kopii zapasowych na papierze w postaci kodu QR. Możesz utworzyć QR dowolnego
+            tekstu, przetestuj QR dla długiego tekstu. QR ma limit pojemności i po zaszyfrowaniu dane wynikowe są dłuższe
+            niż zwykły tekst.</p>
+        <p>Przeczytaj poniżej, aby lepiej zrozumieć całość.</p>
+
+        <h4>CZP</h4>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Jaki rodzaj szyfrowania?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                Zastosowany algorytm szyfrowania to AES-256-CBC, najwyższy znany dziś poziom, ale twój kod QR jest tak bezpieczny jak twoja
+                fraza(hasło), więc upewnij się, że masz co najmniej 7 słów lub 25 mieszanych znaków.
+            </p>
+        </div>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Jeśli zaszyfruję moje dane i to narzędzie przestanie istnieć, to czy moje dane zostaną utracone?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                Twoje dane są szyfrowane za pomocą OpenSSL w implementacji JavaScript, a to oznacza, że możesz użyć OpenSSL do odszyfrowania
+                tekstu QR bez tego narzędzia. Kiedy zeskanujesz swój kod QR, po prostu wpisz tekst w pliku
+                <i>encrypted.txt</i>
+            </p>
+            <div class="qa-more">
+                <b>Zaszyfruj:</b>
+                <br>
+                <span class="command">openssl aes-256-cbc -in plain.txt -out encrypted.txt -a</span>
+                <br>
+                <b>Odszyfruj do pliku:</b>
+                <br>
+                <span class="command">openssl aes-256-cbc -d -a -in encrypted.txt -out plain.txt</span>
+                <br>
+                <b>Odszyfruj do konsoli:</b>
+                <br>
+                <span class="command">openssl aes-256-cbc -d -a -in encrypted.txt</span>
+            </div>
+
+        </div>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Do czego służy "Bez Szyfrowania"?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                To tylko generator QR dla zwykłego tekstu, na wypadek gdybyś chciał utworzyć QR, który nie jest szyfrowany.
+            </p>
+        </div>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Zeskanowałem QR i umieściłem zawartość w pliku, próbowałem odszyfrować ręcznie przez openSSL i otrzymałem "błąd odczytu pliku
+                wejściowego". Co ja robię źle?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                Jeśli podczas tworzenia QR, który wybrałeś "Umieść etykietę w QR", musisz użyć tylko tekstu pod "-ENC BLOCK-"
+            </p>
+            <div class="qa-more">
+                <img src="../../images/enc-block-example.png">
+            </div>
+        </div>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Czy mogę ufać temu narzędziu, że nie ukradnie moich tajemnic?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                Zasadą jest, że nie można nikomu zaufać. Opracowałem to narzędzie dla siebie i przyjrzałem się wszystkim użytym tu bibliotekom,
+                czy nie zawierają one AJAX, obiektu XMLHttpRequest, który mógłby potencjalnie wysłać dowolne informacje.
+                <br>
+                <br> Mówiąc tak, musisz uważać na inne rzeczy. Mimo, że to narzędzie może być używane online z http://qr.greenhex.net
+                i uważane za bezpieczne, jakikolwiek keyloger, który możesz mieć na swoim komputerze, może ukraść twoje hasło.
+                Również witryna może zostać zhakowana i moźe mieć wstrzyknięty złośliwy kod JavaScript. Dlatego najbezpieczniej
+                jest pobrać kod źródłowy z github i uruchomić na komputerze z linuxem offline.
+            </p>
+        </div>
+        <div class="qa">
+            <p class="q">
+                <b>P: </b>
+                Kiedy jestem offline, jak mogę drukować?
+            </p>
+            <p class="a">
+                <b>O: </b>
+                Możesz być podłączony bezpośrednio do drukarki lub możesz zapisać QR jako obraz lub HTML i przenieść go za pomocą napędu
+                USB do dowolnego innego urządzenia, z którego możesz drukować.
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>

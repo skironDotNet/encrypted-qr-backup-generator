@@ -6,8 +6,8 @@
 <body onload="parent.postMessage(document.documentElement.offsetHeight, '*');">
     <div class="page">
         <h4>About</h4>
-        <p>The main purpose of this tool is to create paper backups in form of a QR code. You can create a QR of any text you
-            like, just test the QR for long text. QR has capacity limit and with added excryption the resulting data is longer
+        <p>The main purpose of this tool is to create backups on a paper in form of a QR code. You can create a QR of any text,
+            please test the QR for long text. QR has capacity limit and after the encryption the resulting data is longer
             than the plain text input.</p>
         <p>Please read below to have better understanding of the whole.</p>
 
@@ -19,19 +19,19 @@
             </p>
             <p class="a">
                 <b>A: </b>
-                The encryption used is AES-256-CBC, the highest grade know today, but your QR is only as safe as your passphrase so make
-                sure you have at least 7 words or 25 mixed characters.
+                The encryption algorithm used is AES-256-CBC, the highest grade known today, but your QR is only as safe as your passphrase
+                so make sure you have at least 7 words or 25 mixed characters.
             </p>
         </div>
         <div class="qa">
             <p class="q">
                 <b>Q: </b>
-                If I encrypt my data and this tool dissaperas from existance is my data lost?
+                If I encrypt my data and this tool will cease to exist, will my data be lost?
             </p>
             <p class="a">
                 <b>A: </b>
                 Your data is encrypted with JavaScript implementation of OpenSSL, and this means you can use OpenSSL to decrypt your QR text
-                without this tool. When you scan your QR just put the text into
+                without this tool. When you scan your QR just put the text into a file
                 <i>encrypted.txt</i>
             </p>
             <div class="qa-more">
@@ -52,22 +52,22 @@
         <div class="qa">
             <p class="q">
                 <b>Q: </b>
-                What is "No Encryption" For?
+                What's the "No Encryption" used for?
             </p>
             <p class="a">
                 <b>A: </b>
-                This is just plain text QR generator in case you want to create a QR that is not encrypted.
+                This is just a QR generator for a plain text, in case you want to create a QR that is not encrypted.
             </p>
         </div>
         <div class="qa">
             <p class="q">
                 <b>Q: </b>
-                I scanned the QR and placed contents to a file, tried to decrypt manually via openssl and got "error reading input file".
-                What am I doin wrong?
+                I scanned the QR and placed contents to a file, tried to decrypt manually via openSSL and got "error reading input file".
+                What am I doing wrong?
             </p>
             <p class="a">
                 <b>A: </b>
-                If during creation of a QR you selected "Embed Label in the QR", you need to grab only the text under "-ENC BLOCK-"
+                If during creation of a QR you selected "Embed Label in the QR", you need to use only the text under "-ENC BLOCK-"
             </p>
             <div class="qa-more">
                 <img src="../../images/enc-block-example.png">
@@ -76,17 +76,16 @@
         <div class="qa">
             <p class="q">
                 <b>Q: </b>
-                Can I trust this tool won't steal my secrets?
+                Can I trust this tool it won't steal my secrets?
             </p>
             <p class="a">
                 <b>A: </b>
-                The rule is you can't trust anybody. I developed this tool for myself and reviewed all the libraries used here to not cointain
-                AJAX the XMLHttpRequest Object that could potentially send any info out.
+                The rule is that you can not trust anyone. I developed this tool for myself and looked at all the libraries used here, if they don't contain an AJAX, the XMLHttpRequest object that could potentially send any information.
                 <br>
-                <br> Saying so you must watch out for other things. While this tool can be used online from http://qr.greenhex.net
+                <br> However, you must watch out for other things. Despite this tool can be used online from http://qr.greenhex.net
                 and considered safe, any keyloger you may have on your machine can steal your passphrase. Also the site could
-                get hacked and malicious JS injected. So the safest is to download the source code from github and run on
-                the offline linux machine.
+                get hacked and malicious JavaScript code injected. So the safest is to download the source code from github
+                and run on the offline linux machine.
             </p>
         </div>
         <div class="qa">
@@ -96,8 +95,7 @@
             </p>
             <p class="a">
                 <b>A: </b>
-                You can be connected directly to the printer only, or you can save the QR as image or HTML and transfer it to any other device
-                for printing.
+                You can be connected directly to the printer only, or you can save the QR as image or HTML and transfer it using USB drive to any other device you can print from.
             </p>
         </div>
     </div>
