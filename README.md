@@ -2,6 +2,8 @@
 
 ### ABOUT THIS TOOL
 
+[https://qr.greenhex.net](https://qr.greenhex.net)
+
 The idea for creating this tool came for the idea for safely storing private keys of the crypto-currencies that don't have generators.
 
 If so called Brain Wallet can be generated elsewhere there is no need to use this tool, but it may be a good idea to store the seed of Electrum wallet. In theory we should remember the seed ourselves and it's already a brain wallet, but some people may already remember long passpharse and this can be reused to backup anything else, using this tool.
