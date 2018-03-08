@@ -150,9 +150,9 @@
                 <!-- <iframe id="infoFrame" src="" onload="setIframeHeight()" scrolling="no"></iframe>  -->
             </div>
             <div id="pageTwoFactorUtility" hidden>
-                two-factor authentication
+                <span id="xt2faInfo"></span>
+                <br><br>
                 <form name="twoFactorForm" autocomplete="off" action="#" method="POST">
-
                     <label>
                         <span id="xt2faAccountName"></span>
                     </label>
@@ -170,7 +170,7 @@
                             <button id="xtClearForm" type="button" onclick="clearTwoFactorForm()" class="button u-pull-right"></button>
                         </div>
                     </div>
-                    <div id="twoFactorResult" class="center">
+                    <div id="twoFactorResult" class="center" hidden>
                         <label>
                             <span id="xt2faPleaseScan"></span>
                         </label>

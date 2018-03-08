@@ -47,6 +47,7 @@ var translations = {
     xtErr2FaAccountNameTooShort: 'Account Name too short!',
     xtErr2FaSecretKeyNotPresent: 'Paste the Secret Key!',
     xt2faPleaseScan: 'Scan the following code in a two-factor authentication application',
+    xt2faInfo: 'If you have a backup copy of a two-factor authentication key, instead of entering the code into the application, you can paste it here and generate the code to be quickly scanned in the application.',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',

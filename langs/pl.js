@@ -47,6 +47,7 @@ var translations = {
     xtErr2FaAccountNameTooShort: 'Nazwa konta zbyt krótka!',
     xtErr2FaSecretKeyNotPresent: 'Wklej Sekretny Klucz!',
     xt2faPleaseScan: 'Zeskanuj poniższy kod w aplikacji uwierzytelnienia dwuskładnikowego',
+    xt2faInfo: 'Jeżeli posiadasz kopię zapasową klucza uwierzytelnienia dwuskładnikowego, to zamiast wpisywać kod do aplikacji, możesz wkleić go tu i wygenerować kod do szybkiego zeskanowania w aplikacji.',
 
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzie ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
