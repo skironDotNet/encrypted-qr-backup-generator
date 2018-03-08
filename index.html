@@ -29,10 +29,11 @@
                     <button id="xtEncryption" class="button button-page" onclick="setMode(this)" disabled="disabled"></button>
                     <button id="xtDecryption" onclick="setMode(this)"></button>
                     <button id="xtNoEncryption" onclick="setMode(this)"></button>
+                    <button id="xtTwoFactorUtility" onclick="setMode(this)"></button>
                     <button id="xtInfo" onclick="setMode(this)"></button>
                     <button id="xtDonate" onclick="setMode(this)"></button>
                 </div>
-                <span id="ver">v1.0.0</span>
+                <span id="ver">v1.1.0</span>
             </div>
         </div>
 
@@ -86,14 +87,13 @@
                         </label>
                         <input type="password" name="pharseConfirm" class="u-full-width">
                     </div>
-                    <div id="validationError" class="validationError center"></div>
                     <div class="row">
                         <div class="six columns">
                             <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
                             <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary" hidden></button>
                         </div>
                         <div class="six columns">
-                            <button id="xtClearForm" type="button" onclick="clearForm()" class="button u-pull-right"></button>
+                            <button id="xtClearForm" type="button" onclick="clearForm('qrForm')" class="button u-pull-right"></button>
                         </div>
                     </div>
                 </form>
@@ -103,7 +103,7 @@
                         <div id="printQr" class="nine columns">
                             <div id="qrHolder" style="background-color: white; border: 2px dashed black; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
                                 <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
-                                <img id="qrious" alt="Encrypted QR" style="vertical-align: top;" />
+                                <img id="mainQr" alt="Encrypted QR" style="vertical-align: top;" />
                                 <div id="qrResultDescription" style="word-break: break-all; margin-top: 20px;">Description</div>
                                 <div id="qrPrintDate" style="margin-top: 20px; font-size: small;"></div>
                             </div>
@@ -148,6 +148,36 @@
                 <iframe id="infoFrame" src="" height="0"></iframe>
                 <!-- This can be used in FF without postMessage -->
                 <!-- <iframe id="infoFrame" src="" onload="setIframeHeight()" scrolling="no"></iframe>  -->
+            </div>
+            <div id="pageTwoFactorUtility" hidden>
+                two-factor authentication
+                <form name="twoFactorForm" autocomplete="off" action="#" method="POST">
+
+                    <label>
+                        <span id="xt2faAccountName"></span>
+                    </label>
+                    <input type="text" name="twoFactorAccountName" class="u-full-width" onkeypress="hide(twoFactorResult)">
+                    <label>
+                        <span id="xt2faSecretKey"></span>
+                    </label>
+                    <input type="text" name="twoFactorSecretKey" class="u-full-width" onkeypress="hide(twoFactorResult)">
+                    <div class="row">
+                        <div class="six columns">
+                            <button id="xtGenerate" type="button" onclick="generate2FaQr()" class="button-primary"></button>
+                        </div>
+                        <div class="six columns">
+
+                            <button id="xtClearForm" type="button" onclick="clearTwoFactorForm()" class="button u-pull-right"></button>
+                        </div>
+                    </div>
+                    <div id="twoFactorResult" class="center">
+                        <label>
+                            <span id="xt2faPleaseScan"></span>
+                        </label>
+                        <img id="twoFactorQr" style="vertical-align: top;" />
+
+                    </div>
+                </form>
             </div>
             <div id="pageDonate" class="page" hidden>
                 <p id="xtDonationHeader"></p>
@@ -337,6 +367,7 @@
                 </table>
                 <img id="donateQr" style="position: absolute; display: none" />
             </div>
+            <div id="validationError" class="validationError center"></div>
             <footer>
                 <div class="securityCheck">
                     <span id="xtNotOffline"></span>
@@ -383,7 +414,7 @@
         <script type="text/javascript">
 
             var qr = window.qr = new QRious({
-                element: document.getElementById('qrious'),
+                element: document.getElementById('mainQr'),
                 size: 100,
                 value: 'Nothing here!'
             });
@@ -392,6 +423,12 @@
                 element: document.getElementById('donateQr'),
                 size: 124,
                 value: '',
+            });
+
+            var twoFactorQr = window.qr = new QRious({
+                element: document.getElementById('twoFactorQr'),
+                size: 125,
+                value: ''
             });
 
             var qrData = getElement('qrData');
@@ -496,6 +533,33 @@
                 scanFromCamera();
             }
 
+            function generate2FaQr() {
+                var accountName = document.twoFactorForm.twoFactorAccountName.value;
+                var secretKey = document.twoFactorForm.twoFactorSecretKey.value;
+
+                if (!validate2Fa(accountName, secretKey)) {
+                    return;
+                }
+
+                twoFactorQr.value = 'otpauth://totp/' + accountName + '?secret=' + secretKey;
+                show(twoFactorResult);
+            }
+
+            function validate2Fa(accountName, secretKey) {
+                clearValidationError();
+                hide(twoFactorResult);
+
+                if (accountName.length < 5) {
+                    showValidationError('xtErr2FaAccountNameTooShort');
+                    return false;
+                }
+                if (secretKey.length < 16) {
+                    showValidationError('xtErr2FaSecretKeyNotPresent');
+                    return false;
+                }
+
+                return true;
+            }
             function fillResultScreen(qrValue) {
 
                 var dataLineCount = qrValue.split(/\r\n|\r|\n/).length;
@@ -559,10 +623,13 @@
                     case "xtDonate":
                         showPage('Donate');
                         break;
+                    case "xtTwoFactorUtility":
+                        showPage('TwoFactorUtility');
+                        break;
                 }
             }
 
-            var pages = ['Tools', 'Info', 'Donate'];
+            var pages = ['Tools', 'Info', 'Donate', 'TwoFactorUtility'];
 
             function showPage(pageName) {
                 for (var i = 0; i < pages.length; i++) {
@@ -638,7 +705,7 @@
                 }
 
                 showResult(false);
-                clearForm();
+                clearAllForms();
             }
 
             function showResult(bool) {
@@ -664,8 +731,19 @@
                 hide(xtDecQrData);
             }
 
-            function clearForm() {
-                document.qrForm.reset();
+            function clearTwoFactorForm() {
+                hide(twoFactorResult);
+                clearForm('twoFactorForm');
+            }
+            function clearForm(formName) {
+                document.forms.namedItem(formName).reset();
+                clearValidationError();
+            }
+
+            function clearAllForms() {
+                for (i = 0; i < document.forms.length; i++) {
+                    document.forms[i].reset();
+                }
                 clearValidationError();
             }
 
@@ -866,7 +944,7 @@
 
             */
 
-            function loadInfoPage(){
+            function loadInfoPage() {
                 infoFrame.height = 0; //reset so it can recalculate onLoand and pass back via postMessage
                 infoFrame.src = 'langs/pages/info-' + currentLangCode + '.html';
             }
@@ -996,7 +1074,7 @@
                     validationError.textContent = translations[currentValidationError];
                 }
 
-loadInfoPage();
+                loadInfoPage();
             };
 
             loadLangFile(null, updateLang);

@@ -41,6 +41,12 @@ var translations = {
     xtDonationHeader: '<b>If you think this tool is useful, consider donating to the author. Each donation will help to maintain this tool and create new ones. Thanks!</b>',
     xtHideDate: 'Hide the Date',
     xtQrDateCreatedLabel: 'Created: ',
+    xtTwoFactorUtility: '2FA QR',
+    xt2faAccountName: 'Account Name',
+    xt2faSecretKey: 'Secret Key',
+    xtErr2FaAccountNameTooShort: 'Account Name too short!',
+    xtErr2FaSecretKeyNotPresent: 'Paste the Secret Key!',
+    xt2faPleaseScan: 'Scan the following code in a two-factor authentication application',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',

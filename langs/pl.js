@@ -41,6 +41,12 @@ var translations = {
     xtDonationHeader: '<b>Jeśli uważasz, że to narzędzie jest przydatne, rozważ darowiznę dla autora. Każda darowizna pomoże w utrzymaniu tego narzędzia i oraz w tworzeniu nowych. Dzięki!</b>',
     xtHideDate: 'Ukryj Datę',
     xtQrDateCreatedLabel: 'Utworzono: ',
+    xtTwoFactorUtility: '2FA QR',
+    xt2faAccountName: 'Nazwa Konta',
+    xt2faSecretKey: 'Sekretny Klucz',
+    xtErr2FaAccountNameTooShort: 'Nazwa konta zbyt krótka!',
+    xtErr2FaSecretKeyNotPresent: 'Wklej Sekretny Klucz!',
+    xt2faPleaseScan: 'Zeskanuj poniższy kod w aplikacji uwierzytelnienia dwuskładnikowego',
 
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzie ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
