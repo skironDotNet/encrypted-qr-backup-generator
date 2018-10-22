@@ -500,9 +500,9 @@
                     suppressHashChange = false;
                     return;
                 }
-                parsedUrl = parseURL(parent.location);
-                loadLangFile(parsedUrl.hashObject[0], updateLang);
-                setModeName(getModeFromHashName(parsedUrl.hashObject[1]));
+
+                loadLangFile(getLangFromUrl(), updateLang);
+                setModeName(getModeFromUrl());
                 suppressHashChange = false;
             }
 
@@ -697,6 +697,33 @@
 
             function setPageTitle(titleSuffix) {
                 document.title = baseTitle + ' - ' + titleSuffix;
+            }
+
+            function getModeFromHashName(name) {
+                if (name === undefined)
+                    return "xtEncryption";
+
+                switch (name.toLowerCase()) {
+                    case "encrypt":
+                        return "xtEncryption";
+                    case "decrypt":
+                        return "xtDecryption";
+                    case "plain":
+                        return "xtNoEncryption";
+                    case "info":
+                        return "xtInfo";
+                    case "donate":
+                        return "xtDonate";
+                    case "2fa":
+                        return "xtTwoFactorUtility";
+                    default:
+                        return "xtEncryption";
+                }
+            }
+
+            function getModeFromUrl() {
+                var parsedUrl = parseURL(parent.location);
+                return getModeFromHashName(parsedUrl.hashObject[1])
             }
 
             function showPage(pageName) {
@@ -1144,34 +1171,20 @@
 
                 loadInfoPage();
 
-                var parsedUrl = parseURL(parent.location);
-                setModeName(getModeFromHashName(parsedUrl.hashObject[1])); //needed on first load from url hash
+                setModeName(getModeFromUrl()); //needed on first load from url hash
+                suppressHashChange = false; //need this as URL hash event can finish before lang reload
             };
 
-            function getModeFromHashName(name) {
-                if (name === undefined)
-                    return "xtEncryption";
-
-                switch (name.toLowerCase()) {
-                    case "encrypt":
-                        return "xtEncryption";
-                    case "decrypt":
-                        return "xtDecryption";
-                    case "plain":
-                        return "xtNoEncryption";
-                    case "info":
-                        return "xtInfo";
-                    case "donate":
-                        return "xtDonate";
-                    case "2fa":
-                        return "xtTwoFactorUtility";
-                    default:
-                        return "xtEncryption";
-                }
+            function getLangFromUrl() {
+                var parsedUrl = parseURL(parent.location);
+                const lang = langsAvailable.find(lang => lang.Code === parsedUrl.hashObject[0]);
+                if (lang === undefined)
+                    return defaultLanguageCode;
+                else
+                    return lang.Code;
             }
 
-            var parsedUrl = parseURL(parent.location);
-            loadLangFile(parsedUrl.hashObject[0], updateLang);
+            loadLangFile(getLangFromUrl(), updateLang);
 
             /*** End Lang Engine ***/
 
