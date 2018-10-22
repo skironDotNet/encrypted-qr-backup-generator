@@ -445,7 +445,6 @@
             var currentMode = 'xtEncryption';
             var pages = ['Tools', 'Info', 'Donate', 'TwoFactorUtility'];
             var suppressHashChange = false;
-            var currentHashPage = 'encrypt';
             var baseTitle = document.title;
 
             const smImage = 1;
@@ -490,7 +489,6 @@
             function setUrlHash(lang, page) {
                 suppressHashChange = true;
                 parent.location.hash = lang + '/' + page
-                currentHashPage = page;
             }
 
             function receiveMessage(event) {
@@ -700,7 +698,7 @@
             function setPageTitle(titleSuffix) {
                 document.title = baseTitle + ' - ' + titleSuffix;
             }
-            
+
             function showPage(pageName) {
                 for (var i = 0; i < pages.length; i++) {
                     var pageNode = getElement('page' + pages[i]);
@@ -1110,7 +1108,6 @@
 
                 head.appendChild(script);
                 localStorage.setItem("qrlang", currentLangCode);
-                setUrlHash(currentLangCode, currentHashPage);
             }
 
             function showLangMenu(langSelected) {
@@ -1146,6 +1143,9 @@
                 }
 
                 loadInfoPage();
+
+                var parsedUrl = parseURL(parent.location);
+                setModeName(getModeFromHashName(parsedUrl.hashObject[1])); //needed on first load from url hash
             };
 
             function getModeFromHashName(name) {
@@ -1171,9 +1171,7 @@
             }
 
             var parsedUrl = parseURL(parent.location);
-
             loadLangFile(parsedUrl.hashObject[0], updateLang);
-            setModeName(getModeFromHashName(parsedUrl.hashObject[1]));
 
             /*** End Lang Engine ***/
 
