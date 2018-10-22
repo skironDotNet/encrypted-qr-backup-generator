@@ -446,6 +446,7 @@
             var pages = ['Tools', 'Info', 'Donate', 'TwoFactorUtility'];
             var suppressHashChange = false;
             var currentHashPage = 'encrypt';
+            var baseTitle = document.title;
 
             const smImage = 1;
             const smHtml = 2;
@@ -664,33 +665,42 @@
                         setDecryptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "decrypt")
+                        setPageTitle("Decryption");
                         break;
                     case "xtNoEncryption":
                         setNoEncyptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "plain")
+                        setPageTitle("Plain Data QR");
                         break;
                     case "xtInfo":
                         showPage('Info');
                         setUrlHash(currentLangCode, "info")
+                        setPageTitle("Info");
                         break;
                     case "xtDonate":
                         showPage('Donate');
                         setUrlHash(currentLangCode, "donate")
+                        setPageTitle("Donate");
                         break;
                     case "xtTwoFactorUtility":
                         showPage('TwoFactorUtility');
                         setUrlHash(currentLangCode, "2fa")
+                        setPageTitle("Two Factor QR Generator");
                         break;
                     default:
                         setEncryptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "encrypt")
+                        setPageTitle("Encryption");
                         break;
                 }
             }
 
-
+            function setPageTitle(titleSuffix) {
+                document.title = baseTitle + ' - ' + titleSuffix;
+            }
+            
             function showPage(pageName) {
                 for (var i = 0; i < pages.length; i++) {
                     var pageNode = getElement('page' + pages[i]);
