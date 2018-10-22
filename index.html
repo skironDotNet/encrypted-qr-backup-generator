@@ -33,7 +33,7 @@
                     <button id="xtInfo" onclick="setMode(this)"></button>
                     <button id="xtDonate" onclick="setMode(this)"></button>
                 </div>
-                <span id="ver">v1.1.1</span>
+                <span id="ver">v1.2.1</span>
             </div>
         </div>
 
@@ -151,7 +151,8 @@
             </div>
             <div id="pageTwoFactorUtility" hidden>
                 <span id="xt2faInfo"></span>
-                <br><br>
+                <br>
+                <br>
                 <form name="twoFactorForm" autocomplete="off" action="#" method="POST">
                     <label>
                         <span id="xt2faAccountName"></span>
@@ -441,6 +442,10 @@
             var hideNoCanvas = getElement('hideNoCanvas');
             var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
+            var currentMode = 'xtEncryption';
+            var pages = ['Tools', 'Info', 'Donate', 'TwoFactorUtility'];
+            var suppressHashChange = false;
+            var currentHashPage = 'encrypt';
 
             const smImage = 1;
             const smHtml = 2;
@@ -448,9 +453,58 @@
             var qrfileName = getElement('qrFileName');
 
             window.addEventListener("message", receiveMessage, false);
+            window.onhashchange = hashChanged;
+
+            function parseURL(url) {
+                //from https://www.abeautifulsite.net/parsing-urls-in-javascript
+                //plus my own modification
+
+                var parser = document.createElement('a'),
+                    searchObject = {},
+                    queries, split, i;
+                // Let the browser do the work
+                parser.href = url;
+                // Convert query string to object
+                queries = parser.search.replace(/^\?/, '').split('&');
+                for (i = 0; i < queries.length; i++) {
+                    split = queries[i].split('=');
+                    searchObject[split[0]] = split[1];
+                }
+
+                hashObject = parser.hash.replace(/^#/, '').split('/');
+
+                return {
+                    protocol: parser.protocol,
+                    host: parser.host,
+                    hostname: parser.hostname,
+                    port: parser.port,
+                    pathname: parser.pathname,
+                    search: parser.search,
+                    searchObject: searchObject,
+                    hash: parser.hash,
+                    hashObject: hashObject
+                };
+            }
+
+            function setUrlHash(lang, page) {
+                suppressHashChange = true;
+                parent.location.hash = lang + '/' + page
+                currentHashPage = page;
+            }
 
             function receiveMessage(event) {
                 infoFrame.height = event.data;
+            }
+
+            function hashChanged(event) {
+                if (suppressHashChange) {
+                    suppressHashChange = false;
+                    return;
+                }
+                parsedUrl = parseURL(parent.location);
+                loadLangFile(parsedUrl.hashObject[0], updateLang);
+                setModeName(getModeFromHashName(parsedUrl.hashObject[1]));
+                suppressHashChange = false;
             }
 
             function generate() {
@@ -598,38 +652,44 @@
                 return document.getElementById(id);
             }
 
-            var currentMode = 'xtEncryption';
-
             function setMode(obj) {
-                currentMode = obj.id;
+                setModeName(obj.id)
+            }
 
-                highlightModeButton(currentMode);
-                switch (currentMode) {
-                    case "xtEncryption":
-                        setEncryptionMode();
-                        showPage('Tools');
-                        break;
+            function setModeName(name) {
+                currentMode = name;
+                highlightModeButton(name);
+                switch (name) {
                     case "xtDecryption":
                         setDecryptionMode();
                         showPage('Tools');
+                        setUrlHash(currentLangCode, "decrypt")
                         break;
                     case "xtNoEncryption":
                         setNoEncyptionMode();
                         showPage('Tools');
+                        setUrlHash(currentLangCode, "plain")
                         break;
                     case "xtInfo":
                         showPage('Info');
+                        setUrlHash(currentLangCode, "info")
                         break;
                     case "xtDonate":
                         showPage('Donate');
+                        setUrlHash(currentLangCode, "donate")
                         break;
                     case "xtTwoFactorUtility":
                         showPage('TwoFactorUtility');
+                        setUrlHash(currentLangCode, "2fa")
+                        break;
+                    default:
+                        setEncryptionMode();
+                        showPage('Tools');
+                        setUrlHash(currentLangCode, "encrypt")
                         break;
                 }
             }
 
-            var pages = ['Tools', 'Info', 'Donate', 'TwoFactorUtility'];
 
             function showPage(pageName) {
                 for (var i = 0; i < pages.length; i++) {
@@ -1002,7 +1062,7 @@
             /*** Simple Lang engine by Pawel Cioch ***/
 
             var langMenu = getElement('langMenu');
-            var currentLangCode = '';
+            var currentLangCode = null;
             var currentValidationError = '';
 
             function setLang(obj) {
@@ -1014,7 +1074,7 @@
                     return;
                 }
 
-                if (langCode == null) {
+                if (langCode == null || langCode == '') {
                     langCode = localStorage.getItem('qrlang');
                     if (langCode == null || langCode.length != 2) {
                         langCode = defaultLanguageCode;
@@ -1040,15 +1100,16 @@
 
                 head.appendChild(script);
                 localStorage.setItem("qrlang", currentLangCode);
+                setUrlHash(currentLangCode, currentHashPage);
             }
 
             function showLangMenu(langSelected) {
                 var html = '';
                 langsAvailable.forEach(function (lang) {
                     if (langSelected == lang.Code)
-                        html += '<span><a href="#" id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                        html += '<span><a id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
                     else
-                        html += '<span><a href="#" id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                        html += '<span><a id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
                 }, this);
 
                 langMenu.innerHTML = html.substring(0, html.length - 3);;
@@ -1077,7 +1138,32 @@
                 loadInfoPage();
             };
 
-            loadLangFile(null, updateLang);
+            function getModeFromHashName(name) {
+                if (name === undefined)
+                    return "xtEncryption";
+
+                switch (name.toLowerCase()) {
+                    case "encrypt":
+                        return "xtEncryption";
+                    case "decrypt":
+                        return "xtDecryption";
+                    case "plain":
+                        return "xtNoEncryption";
+                    case "info":
+                        return "xtInfo";
+                    case "donate":
+                        return "xtDonate";
+                    case "2fa":
+                        return "xtTwoFactorUtility";
+                    default:
+                        return "xtEncryption";
+                }
+            }
+
+            var parsedUrl = parseURL(parent.location);
+
+            loadLangFile(parsedUrl.hashObject[0], updateLang);
+            setModeName(getModeFromHashName(parsedUrl.hashObject[1]));
 
             /*** End Lang Engine ***/
 

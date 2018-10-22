@@ -41,6 +41,10 @@ a {
   color: #829d5d;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .selected {
   font-weight: bold;
 }
@@ -261,7 +265,7 @@ iframe {
   font-size: small;
 }
 
-.page{
+.page {
   background-color: whitesmoke;
   padding: 20px;
   border-radius: 5px;
@@ -279,6 +283,10 @@ iframe {
 .a {
   margin-bottom: 15px;
   padding-left: 5px;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 .command {
