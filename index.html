@@ -1178,10 +1178,16 @@
             function getLangFromUrl() {
                 var parsedUrl = parseURL(parent.location);
                 const lang = langsAvailable.find(lang => lang.Code === parsedUrl.hashObject[0]);
-                if (lang === undefined)
-                    return defaultLanguageCode;
-                else
+                if (lang === undefined) {
+                    var langCode = localStorage.getItem('qrlang');
+                    if (langCode == null || langCode.length != 2) {
+                        langCode = defaultLanguageCode;
+                    }
+                    return langCode
+                }
+                else {
                     return lang.Code;
+                }
             }
 
             loadLangFile(getLangFromUrl(), updateLang);
