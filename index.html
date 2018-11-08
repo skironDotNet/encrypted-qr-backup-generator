@@ -594,11 +594,11 @@
                 clearValidationError();
                 hide(twoFactorResult);
 
-                if (accountName.length < 5) {
+                if (accountName.length < 4) {
                     showValidationError('xtErr2FaAccountNameTooShort');
                     return false;
                 }
-                if (secretKey.length < 16) {
+                if (secretKey.length < 4) {
                     showValidationError('xtErr2FaSecretKeyNotPresent');
                     return false;
                 }
