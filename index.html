@@ -171,16 +171,28 @@
             </div>
             <div id="pageDonate" class="page" hidden>
                 <p id="xtDonationHeader"></p>
-                <table onmouseout="hideDonateQr()">
-                    <tr>
+                <table>
+                    <tr style="border-top: 1px solid #E1E1E1;"">
                         <td>
                             <i class="sprite sprite-bitcoin"></i>
                         </td>
-                        <td>Bitcoin (BTC)
-                            <br>Bitcoin Cash (BCH)
+                        <td>Bitcoin (BTC)</td>
+                        <td>
+                            <div>Legacy: 
+                                <div class="donateQr">1D1nmcbpL5WaJxFJF4eeyhZ9A1mQzL32wA</div>
+                            </div>
+                            <div>P2SH:&nbsp;&nbsp; 
+                                <div class="donateQr">bc1qt8kd0ftz7y6rk6x7wwdm74v3848adhrhj3d42u</div>
+                            </div>
                         </td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>1D1nmcbpL5WaJxFJF4eeyhZ9A1mQzL32wA</div>
+                    </tr>
+                    <tr>
+                        <td>
+                            <svg style="vertical-align: middle;" viewBox="0 0 32 32" height="32px" selectable="1" width="32px" class="sc-1pmbxjh-0 pmruo"><g fill="none" fill-rule="evenodd"><circle cx="16" cy="16" fill="#8dc351" r="16"></circle><path d="M21.207 10.534c-.776-1.972-2.722-2.15-4.988-1.71l-.807-2.813-1.712.491.786 2.74c-.45.128-.908.27-1.363.41l-.79-2.758-1.711.49.805 2.813c-.368.114-.73.226-1.085.328l-.003-.01-2.362.677.525 1.83s1.258-.388 1.243-.358c.694-.199 1.035.139 1.2.468l.92 3.204c.047-.013.11-.029.184-.04l-.181.052 1.287 4.49c.032.227.004.612-.48.752.027.013-1.246.356-1.246.356l.247 2.143 2.228-.64c.415-.117.825-.227 1.226-.34l.817 2.845 1.71-.49-.807-2.815a65.74 65.74 0 0 0 1.372-.38l.802 2.803 1.713-.491-.814-2.84c2.831-.991 4.638-2.294 4.113-5.07-.422-2.234-1.724-2.912-3.471-2.836.848-.79 1.213-1.858.642-3.3zm-.65 6.77c.61 2.127-3.1 2.929-4.26 3.263l-1.081-3.77c1.16-.333 4.704-1.71 5.34.508zm-2.322-5.09c.554 1.935-2.547 2.58-3.514 2.857l-.98-3.419c.966-.277 3.915-1.455 4.494.563z" fill="#fff" fill-rule="nonzero"></path></g></svg>
+                        </td>
+                        <td>Bitcoin Cash (BCH)</td>
+                        <td>
+                            <div class="donateQr">qpxkjyjrxdcd57wrwez9wg7elu20gzvu4qn3j4t4rm</div>
                         </td>
                     </tr>
                     <tr>
@@ -188,8 +200,8 @@
                             <i class="sprite sprite-litecoin"></i>
                         </td>
                         <td>LiteCoin (LTC)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>LNYffmyYBacgQPdPyftSHt5KcC1WF2kpm4</div>
+                        <td>
+                            <div class="donateQr">LNYffmyYBacgQPdPyftSHt5KcC1WF2kpm4</div>
                         </td>
                     </tr>
                     <tr>
@@ -197,89 +209,8 @@
                             <i class="sprite sprite-monero"></i>
                         </td>
                         <td>Monero (XMR)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>4AVYbSPHYP9gZRLkdpXNuNAKVQNymntPJUSTguyXziF9WgJppVpKFoHJQVjJkZQ6NhTMzGz6gSjNGaCQvswMgLe9MhGVXRw</div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
-                            <i class="sprite sprite-hush"></i>
-                        </td>
-                        <td>Hush (HUSH)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>t1awQNnN9TKXaKkKA6n3VV9md2qkxxHvBrt</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-bitcoinz"></i>
-                        </td>
-                        <td>BitcoinZ (BTCZ)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>t1UvBc7s1qNAjY5deR2mmeGLnybEN8Bp6Lb</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-dash"></i>
-                        </td>
-                        <td>Dash (DASH)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>Xksnyf9Jxhij65nsdopBJDQb2B1kqze5rJ</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-pivx"></i>
-                        </td>
-                        <td>PIVX (PIVX)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>DB7DTG5Mg1K4CN12vxo1aoL97qQ4rWiXsX</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-verge"></i>
-                        </td>
-                        <td>Verge (XVG)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>DQMsdWDH4wHrKMa3f3QHHc1BQ1uLbWWMa2</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-digibyte"></i>
-                        </td>
-                        <td>DigiByte (DGB)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>DNVodL8gwAdNDPvuv6SNWptDbAywZwLoWU</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-syscoin"></i>
-                        </td>
-                        <td>Syscoin (SYS)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>SNEJVqQVF3cMRZeQjuKPh1bjdJveqznTdY</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-stellar"></i>
-                        </td>
-                        <td>Stellar (XLM)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>GDVMJK62FYXFKQC7FOVLP2HKX5QDWSIET6XWTIIEP3QY2S65CCBDNYNL</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sprite sprite-stratis"></i>
-                        </td>
-                        <td>Stratis (STRAT)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>SP2tUjxJdn7BjzEezrJtWhAbEu2iSttC48</div>
+                            <div class="donateQr">4AVYbSPHYP9gZRLkdpXNuNAKVQNymntPJUSTguyXziF9WgJppVpKFoHJQVjJkZQ6NhTMzGz6gSjNGaCQvswMgLe9MhGVXRw</div>
                         </td>
                     </tr>
                     <tr>
@@ -287,17 +218,99 @@
                             <i class="sprite sprite-aeon"></i>
                         </td>
                         <td>Aeon (AEON)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>WmtwWaaFimBed3WE776ScG9EUR4ATq38ZZPZPU62QpJdBpc2wnzjjJhht3qo9AYnYUFVHG3osdQHshSXLUmF4a961QGH25FGt</div>
+                        <td>
+                            <div class="donateQr">WmtwWaaFimBed3WE776ScG9EUR4ATq38ZZPZPU62QpJdBpc2wnzjjJhht3qo9AYnYUFVHG3osdQHshSXLUmF4a961QGH25FGt</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <i class="sprite sprite-bitcoin-gold"></i>
+                            <i class="sprite sprite-pivx"></i>
                         </td>
-                        <td>Bitcoin Gold (BTG)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>GcMHJaTKrLrk9RcyJ5SK7YaX1uJ92B3Ehi</div>
+                        <td>PIVX (PIVX)</td>
+                        <td >
+                            <div class="donateQr">DB7DTG5Mg1K4CN12vxo1aoL97qQ4rWiXsX</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-digibyte"></i>
+                        </td>
+                        <td>DigiByte (DGB)</td>
+                        <td>
+                            <div class="donateQr">DNVodL8gwAdNDPvuv6SNWptDbAywZwLoWU</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-syscoin"></i>
+                        </td>
+                        <td>Syscoin (SYS)</td>
+                        <td>
+                            <div class="donateQr">SNEJVqQVF3cMRZeQjuKPh1bjdJveqznTdY</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-stellar"></i>
+                        </td>
+                        <td>Stellar (XLM)</td>
+                        <td>
+                            <div class="donateQr">GDVMJK62FYXFKQC7FOVLP2HKX5QDWSIET6XWTIIEP3QY2S65CCBDNYNL</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-dash"></i>
+                        </td>
+                        <td>Dash (DASH)</td>
+                        <td>
+                            <div class="donateQr">Xksnyf9Jxhij65nsdopBJDQb2B1kqze5rJ</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-verge"></i>
+                        </td>
+                        <td>Verge (XVG)</td>
+                        <td>
+                            <div class="donateQr">DQMsdWDH4wHrKMa3f3QHHc1BQ1uLbWWMa2</div>
+                        </td>
+                    </tr>
+                    <!-- Need new StratX format -->
+                    <!-- <tr>
+                        <td>
+                            <i class="sprite sprite-stratis"></i>
+                        </td>
+                        <td>Stratis (STRAT)</td>
+                        <td>
+                            <div class="donateQr">SP2tUjxJdn7BjzEezrJtWhAbEu2iSttC48</div>
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-crown"></i>
+                        </td>
+                        <td>Crown (CRW)</td>
+                        <td>
+                            <div class="donateQr">CRWDdTnGbLyJ1F1j5MPV3iJh2Mbfzcp3Cpbb</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-hush"></i>
+                        </td>
+                        <td>Hush (HUSH)</td>
+                        <td>
+                            <div class="donateQr">RSLzSxqJ5pYYo7dTdXDVSrzuYT2UkiaAiq</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sprite sprite-bitcoinz"></i>
+                        </td>
+                        <td>BitcoinZ (BTCZ)</td>
+                        <td>
+                            <div class="donateQr">t1UvBc7s1qNAjY5deR2mmeGLnybEN8Bp6Lb</div>
                         </td>
                     </tr>
                     <tr>
@@ -305,8 +318,8 @@
                             <i class="sprite sprite-namecoin"></i>
                         </td>
                         <td>Namecoin (NMC)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>MwqbW9Y1swYB1WoTY9q5dBwdXnSdf3tQQ2</div>
+                        <td>
+                            <div class="donateQr">MwqbW9Y1swYB1WoTY9q5dBwdXnSdf3tQQ2</div>
                         </td>
                     </tr>
                     <tr>
@@ -314,26 +327,17 @@
                             <i class="sprite sprite-vertcoin"></i>
                         </td>
                         <td>Vertcoin (VTC)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>Vwtvo3k3LVtBcYLupvF4dCe587LjJRYPJx</div>
+                        <td>
+                            <div class="donateQr">Vwtvo3k3LVtBcYLupvF4dCe587LjJRYPJx</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <i class="sprite sprite-crown"></i>
+                            <i class="sprite sprite-bitcoin-gold"></i>
                         </td>
-                        <td>Crown (CRW)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>12fUTiKtrhKTVXijAuTvqHk9HyNx8rhyrB</div>
-                        </td>
-                    </tr>
-                    <tr>
+                        <td>Bitcoin Gold (BTG)</td>
                         <td>
-                            <i class="sprite sprite-project"></i>
-                        </td>
-                        <td>Project (PRJ)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>PTTGX25afVcH8xepnGPxEXmxx65TMSuAJX</div>
+                            <div class="donateQr">GcMHJaTKrLrk9RcyJ5SK7YaX1uJ92B3Ehi</div>
                         </td>
                     </tr>
                     <tr>
@@ -341,8 +345,8 @@
                             <i class="sprite sprite-dogecoin"></i>
                         </td>
                         <td>Dogecoin (DOGE)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>D7YpAAF6k8R9jCgfDYu1UjEVdq6hnFPKSu</div>
+                        <td>
+                            <div class="donateQr">D7YpAAF6k8R9jCgfDYu1UjEVdq6hnFPKSu</div>
                         </td>
                     </tr>
                     <tr>
@@ -350,12 +354,11 @@
                             <i class="sprite sprite-reddcoin"></i>
                         </td>
                         <td>ReddCoin (RDD)</td>
-                        <td onmouseover="showDonateQr(this)">
-                            <div>Rj9B2vDpKpUqRAFpqa2tDim9LtiLowNAUk</div>
+                        <td>
+                            <div class="donateQr">Rj9B2vDpKpUqRAFpqa2tDim9LtiLowNAUk</div>
                         </td>
                     </tr>
                 </table>
-                <img id="donateQr" style="position: absolute; display: none" />
             </div>
             <div id="validationError" class="validationError center"></div>
             <footer>
@@ -409,12 +412,6 @@
                 value: 'Nothing here!'
             });
 
-            var donateQr = window.donateQr = new QRious({
-                element: document.getElementById('donateQr'),
-                size: 124,
-                value: '',
-            });
-
             var twoFactorQr = window.twoFactorQr = new QRious({
                 element: document.getElementById('twoFactorQr'),
                 size: 125,
@@ -443,6 +440,12 @@
 
             window.addEventListener("message", receiveMessage, false);
             window.onhashchange = hashChanged;
+
+            var donationQrs = document.querySelectorAll(".donateQr");
+            for(var i=0;i<donationQrs.length;i++) {
+                donationQrs[i].addEventListener('mouseenter', showDonateQr); 
+                donationQrs[i].addEventListener('mouseleave', hideDonateQr); 
+            }
 
             function parseURL(url) {
                 //from https://www.abeautifulsite.net/parsing-urls-in-javascript
@@ -987,37 +990,34 @@
                 element.style.display = 'none';
             }
 
-            var prevAddressNode = null;
-
-            function showDonateQr(sourceObj) {
-
-
-                if (prevAddressNode != null) {
-                    prevAddressNode.style.backgroundColor = '';
+            function showDonateQr(event) {
+                var parent = event.target.parentNode;
+                var img = parent.querySelector('img');
+                if (img) {
+                    return;
                 }
-                prevAddressNode = sourceObj.children[0];
 
-                donateQr.value = sourceObj.innerText;
-                donateQr.element.style.left = (sourceObj.offsetLeft + sourceObj.offsetParent.offsetLeft + prevAddressNode.offsetLeft) + "px";
+                var br = document.createElement('br');
+                var img = document.createElement('img');
+                var x = new QRious({
+                    element: img,
+                    size: 124,
+                    value: event.target.innerText,
+                });
 
-                //the sums of top location gives correct QR location
-                donateQr.element.style.top =
-                    (sourceObj.parentNode.parentNode.parentNode.offsetTop +     //table top location
-                        sourceObj.offsetTop +                                   //table row top location
-                        prevAddressNode.offsetTop +                            //<div>text</div> top location
-                        prevAddressNode.offsetHeight                            //text height
-                    ) + "px";
-
-                prevAddressNode.style.backgroundColor = 'white';
-                show(donateQr.element);
+                parent.appendChild(br);
+                parent.appendChild(img);
             }
 
-            function hideDonateQr() {
-                if (prevAddressNode != null) {
-                    prevAddressNode.style.backgroundColor = '';
+            function hideDonateQr(event) {
+                var parent = event.target.parentNode;
+                var img = parent.querySelector('img');
+                var br = parent.querySelector('br');
+                if (!img) {
+                    return;
                 }
-
-                hide(donateQr.element);
+                parent.removeChild(img);
+                parent.removeChild(br);
             }
 
             /*

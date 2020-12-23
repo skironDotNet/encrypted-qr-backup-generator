@@ -306,6 +306,16 @@ a:hover {
 form {
   margin-bottom: 0px;
 }
+
+.donateQr:hover {
+  background-color: white;
+}
+
+td img {
+  position: absolute;
+}
+
+
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {
   background-image: url(../images/coin-logos.png);
