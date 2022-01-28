@@ -329,118 +329,94 @@ td img {
   background-position: -5px -5px;
 }
 
-.sprite-bitcoin {
+.sprite-bch {
   width: 32px;
   height: 32px;
   background-position: -47px -5px;
 }
 
-.sprite-bitcoin-gold {
+.sprite-btc {
   width: 32px;
   height: 32px;
   background-position: -89px -5px;
 }
 
-.sprite-bitcoinz {
+.sprite-btcz {
   width: 32px;
   height: 32px;
   background-position: -131px -5px;
 }
 
-.sprite-dash {
+.sprite-btg {
   width: 32px;
   height: 32px;
   background-position: -5px -47px;
 }
 
-.sprite-digibyte {
+.sprite-dash {
   width: 32px;
   height: 32px;
   background-position: -47px -47px;
 }
 
-.sprite-crown {
+.sprite-dgb {
   width: 32px;
   height: 32px;
   background-position: -89px -47px;
 }
 
-.sprite-dogecoin {
+.sprite-doge {
   width: 32px;
   height: 32px;
   background-position: -131px -47px;
 }
 
-.sprite-project {
+.sprite-ltc {
   width: 32px;
   height: 32px;
   background-position: -5px -89px;
 }
 
-.sprite-hush {
+.sprite-pivx {
   width: 32px;
   height: 32px;
   background-position: -47px -89px;
 }
 
-.sprite-litecoin {
+.sprite-strax {
   width: 32px;
   height: 32px;
   background-position: -89px -89px;
 }
 
-.sprite-monero {
+.sprite-sys {
   width: 32px;
   height: 32px;
   background-position: -131px -89px;
 }
 
-.sprite-namecoin {
+.sprite-xlm {
   width: 32px;
   height: 32px;
   background-position: -5px -131px;
 }
 
-.sprite-pivx {
+.sprite-xmr {
   width: 32px;
   height: 32px;
   background-position: -47px -131px;
 }
 
-.sprite-reddcoin {
+.sprite-xvg {
   width: 32px;
   height: 32px;
   background-position: -89px -131px;
 }
 
-.sprite-stellar {
+.sprite-zec {
   width: 32px;
   height: 32px;
   background-position: -131px -131px;
-}
-
-.sprite-stratis {
-  width: 32px;
-  height: 32px;
-  background-position: -173px -5px;
-}
-
-.sprite-syscoin {
-  width: 32px;
-  height: 32px;
-  background-position: -173px -47px;
-}
-
-.sprite-verge {
-  width: 32px;
-  height: 32px;
-  background-position: -173px -89px;
-}
-
-.sprite-vertcoin {
-  width: 32px;
-  height: 32px;
-  background-position: -173px -131px;
 }
 
 /*** End Coin Sprites ***/
