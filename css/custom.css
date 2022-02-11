@@ -221,6 +221,15 @@ footer {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#readerFloat {
+  position: absolute;
+} 
+
+#reader {
+  margin:auto;
+  background-color: antiquewhite;
+}
+
 .decryptFloat {
   margin-top: -6px;
   text-align: right;

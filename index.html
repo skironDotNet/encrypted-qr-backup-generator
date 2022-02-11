@@ -18,6 +18,7 @@
     <script type="text/javascript" src="lib/gibberish-aes-1.0.0.min.js"></script>
     <script type="text/javascript" src="lib/qrious.min.js"></script>
     <script type="text/javascript" src="langs/lang-map.js"></script>
+    <script type="text/javascript" src="lib/html5-qrcode.min.js"></script>
 
     <body>
 
@@ -68,6 +69,10 @@
                         <textarea name="qrDescription" class="u-full-width"></textarea>
                     </div>
                     <div id="decryptInputs">
+                        <input type="file" id="qr-input-file" accept="image/*">
+                        <div id="readerFloat" class="u-full-width">
+                            <div style="width: 600px" id="reader"></div>
+                        </div>
                         <label>
                             <span id="xtEnterEncryptedKey"></span>
                         </label>
@@ -405,6 +410,42 @@
                 donationQrs[i].addEventListener('mouseleave', hideDonateQr); 
             }
 
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", { fps: 20, qrbox: 400 });
+                   
+            const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+
+                //var html5QrCode = new Html5Qrcode();
+            function onScanSuccess(decodedText, decodedResult) {
+                // Handle on success condition with the decoded text or result.
+                console.log(`Scan result: ${decodedText}`, decodedResult);
+                // ...
+                document.qrForm.qrEncryptedText.value = decodedText;
+                html5QrcodeScanner.clear();
+                // ^ this will stop the scanner (video feed) and clear the scan area.
+            }
+
+            const fileinput = document.getElementById('qr-input-file');
+            fileinput.addEventListener('change', e => {
+            if (e.target.files.length == 0) {
+                // No file selected, ignore 
+                return;
+            }
+
+            // Use the first item in the list
+            const imageFile = e.target.files[0];
+            html5QrCode.scanFile(imageFile, /* showImage= */false)
+            .then(qrCodeMessage => {
+                // success, use qrCodeMessage
+                document.qrForm.qrEncryptedText.value = qrCodeMessage;
+                clearValidationError();
+            })
+            .catch(err => {
+                // failure, handle it.
+                showValidationError('xtBadQrImage');
+            });
+            });
+
             function parseURL(url) {
                 //from https://www.abeautifulsite.net/parsing-urls-in-javascript
                 //plus my own modification
@@ -532,7 +573,22 @@
             }
 
             function scanFromCamera() {
-                alert('Not implemented yet.');
+                //html5QrcodeScanner.render(onScanSuccess);
+                Html5Qrcode.getCameras().then(devices => {
+                /**
+                 * devices would be an array of objects of type:
+                 * { id: "id", label: "label" }
+                 */
+                console.log(devices);
+                if (devices && devices.length) {
+                    var cameraId = devices[0].id;
+                    // .. use this to start scanning.
+                }
+                }).catch(err => {
+                // handle err
+                console.log(err);
+
+                });
             }
 
             function loadQrImage() {

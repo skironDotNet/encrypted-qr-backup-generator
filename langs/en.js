@@ -33,7 +33,7 @@ var translations = {
     xtInfo: "Info",
     xtDecrypt: 'Decrypt',
     xtEnterEncryptedKey: 'Encrypted Data From QR',
-    xtLoadQrImage: 'Load from QR Image',
+    xtLoadQrImage: 'Load QR from Image',
     xtErrWrongPassphrase: "Can't decrypt - wrong passpharse.",
     xtErrGenericDecryptError: "Can't decrypt - likely entered text is not valid AES256 base64 encoded encrypted text",
     xtDecQrData: 'Decrypted Secret',
@@ -54,4 +54,5 @@ var translations = {
     xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
     xttScanQrHint: 'Scan QR code',
+    xtBadQrImage: 'Error scanning file, likely does not contain QR image or undetectable',
 }
