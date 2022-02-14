@@ -223,6 +223,9 @@ footer {
 
 #readerFloat {
   position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
 } 
 
 #reader {
@@ -233,6 +236,23 @@ footer {
 .decryptFloat {
   margin-top: -6px;
   text-align: right;
+}
+
+.qr-input-layer {
+  display: block;
+  background-color: antiquewhite;
+  width: 70%;
+  word-wrap: break-word;
+  margin: 20px auto;
+  border: solid gray 1px;
+}
+
+.qr-input-layer h5 {
+  padding: 0.8rem;
+}
+
+.qr-input-layer .validationError {
+  padding: 1rem;
 }
 
 .scanQr {

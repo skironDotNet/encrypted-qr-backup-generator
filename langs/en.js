@@ -54,5 +54,5 @@ var translations = {
     xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
     xttScanQrHint: 'Scan QR code',
-    xtBadQrImage: 'Error scanning file, likely does not contain QR image or undetectable',
+    xtBadQrImage: 'Error scanning file, likely does not contain QR image or undetectable.',
 }

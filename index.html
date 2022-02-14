@@ -69,8 +69,30 @@
                         <textarea name="qrDescription" class="u-full-width"></textarea>
                     </div>
                     <div id="decryptInputs">
-                        <input type="file" id="qr-input-file" accept="image/*">
                         <div id="readerFloat" class="u-full-width">
+                            <div id="qr-input-layer" class="qr-input-layer">
+                                <h5>Load encrypted data from QR image</h5>
+                                <div class="row">
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                    <div class="ten columns center">
+                                        <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
+                                        <div id="imgValidationError" class="validationError center"></div>
+                                    </div>
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                        <div class="eleven columns">
+                                        <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button u-pull-right"></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div style="width: 600px" id="reader"></div>
                         </div>
                         <label>
@@ -391,6 +413,8 @@
             var hideNoCanvas = getElement('hideNoCanvas');
             var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
+            var imgValidationError = getElement('imgValidationError');
+            const fileinput = document.getElementById('qr-input-file');
             var currentMode = 'xtEncryption';
             var pages = ['Tools', 'Info', 'Donate'];
             var suppressHashChange = false;
@@ -425,25 +449,24 @@
                 // ^ this will stop the scanner (video feed) and clear the scan area.
             }
 
-            const fileinput = document.getElementById('qr-input-file');
             fileinput.addEventListener('change', e => {
-            if (e.target.files.length == 0) {
-                // No file selected, ignore 
-                return;
-            }
+                if (e.target.files.length == 0) {
+                    // No file selected, ignore 
+                    return;
+                }
 
-            // Use the first item in the list
-            const imageFile = e.target.files[0];
-            html5QrCode.scanFile(imageFile, /* showImage= */false)
-            .then(qrCodeMessage => {
-                // success, use qrCodeMessage
-                document.qrForm.qrEncryptedText.value = qrCodeMessage;
-                clearValidationError();
-            })
-            .catch(err => {
-                // failure, handle it.
-                showValidationError('xtBadQrImage');
-            });
+                // Use the first item in the list
+                const imageFile = e.target.files[0];
+                html5QrCode.scanFile(imageFile, /* showImage= */false)
+                .then(qrCodeMessage => {
+                    document.qrForm.qrEncryptedText.value = qrCodeMessage;
+                    hideReaderFloat();
+                })
+                .catch(err => {
+                    document.qrForm.qrEncryptedText.value = '';
+                    imgValidationError.textContent = translations['xtBadQrImage'];
+                    show(imgValidationError);
+                });
             });
 
             function parseURL(url) {
@@ -592,7 +615,7 @@
             }
 
             function loadQrImage() {
-                scanFromCamera();
+                showReaderFloat();
             }
 
             function generate2FaQr() {
@@ -1032,6 +1055,17 @@
                 }
                 parent.removeChild(img);
                 parent.removeChild(br);
+            }
+
+            function hideReaderFloat() {
+                hide(getElement('readerFloat'));
+                hide(imgValidationError);
+                imgValidationError.textContent = '';
+                fileinput.value = null;
+            }
+
+            function showReaderFloat() {
+                show(getElement('readerFloat'));
             }
 
             /*
