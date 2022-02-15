@@ -69,7 +69,36 @@
                         <textarea name="qrDescription" class="u-full-width"></textarea>
                     </div>
                     <div id="decryptInputs">
-                        <div id="readerFloat" class="u-full-width">
+                        <div id="camReaderFloat" class="readerFloat u-full-width">
+                            <div id="qr-input-layer" class="qr-input-layer">
+                                <!-- <h5>Select a camera to scan QR</h5> -->
+                                <!-- <div class="row">
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                    <div class="eleven columns">
+                                        <label for="cameras">Select a camera to scan QR</label>
+                                        <select id="cameras"></select>
+                                        <div id="imgValidationError" class="validationError center"></div> 
+                                    </div>
+                                </div> -->
+                                <label for="cameras">Select a camera to scan QR</label>
+                                <select id="cameras"></select>
+                                <div id="reader" style="width: 500px">Initializg camera</div>
+                                <div class="row">
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                    <div class="ten columns center">
+                                        <button id="xtClose" type="button" onclick="hideCamReaderFloat()" class="button"></button>
+                                    </div>
+                                    <div class="one columns">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="imgReaderFloat" class="readerFloat u-full-width">
                             <div id="qr-input-layer" class="qr-input-layer">
                                 <h5>Load encrypted data from QR image</h5>
                                 <div class="row">
@@ -88,12 +117,14 @@
                                     <div class="one columns">
                                         &nbsp;
                                     </div>
-                                        <div class="eleven columns">
-                                        <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button u-pull-right"></button>
+                                        <div class="ten columns center">
+                                        <button id="xtClose" type="button" onclick="hideImgReaderFloat()" class="button"></button>
+                                    </div>
+                                    <div class="one columns">
+                                        &nbsp;
                                     </div>
                                 </div>
                             </div>
-                            <div style="width: 600px" id="reader"></div>
                         </div>
                         <label>
                             <span id="xtEnterEncryptedKey"></span>
@@ -101,7 +132,7 @@
                         <textarea name="qrEncryptedText" id="xhtEncryptedTextHint" class="u-full-width"></textarea>
                         <div class="decryptFloat">
                             <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
-                            <button id="xtLoadQrImage" type="button" class="button" onclick="loadQrImage()"></button>
+                            <button id="xtLoadQrImage" type="button" class="button" onclick="showImgReaderFloat()"></button>
                         </div>
                     </div>
                     <div id="pharseInputs">
@@ -414,7 +445,12 @@
             var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
             var imgValidationError = getElement('imgValidationError');
+            const camReaderFloat = getElement('camReaderFloat');
+            const imgReaderFloat = getElement('imgReaderFloat');
             const fileinput = document.getElementById('qr-input-file');
+            const cameras = document.getElementById('cameras');
+            var option = document.createElement('option');
+
             var currentMode = 'xtEncryption';
             var pages = ['Tools', 'Info', 'Donate'];
             var suppressHashChange = false;
@@ -434,24 +470,19 @@
                 donationQrs[i].addEventListener('mouseleave', hideDonateQr); 
             }
 
-            var html5QrcodeScanner = new Html5QrcodeScanner(
-                "reader", { fps: 20, qrbox: 400 });
-                   
             const html5QrCode = new Html5Qrcode(/* element id */ "reader");
 
-                //var html5QrCode = new Html5Qrcode();
             function onScanSuccess(decodedText, decodedResult) {
                 // Handle on success condition with the decoded text or result.
                 console.log(`Scan result: ${decodedText}`, decodedResult);
                 // ...
                 document.qrForm.qrEncryptedText.value = decodedText;
-                html5QrcodeScanner.clear();
+                //html5QrcodeScanner.clear();
                 // ^ this will stop the scanner (video feed) and clear the scan area.
             }
 
             fileinput.addEventListener('change', e => {
-                if (e.target.files.length == 0) {
-                    // No file selected, ignore 
+                if (e.target.files.length == 0) { // No file selected, ignore 
                     return;
                 }
 
@@ -460,13 +491,17 @@
                 html5QrCode.scanFile(imageFile, /* showImage= */false)
                 .then(qrCodeMessage => {
                     document.qrForm.qrEncryptedText.value = qrCodeMessage;
-                    hideReaderFloat();
+                    hideImgReaderFloat();
                 })
                 .catch(err => {
                     document.qrForm.qrEncryptedText.value = '';
                     imgValidationError.textContent = translations['xtBadQrImage'];
                     show(imgValidationError);
                 });
+            });
+
+            cameras.addEventListener('change', e => {
+                startScanning(cameras.value);
             });
 
             function parseURL(url) {
@@ -596,26 +631,63 @@
             }
 
             function scanFromCamera() {
-                //html5QrcodeScanner.render(onScanSuccess);
+                showCamReaderFloat();
+
                 Html5Qrcode.getCameras().then(devices => {
                 /**
                  * devices would be an array of objects of type:
                  * { id: "id", label: "label" }
                  */
                 console.log(devices);
+                cameras.innerHTML = '';
                 if (devices && devices.length) {
-                    var cameraId = devices[0].id;
-                    // .. use this to start scanning.
+                    var defaultCameraId = devices[0].id;
+
+                    var options = [];
+
+                    devices.forEach(c => {
+                        option.text = c.label;
+                        option.value = c.id;
+                        options.push(option.outerHTML);
+                    });
+
+                    cameras.insertAdjacentHTML('beforeEnd', options.join('\n'));
+                    startScanning(defaultCameraId);
                 }
                 }).catch(err => {
-                // handle err
-                console.log(err);
-
+                    console.log(err);
+                    cameras.innerHTML = '';
                 });
             }
 
-            function loadQrImage() {
-                showReaderFloat();
+            function stopScanning() {
+                var state = html5QrCode.getState();
+                if (state == 2){
+                    html5QrCode.stop();
+                }
+            }
+
+            function startScanning(cameraId) {
+                stopScanning();
+                html5QrCode.start(
+                cameraId,     // retreived in the previous step.
+                {
+                    fps: 15,    // sets the framerate to 10 frame per second
+                    qrbox: 260  // sets only 250 X 250 region of viewfinder to
+                                // scannable, rest shaded.
+                },
+                qrCodeMessage => {
+                    document.qrForm.qrEncryptedText.value = qrCodeMessage;
+                    hideCamReaderFloat();
+                },
+                errorMessage => {
+                    // parse error, ideally ignore it. For example:
+                    //console.log(`QR Code no longer in front of camera.`);
+                })
+                .catch(err => {
+                    // Start failed, handle it. For example,
+                    console.log(`Unable to start scanning, error: ${err}`);
+                });
             }
 
             function generate2FaQr() {
@@ -1057,15 +1129,24 @@
                 parent.removeChild(br);
             }
 
-            function hideReaderFloat() {
-                hide(getElement('readerFloat'));
+            function hideImgReaderFloat() {
+                hide(imgReaderFloat);
                 hide(imgValidationError);
                 imgValidationError.textContent = '';
                 fileinput.value = null;
             }
 
-            function showReaderFloat() {
-                show(getElement('readerFloat'));
+            function showImgReaderFloat() {
+                show(imgReaderFloat);
+            }
+
+            function hideCamReaderFloat() {
+                stopScanning();
+                hide(camReaderFloat);
+            }
+
+            function showCamReaderFloat() {
+                show(camReaderFloat);
             }
 
             /*
