@@ -69,60 +69,20 @@
                         <textarea name="qrDescription" class="u-full-width"></textarea>
                     </div>
                     <div id="decryptInputs">
-                        <div id="camReaderFloat" class="readerFloat u-full-width">
+                        <div id="readerFloat" class="readerFloat u-full-width">
                             <div id="qr-input-layer" class="qr-input-layer">
-                                <!-- <h5>Select a camera to scan QR</h5> -->
-                                <!-- <div class="row">
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
-                                    <div class="eleven columns">
-                                        <label for="cameras">Select a camera to scan QR</label>
-                                        <select id="cameras"></select>
-                                        <div id="imgValidationError" class="validationError center"></div> 
-                                    </div>
-                                </div> -->
-                                <label for="cameras">Select a camera to scan QR</label>
-                                <select id="cameras"></select>
-                                <div id="reader" style="width: 500px">Initializg camera</div>
-                                <div class="row">
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
-                                    <div class="ten columns center">
-                                        <button id="xtClose" type="button" onclick="hideCamReaderFloat()" class="button"></button>
-                                    </div>
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
+                                <div id="cameraReaderControls" hidden>
+                                    <label for="cameras">Select a camera to scan QR</label>
+                                    <select id="cameras" hidden></select>
+                                    <div id="reader" style="width: 500px"></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div id="imgReaderFloat" class="readerFloat u-full-width">
-                            <div id="qr-input-layer" class="qr-input-layer">
-                                <h5>Load encrypted data from QR image</h5>
-                                <div class="row">
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
-                                    <div class="ten columns center">
-                                        <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
-                                        <div id="imgValidationError" class="validationError center"></div>
-                                    </div>
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
+                                <div id="imageReaderControls" hidden>
+                                    <label for="qr-input-file">Load encrypted data from QR image</label>
+                                    <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
                                 </div>
-                                <div class="row">
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
-                                        <div class="ten columns center">
-                                        <button id="xtClose" type="button" onclick="hideImgReaderFloat()" class="button"></button>
-                                    </div>
-                                    <div class="one columns">
-                                        &nbsp;
-                                    </div>
+                                <div id="scanError" class="validationError center"></div>
+                                <div class="center">
+                                    <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button center"></button>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +92,7 @@
                         <textarea name="qrEncryptedText" id="xhtEncryptedTextHint" class="u-full-width"></textarea>
                         <div class="decryptFloat">
                             <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
-                            <button id="xtLoadQrImage" type="button" class="button" onclick="showImgReaderFloat()"></button>
+                            <button id="xtLoadQrImage" type="button" class="button" onclick="scanFromImage()"></button>
                         </div>
                     </div>
                     <div id="pharseInputs">
@@ -444,12 +404,17 @@
             var hideNoCanvas = getElement('hideNoCanvas');
             var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
-            var imgValidationError = getElement('imgValidationError');
-            const camReaderFloat = getElement('camReaderFloat');
-            const imgReaderFloat = getElement('imgReaderFloat');
+            const scanError = getElement('scanError');
+            const readerFloat = getElement('readerFloat');
             const fileinput = document.getElementById('qr-input-file');
             const cameras = document.getElementById('cameras');
+            const cameraReaderControls = document.getElementById('cameraReaderControls');
+            const imageReaderControls = document.getElementById('imageReaderControls');
             var option = document.createElement('option');
+            var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            var isChrome = !!window.chrome;
+            var isRunningFromFile = window.location.protocol == 'file:';
+            const html5QrCode = new Html5Qrcode("reader");
 
             var currentMode = 'xtEncryption';
             var pages = ['Tools', 'Info', 'Donate'];
@@ -470,17 +435,6 @@
                 donationQrs[i].addEventListener('mouseleave', hideDonateQr); 
             }
 
-            const html5QrCode = new Html5Qrcode(/* element id */ "reader");
-
-            function onScanSuccess(decodedText, decodedResult) {
-                // Handle on success condition with the decoded text or result.
-                console.log(`Scan result: ${decodedText}`, decodedResult);
-                // ...
-                document.qrForm.qrEncryptedText.value = decodedText;
-                //html5QrcodeScanner.clear();
-                // ^ this will stop the scanner (video feed) and clear the scan area.
-            }
-
             fileinput.addEventListener('change', e => {
                 if (e.target.files.length == 0) { // No file selected, ignore 
                     return;
@@ -491,12 +445,12 @@
                 html5QrCode.scanFile(imageFile, /* showImage= */false)
                 .then(qrCodeMessage => {
                     document.qrForm.qrEncryptedText.value = qrCodeMessage;
-                    hideImgReaderFloat();
+                    hideReaderFloat();
                 })
                 .catch(err => {
+                    console.log(err);
                     document.qrForm.qrEncryptedText.value = '';
-                    imgValidationError.textContent = translations['xtBadQrImage'];
-                    show(imgValidationError);
+                    showScanError(translations['xtBadQrImage']);
                 });
             });
 
@@ -631,7 +585,13 @@
             }
 
             function scanFromCamera() {
-                showCamReaderFloat();
+                show(readerFloat);
+                show(cameraReaderControls);
+                if (isChrome && isRunningFromFile){
+                    showScanError(translations['xtCameraChromeError']);
+                    return;
+                }
+
 
                 Html5Qrcode.getCameras().then(devices => {
                 /**
@@ -678,15 +638,19 @@
                 },
                 qrCodeMessage => {
                     document.qrForm.qrEncryptedText.value = qrCodeMessage;
-                    hideCamReaderFloat();
+                    hideReaderFloat();
                 },
                 errorMessage => {
                     // parse error, ideally ignore it. For example:
                     //console.log(`QR Code no longer in front of camera.`);
+                    //NotReadableError : Could not start video source
+                    //try to switch to next camera this one is busy, already running
                 })
                 .catch(err => {
                     // Start failed, handle it. For example,
-                    console.log(`Unable to start scanning, error: ${err}`);
+                    var msg = `Unable to start scanning, error: ${err}`
+                    console.log(msg);
+                    showScanError(msg);
                 });
             }
 
@@ -1078,7 +1042,7 @@
             }
 
             function isOffline() {
-                return window.location.protocol == 'file:' 
+                return isRunningFromFile 
                 || window.location.hostname == 'localhost'
                 || window.location.hostname == '127.0.0.1';
             }
@@ -1086,10 +1050,10 @@
             function securityCheck() {
                 var secOffline = getElement('xtNotOffline')
                 if (!isOffline()) {
-                    secOffline.style.display = 'block';
+                    show(secOffline);
                 }
                 else {
-                    secOffline.style.display = 'none';
+                    hide(secOffline);
                 }
             }
 
@@ -1131,24 +1095,27 @@
                 parent.removeChild(br);
             }
 
-            function hideImgReaderFloat() {
-                hide(imgReaderFloat);
-                hide(imgValidationError);
-                imgValidationError.textContent = '';
+            function scanFromImage() {
+                show(readerFloat);
+                show(imageReaderControls);
+            }
+
+            function hideReaderFloat() {
+                hide(readerFloat);
+                hide(imageReaderControls);
+                hide(cameraReaderControls);
+                showScanError(null);
                 fileinput.value = null;
-            }
-
-            function showImgReaderFloat() {
-                show(imgReaderFloat);
-            }
-
-            function hideCamReaderFloat() {
                 stopScanning();
-                hide(camReaderFloat);
             }
 
-            function showCamReaderFloat() {
-                show(camReaderFloat);
+            function showScanError(message){
+                debugger;
+                scanError.innerHTML = message;
+                if (message)
+                    show(scanError);
+                else
+                    hide(scanError);
             }
 
             /*
