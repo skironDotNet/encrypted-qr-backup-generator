@@ -54,8 +54,8 @@ var translations = {
     xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
     xttScanQrHint: 'Scan QR code',
-    xtBadQrImage: 'Error scanning file, likely does not contain QR image or undetectable.',
-    
+    xtBadQrImage: 'Error scanning file, likely does not contain QR image or it is unreadable.',
+
     xtCameraChromeError: 
         "Chrome based browsers do not allow camera access from file:/// location.<br>"
         + "Must serve this file via some simple localhost server. You can use Web Server for Chrome<br>"

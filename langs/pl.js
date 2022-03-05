@@ -54,4 +54,15 @@ var translations = {
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
 
     xttScanQrHint: 'Skanuj kod QR',
+    xtBadQrImage: 'Błąd skanowania pliku, prawdopodobnie nie zawiera obrazu QR lub jest on nie czytelny.',
+
+    xtCameraChromeError: 
+    "Chrome based browsers do not allow camera access from file:/// location.<br>"
+    + "Must serve this file via some simple localhost server. You can use Web Server for Chrome<br>"
+    + "https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb/<br><br>"
+    + "<img src=\"images/webserver.png\"/><br><br>"
+    + "Many other choices at <br>"
+    + "https://medium.com/swlh/need-a-local-static-server-here-are-several-options-bbbe77e59a11<br><br>"
+    + "You can then access this tool locally like http://127.0.0.1:8887<br><br>"
+    + "Or use Firefox browser, it works as of Feb 2022",
 }
