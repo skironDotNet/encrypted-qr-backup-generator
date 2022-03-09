@@ -616,15 +616,21 @@
                         showScanError(translations['xtNoCamerasDetected']);
                     }
                 }).catch(err => {
-                    console.log(err);
-                    if (err.includes('NotFoundError : The object can not be found here')) {
-                        showScanError(translations['xtNoCamerasDetected']);
-                    } else if (err.includes('NotAllowedError : Permission denied')){
-                        showScanError(translations['xtNoCameraPermission']);
-                    } else {
-                        showScanError(err);
-                    }
+                    cameraErrorHandler(err);
                 });
+            }
+
+            function cameraErrorHandler(err) {
+                console.log(err);
+                if (err.includes('NotFoundError')) {
+                    showScanError(translations['xtNoCamerasDetected']);
+                } else if (err.includes('NotAllowedError')){
+                    showScanError(translations['xtNoCameraPermission']);
+                } else if ('NotReadableError') {
+                    showScanError(translations['xtCameraBusy']);
+                } else {
+                    showScanError(err);
+                }
             }
 
             function stopScanning() {
@@ -635,6 +641,7 @@
             }
 
             function startScanning(cameraId) {
+                showScanError(null);
                 stopScanning();
                 html5QrCode.start(
                 cameraId,     // retreived in the previous step.
@@ -654,10 +661,7 @@
                     //try to switch to next camera this one is busy, already running
                 })
                 .catch(err => {
-                    // Start failed, handle it. For example,
-                    var msg = `Unable to start scanning, error: ${err}`
-                    console.log(msg);
-                    showScanError(msg);
+                    cameraErrorHandler(err);
                 });
             }
 
@@ -1117,7 +1121,6 @@
             }
 
             function showScanError(message){
-                debugger;
                 scanError.innerHTML = message;
                 if (message)
                     show(scanError);
