@@ -55,6 +55,7 @@ var translations = {
 
     xttScanQrHint: 'Scan QR code',
     xtBadQrImage: 'Error scanning file, likely does not contain QR image or it is unreadable.',
+    xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
 
     xtCameraChromeError: 
         "Chrome based browsers do not allow camera access from file:/// location.<br>"

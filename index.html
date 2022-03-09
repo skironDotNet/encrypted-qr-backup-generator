@@ -594,29 +594,34 @@
 
 
                 Html5Qrcode.getCameras().then(devices => {
-                /**
-                 * devices would be an array of objects of type:
-                 * { id: "id", label: "label" }
-                 */
-                console.log(devices);
-                cameras.innerHTML = '';
-                if (devices && devices.length) {
-                    var defaultCameraId = devices[0].id;
+                    show(cameras);
+                    cameras.innerHTML = '';
+                    if (devices && devices.length) {
+                        console.log(devices);
+                        var defaultCameraId = devices[0].id;
 
-                    var options = [];
+                        var options = [];
 
-                    devices.forEach(c => {
-                        option.text = c.label;
-                        option.value = c.id;
-                        options.push(option.outerHTML);
-                    });
+                        devices.forEach(c => {
+                            option.text = c.label;
+                            option.value = c.id;
+                            options.push(option.outerHTML);
+                        });
 
-                    cameras.insertAdjacentHTML('beforeEnd', options.join('\n'));
-                    startScanning(defaultCameraId);
-                }
+                        cameras.insertAdjacentHTML('beforeEnd', options.join('\n'));
+                        startScanning(defaultCameraId);
+                    }
+                    else {
+                        console.log('devices && devices.length was false');
+                        showScanError(translations['xtNoCamerasDetected']);
+                    }
                 }).catch(err => {
                     console.log(err);
-                    cameras.innerHTML = '';
+                    if (err.includes('NotFoundError')) {
+                        showScanError(translations['xtNoCamerasDetected']);
+                    } else {
+                        showScanError(err);
+                    }
                 });
             }
 
