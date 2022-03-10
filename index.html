@@ -597,11 +597,9 @@
 
                 showScanInfo(translations['xtLoadingCameraList']);
                 Html5Qrcode.getCameras().then(devices => {
-                    show(cameras);
-                    cameras.innerHTML = '';
+                    console.log(devices);
                     if (devices && devices.length) {
-                        console.log(devices);
-                        
+                        cameras.innerHTML = '';
                         var options = [];
                         devices.forEach(c => {
                             option.text = c.label;
@@ -609,6 +607,7 @@
                             options.push(option.outerHTML);
                         });
                         cameras.insertAdjacentHTML('beforeEnd', options.join('\n'));
+                        show(cameras);
 
                         var defaultCameraId = devices[0].id;
                         var lastUsedCamera = devices.find(x=>x.id == lastUsedCameraId) //find last used camera and re-use if still present. USB camera could have been disconnected 
@@ -634,8 +633,8 @@
                     showScanError(translations['xtNoCamerasDetected']);
                 } else if (err.includes('NotAllowedError')){
                     showScanError(translations['xtNoCameraPermission']);
-                } else if (err.includes('NotReadableError')) {
-                    showScanError(translations['xtCameraBusy']);
+                } else if (err.includes('NotReadableError') || err.includes('OverconstrainedError')) {  //OverconstrainedError is in FF when camera disconnected in Chrome is same NotReadableError
+                    showScanError(translations['xtCameraBusyOrDisconnected'] + '<br>' + err);
                 } else {
                     showScanError(err);
                 }

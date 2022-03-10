@@ -55,6 +55,11 @@ var translations = {
 
     xttScanQrHint: 'Skanuj kod QR',
     xtBadQrImage: 'Błąd skanowania pliku, prawdopodobnie nie zawiera obrazu QR lub jest on nie czytelny.',
+    xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
+    xtNoCameraPermission: 'Camera blocked by browser. You must allow to use camera. Please try again or check browser permission settings if not permanently blocked.',
+    xtCameraBusyOrDisconnected: 'Wybrana kamera jest zajęta (używana przez inne oprogramowanie, inną przeglądarkę lub kartę przeglądarki); lub została rozłączona po utworzeniu listy kamer.<br><br>Oryginalny komunikat o błędzie:',
+    xtLoadingCameraList: 'Loading camera list...',
+    xtInitializingCamera: 'Initializing camera...',
 
     xtCameraChromeError: 
     "Chrome based browsers do not allow camera access from file:/// location.<br>"
