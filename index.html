@@ -417,6 +417,7 @@
             var isChrome = !!window.chrome;
             var isRunningFromFile = window.location.protocol == 'file:';
             const html5QrCode = new Html5Qrcode("reader");
+            var lastUsedCameraId = null;
 
             var currentMode = 'xtEncryption';
             var pages = ['Tools', 'Info', 'Donate'];
@@ -600,17 +601,22 @@
                     cameras.innerHTML = '';
                     if (devices && devices.length) {
                         console.log(devices);
-                        var defaultCameraId = devices[0].id;
-
+                        
                         var options = [];
-
                         devices.forEach(c => {
                             option.text = c.label;
                             option.value = c.id;
                             options.push(option.outerHTML);
                         });
-
                         cameras.insertAdjacentHTML('beforeEnd', options.join('\n'));
+
+                        var defaultCameraId = devices[0].id;
+                        var lastUsedCamera = devices.find(x=>x.id == lastUsedCameraId) //find last used camera and re-use if still present. USB camera could have been disconnected 
+                        if (lastUsedCamera) {
+                            defaultCameraId = lastUsedCamera.id;
+                            cameras.value =  defaultCameraId; //re-select correct item in camera because dropdown has been rebuild
+                        }
+
                         startScanning(defaultCameraId);
                     }
                     else {
@@ -645,6 +651,7 @@
             var hideInfoOnce = true;
 
             function startScanning(cameraId) {
+                lastUsedCameraId = cameraId;
                 showScanError(null);
                 showScanInfo(translations['xtInitializingCamera']);
                 hideInfoOnce = true;
@@ -1124,6 +1131,7 @@
                 hide(readerFloat);
                 hide(imageReaderControls);
                 hide(cameraReaderControls);
+                hide(cameras);
                 showScanError(null);
                 fileinput.value = null;
                 stopScanning();
