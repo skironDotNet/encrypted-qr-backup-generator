@@ -634,7 +634,7 @@
                     showScanError(translations['xtNoCamerasDetected']);
                 } else if (err.includes('NotAllowedError')){
                     showScanError(translations['xtNoCameraPermission']);
-                } else if ('NotReadableError') {
+                } else if (err.includes('NotReadableError')) {
                     showScanError(translations['xtCameraBusy']);
                 } else {
                     showScanError(err);
