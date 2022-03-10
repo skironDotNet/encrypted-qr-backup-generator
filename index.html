@@ -453,7 +453,7 @@
                 .catch(err => {
                     console.log(err);
                     document.qrForm.qrEncryptedText.value = '';
-                    showScanError(translations['xtBadQrImage']);
+                    showScanError('xtBadQrImage');
                 });
             });
 
@@ -591,11 +591,11 @@
                 show(readerFloat);
                 show(cameraReaderControls);
                 if (isChrome && isRunningFromFile){
-                    showScanError(translations['xtCameraChromeError']);
+                    showScanError('xtCameraChromeError');
                     return;
                 }
 
-                showScanInfo(translations['xtLoadingCameraList']);
+                showScanInfo('xtLoadingCameraList');
                 Html5Qrcode.getCameras().then(devices => {
                     console.log(devices);
                     if (devices && devices.length) {
@@ -620,7 +620,7 @@
                     }
                     else {
                         console.log('devices && devices.length was false');
-                        showScanError(translations['xtNoCamerasDetected']);
+                        showScanError('xtNoCamerasDetected');
                     }
                 }).catch(err => {
                     cameraErrorHandler(err);
@@ -630,13 +630,13 @@
             function cameraErrorHandler(err) {
                 console.log(err);
                 if (err.includes('NotFoundError')) {
-                    showScanError(translations['xtNoCamerasDetected']);
+                    showScanError('xtNoCamerasDetected');
                 } else if (err.includes('NotAllowedError')){
-                    showScanError(translations['xtNoCameraPermission']);
+                    showScanError('xtNoCameraPermission');
                 } else if (err.includes('NotReadableError') || err.includes('OverconstrainedError')) {  //OverconstrainedError is in FF when camera disconnected in Chrome is same NotReadableError
-                    showScanError(translations['xtCameraBusyOrDisconnected'] + '<br>' + err);
+                    showScanError('xtCameraBusyOrDisconnected', '<br>' + err);
                 } else {
-                    showScanError(err);
+                    showScanError('none', err);
                 }
             }
 
@@ -652,7 +652,7 @@
             function startScanning(cameraId) {
                 lastUsedCameraId = cameraId;
                 showScanError(null);
-                showScanInfo(translations['xtInitializingCamera']);
+                showScanInfo('xtInitializingCamera');
                 hideInfoOnce = true;
                 stopScanning();
                 html5QrCode.start(
@@ -1136,23 +1136,42 @@
                 stopScanning();
             }
 
-            function showScanError(message){
-                scanError.innerHTML = message;
-                if (message) {
+            function showScanError(id, bareMessage) {
+                debugger;
+                let bareMessageClean = '';
+                if (bareMessage) {
+                    bareMessageClean = bareMessage;
+                }
+
+                if (id) {
+                    if (id == 'none') {
+                        scanError.innerHTML = bareMessageClean;
+                    } else {
+                        scanError.innerHTML = translations[id] + bareMessageClean;
+                    }
+
+                    currentScanErrorId = id;
                     show(scanError);
                     showScanInfo(null);
                 }
                 else {
+                    currentScanErrorId = null;
                     hide(scanError);
                 }
+
+                currentScanErrorBareMessage = bareMessageClean;
             }
 
-            function showScanInfo(message){
-                scanInfo.innerHTML = message;
-                if (message)
+            function showScanInfo(id) {
+                if (id) {
+                    scanInfo.innerHTML = translations[id];
+                    currentScanInfoId = id;
                     show(scanInfo);
-                else
+                }
+                else {
+                    currentScanInfoId = null;
                     hide(scanInfo);
+                }
             }
 
             /*
@@ -1235,6 +1254,9 @@
             var langMenu = getElement('langMenu');
             var currentLangCode = null;
             var currentValidationErrorId = null;
+            var currentScanInfoId = null;
+            var currentScanErrorId = null;
+            var currentScanErrorBareMessage = '';
 
             function setLang(obj) {
                 loadLangFile(obj.id, updateLang);
@@ -1305,6 +1327,17 @@
                     validationError.innerHTML = translations[currentValidationErrorId];
                 }
 
+                if (currentScanInfoId) {
+                    scanInfo.innerHTML = translations[currentScanInfoId];
+                }
+
+                if (currentScanErrorId) {
+                    if (currentScanErrorId == 'none')
+                        scanError.innerHTML = currentScanErrorBareMessage;
+                    else
+                        scanError.innerHTML = translations[currentScanErrorId] + currentScanErrorBareMessage;
+                }
+
                 loadInfoPage();
 
                 setModeName(getModeFromUrl()); //needed on first load from url hash
@@ -1313,7 +1346,7 @@
 
             function getLangFromUrl() {
                 var parsedUrl = parseURL(parent.location);
-                const lang = langsAvailable.find(lang => lang.Code === parsedUrl.hashObject[0]);
+                let lang = langsAvailable.find(lang => lang.Code === parsedUrl.hashObject[0]);
                 if (lang === undefined) {
                     var langCode = localStorage.getItem('qrlang');
                     if (langCode == null || langCode.length != 2) {
