@@ -971,13 +971,13 @@
             }
 
             function showValidationError(errorId) {
-                validationError.textContent = translations[errorId];
-                currentValidationError = errorId;
+                validationError.innerHTML = translations[errorId];
+                currentValidationErrorId = errorId;
             }
 
             function clearValidationError() {
-                validationError.textContent = '';
-                currentValidationError = '';
+                validationError.innerHTML = null;
+                currentValidationErrorId = null;
             }
 
             function invokeSaveQrImage() {
@@ -1234,7 +1234,7 @@
 
             var langMenu = getElement('langMenu');
             var currentLangCode = null;
-            var currentValidationError = '';
+            var currentValidationErrorId = null;
 
             function setLang(obj) {
                 loadLangFile(obj.id, updateLang);
@@ -1301,8 +1301,8 @@
                     element.title = translations[element.id];
                 }, this);
 
-                if (currentValidationError.length > 0) {
-                    validationError.textContent = translations[currentValidationError];
+                if (currentValidationErrorId) {
+                    validationError.innerHTML = translations[currentValidationErrorId];
                 }
 
                 loadInfoPage();
