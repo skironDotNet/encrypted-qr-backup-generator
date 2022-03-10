@@ -58,6 +58,8 @@ var translations = {
     xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
     xtNoCameraPermission: 'Camera blocked by browser. You must allow to use camera. Please try again or check browser permission settings if not permanently blocked.',
     xtCameraBusy: 'Selected camera is busy, may be already used by other software, other browser, or browser tab.',
+    xtLoadingCameraList: 'Loading camera list...',
+    xtInitializingCamera: 'Initializing camera...',
 
     xtCameraChromeError: 
         "Chrome based browsers do not allow camera access from file:/// location.<br>"

@@ -98,7 +98,17 @@ img {
 
 .validationError {
   font-size: small;
-  color: red;
+  color: rgb(216, 6, 6);
+  line-height: 1.2;
+  vertical-align: top;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.cameraInfo {
+  font-size: small;
+  color: rgb(56, 123, 248);
   line-height: 1.2;
   vertical-align: top;
   margin-top: -5px;
@@ -232,6 +242,7 @@ footer {
 #reader {
   margin:auto;
   width: 90%;
+  margin-bottom: 15px;
 }
 
 .decryptFloat {

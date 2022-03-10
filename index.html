@@ -80,7 +80,8 @@
                                     <label for="qr-input-file">Load encrypted data from QR image</label>
                                     <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
                                 </div>
-                                <div id="scanError" class="validationError center"></div>
+                                <div id="scanError" class="validationError center" hidden></div>
+                                <div id="scanInfo" class="cameraInfo center" hidden></div>
                                 <div class="center">
                                     <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button center"></button>
                                 </div>
@@ -405,6 +406,7 @@
             var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
             const scanError = getElement('scanError');
+            const scanInfo = getElement('scanInfo');
             const readerFloat = getElement('readerFloat');
             const fileinput = document.getElementById('qr-input-file');
             const cameras = document.getElementById('cameras');
@@ -592,7 +594,7 @@
                     return;
                 }
 
-
+                showScanInfo(translations['xtLoadingCameraList']);
                 Html5Qrcode.getCameras().then(devices => {
                     show(cameras);
                     cameras.innerHTML = '';
@@ -640,15 +642,18 @@
                 }
             }
 
+            var hideInfoOnce = true;
+
             function startScanning(cameraId) {
                 showScanError(null);
+                showScanInfo(translations['xtInitializingCamera']);
+                hideInfoOnce = true;
                 stopScanning();
                 html5QrCode.start(
                 cameraId,     // retreived in the previous step.
                 {
                     fps: 15,    // sets the framerate to 10 frame per second
-                    qrbox: 260  // sets only 250 X 250 region of viewfinder to
-                                // scannable, rest shaded.
+                    qrbox: 250  // sets only 250 X 250 region of viewfinder to scannable, rest shaded.
                 },
                 qrCodeMessage => {
                     document.qrForm.qrEncryptedText.value = qrCodeMessage;
@@ -657,8 +662,12 @@
                 errorMessage => {
                     // parse error, ideally ignore it. For example:
                     //console.log(`QR Code no longer in front of camera.`);
-                    //NotReadableError : Could not start video source
-                    //try to switch to next camera this one is busy, already running
+
+                    //using as hack to know camera is running
+                    if (hideInfoOnce) {
+                        showScanInfo(null);
+                        hideInfoOnce = false;
+                    }
                 })
                 .catch(err => {
                     cameraErrorHandler(err);
@@ -1122,10 +1131,21 @@
 
             function showScanError(message){
                 scanError.innerHTML = message;
-                if (message)
+                if (message) {
                     show(scanError);
-                else
+                    showScanInfo(null);
+                }
+                else {
                     hide(scanError);
+                }
+            }
+
+            function showScanInfo(message){
+                scanInfo.innerHTML = message;
+                if (message)
+                    show(scanInfo);
+                else
+                    hide(scanInfo);
             }
 
             /*
