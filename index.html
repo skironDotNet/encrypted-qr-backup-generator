@@ -759,41 +759,41 @@
                         setDecryptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "decrypt")
-                        setPageTitle("Decryption");
+                        setPageTitle(name);
                         break;
                     case "xtNoEncryption":
                         setNoEncyptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "plain")
-                        setPageTitle("Plain Data QR");
+                        setPageTitle(name);
                         break;
                     case "xtInfo":
                         showPage('Info');
                         setUrlHash(currentLangCode, "info")
-                        setPageTitle("Info");
+                        setPageTitle(name);
                         break;
                     case "xtDonate":
                         showPage('Donate');
                         setUrlHash(currentLangCode, "donate")
-                        setPageTitle("Donate");
+                        setPageTitle(name);
                         break;
                     case "xtTwoFactorUtility":
                         set2FaMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "2fa")
-                        setPageTitle("Two Factor QR Generator");
+                        setPageTitle(name);
                         break;
                     default:
                         setEncryptionMode();
                         showPage('Tools');
                         setUrlHash(currentLangCode, "encrypt")
-                        setPageTitle("Encryption");
+                        setPageTitle('xtEncryption');
                         break;
                 }
             }
 
-            function setPageTitle(titleSuffix) {
-                document.title = baseTitle + ' - ' + titleSuffix;
+            function setPageTitle(transId) {
+                document.title = baseTitle + ' - ' + translations[transId];
             }
 
             function getModeFromHashName(name) {
