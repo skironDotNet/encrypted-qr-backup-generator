@@ -171,12 +171,12 @@
                 <div id="readerFloat" class="readerFloat">
                     <div id="qr-input-layer" class="qr-input-layer">
                         <div id="cameraReaderControls" hidden>
-                            <label for="cameras">Select a camera to scan QR</label>
+                            <label for="cameras" id="xtSelectCamera"></label>
                             <select id="cameras" hidden></select>
                             <div id="reader"></div>
                         </div>
                         <div id="imageReaderControls" hidden>
-                            <label for="qr-input-file">Load encrypted data from QR image</label>
+                            <label for="qr-input-file" id="xtLoadQrFromImage"></label>
                             <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
                         </div>
                         <div id="scanError" class="validationError center" hidden></div>

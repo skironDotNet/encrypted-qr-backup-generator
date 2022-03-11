@@ -54,6 +54,8 @@ var translations = {
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
 
     xttScanQrHint: 'Skanuj kod QR',
+    xtSelectCamera: 'Wybierz camerę do zeskanowania QR',
+    xtLoadQrFromImage: 'Załaduj zaszyfrowane dane z obrazu QR',
     xtBadQrImage: 'Błąd skanowania pliku, prawdopodobnie nie zawiera obrazu QR lub jest on nie czytelny.',
     xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
     xtNoCameraPermission: 'Camera blocked by browser. You must allow to use camera. Please try again or check browser permission settings if not permanently blocked.',
