@@ -53,8 +53,8 @@ var translations = {
     xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
 
-    xttScanQrHint: 'Skanuj kod QR',
-    xtSelectCamera: 'Wybierz camerę do zeskanowania QR',
+    xttScanQrHint: 'Zeskanuj kod QR za pomocą kamery',
+    xtSelectCamera: 'Wybierz kamerę do zeskanowania QR',
     xtLoadQrFromImage: 'Załaduj zaszyfrowane dane z obrazu QR',
     xtBadQrImage: 'Błąd skanowania pliku, prawdopodobnie nie zawiera obrazu QR lub jest on nie czytelny.',
     xtNoCamerasDetected: 'Unable to detect any system or attached cameras',

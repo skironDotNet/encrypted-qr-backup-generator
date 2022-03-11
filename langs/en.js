@@ -53,8 +53,8 @@ var translations = {
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
     xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
-    xttScanQrHint: 'Scan QR code',
-    xtSelectCamera: 'Select a camera to scan QR',
+    xttScanQrHint: 'Scan QR code using camera',
+    xtSelectCamera: 'Select a camera to scan a QR',
     xtLoadQrFromImage: 'Load encrypted data from QR image',
     xtBadQrImage: 'Error scanning file, likely does not contain QR image or it is unreadable.',
     xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
