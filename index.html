@@ -69,24 +69,6 @@
                         <textarea name="qrDescription" class="u-full-width"></textarea>
                     </div>
                     <div id="decryptInputs">
-                        <div id="readerFloat" class="readerFloat u-full-width">
-                            <div id="qr-input-layer" class="qr-input-layer">
-                                <div id="cameraReaderControls" hidden>
-                                    <label for="cameras">Select a camera to scan QR</label>
-                                    <select id="cameras" hidden></select>
-                                    <div id="reader" style="width: 500px"></div>
-                                </div>
-                                <div id="imageReaderControls" hidden>
-                                    <label for="qr-input-file">Load encrypted data from QR image</label>
-                                    <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
-                                </div>
-                                <div id="scanError" class="validationError center" hidden></div>
-                                <div id="scanInfo" class="cameraInfo center" hidden></div>
-                                <div class="center">
-                                    <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button center"></button>
-                                </div>
-                            </div>
-                        </div>
                         <label>
                             <span id="xtEnterEncryptedKey"></span>
                         </label>
@@ -179,6 +161,24 @@
                         <textarea id="qrData" class="u-full-width" readonly></textarea>
                         <div class="right">
                             <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="readerFloat" class="readerFloat">
+                    <div id="qr-input-layer" class="qr-input-layer">
+                        <div id="cameraReaderControls" hidden>
+                            <label for="cameras">Select a camera to scan QR</label>
+                            <select id="cameras" hidden></select>
+                            <div id="reader"></div>
+                        </div>
+                        <div id="imageReaderControls" hidden>
+                            <label for="qr-input-file">Load encrypted data from QR image</label>
+                            <input type="file" id="qr-input-file" accept="image/*" class="u-full-width">
+                        </div>
+                        <div id="scanError" class="validationError center" hidden></div>
+                        <div id="scanInfo" class="cameraInfo center" hidden></div>
+                        <div class="center">
+                            <button id="xtClose" type="button" onclick="hideReaderFloat()" class="button center"></button>
                         </div>
                     </div>
                 </div>
@@ -659,7 +659,7 @@
                 cameraId,     // retreived in the previous step.
                 {
                     fps: 15,    // sets the framerate to 10 frame per second
-                    qrbox: 250  // sets only 250 X 250 region of viewfinder to scannable, rest shaded.
+                    //qrbox: 250  // sets only 250 X 250 region of viewfinder to scannable, rest shaded.
                 },
                 qrCodeMessage => {
                     document.qrForm.qrEncryptedText.value = qrCodeMessage;

@@ -237,38 +237,48 @@ footer {
 .readerFloat {
   display: none;
   position: absolute;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  width: 100%;
   height: 100%;
 } 
 
 #reader {
   margin:auto;
-  width: 90%;
+  width: 100%;
   margin-bottom: 15px;
-}
-
-.decryptFloat {
-  margin-top: -6px;
-  text-align: right;
 }
 
 .qr-input-layer {
   display: block;
   background-color: rgb(233, 233, 233);
-  width: 70%;
+  width: 90%;
   word-wrap: break-word;
   margin: 20px auto;
   border: solid gray 1px;
   padding: 0.8rem;
 }
 
-.qr-input-layer h5 {
-  /* padding: 0.8rem; */
+@media (min-width: 550px)
+{
+  #reader {
+    width: 70%;
+  }
+
+  .qr-input-layer {
+    width: 70%;
+  }
 }
 
 .qr-input-layer .validationError {
   padding: 1rem;
+}
+
+.decryptFloat {
+  margin-top: -6px;
+  text-align: right;
 }
 
 .scanQr {
