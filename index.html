@@ -673,6 +673,8 @@
                     if (hideInfoOnce) {
                         showScanInfo(null);
                         hideInfoOnce = false;
+                        let r = document.getElementById('reader');
+                        r.firstChild.style = null; //first child is video and I must remove hardcoded width by html5-qrcode lib to apply my 100% to allow dynamic resizing
                     }
                 })
                 .catch(err => {

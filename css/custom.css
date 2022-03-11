@@ -251,6 +251,10 @@ footer {
   margin-bottom: 15px;
 }
 
+video {
+  width: 100%;
+}
+
 .qr-input-layer {
   display: block;
   background-color: rgb(233, 233, 233);
@@ -265,6 +269,10 @@ footer {
 {
   #reader {
     width: 70%;
+  }
+
+  video {
+    width: 100%;
   }
 
   .qr-input-layer {
