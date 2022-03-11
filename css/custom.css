@@ -379,6 +379,22 @@ td img {
   position: absolute;
 }
 
+.m-pull-left {
+  float: left;
+  margin-right: 15px;
+}
+
+.m-pull-right {
+  float: left;
+}
+
+/* Specific to min sizes */
+@media (min-width: 450px) {
+  .m-pull-right {
+    float: right;
+  }
+}
+
 
 /*** Coin sprites - thanks to https://spritegen.website-performance.org/ ***/
 .sprite {

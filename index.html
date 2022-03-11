@@ -106,13 +106,9 @@
                         <input type="text" name="twoFactorSecretKey" class="u-full-width" onkeypress="hide(twoFactorResult)">
                     </div>
                     <div class="row">
-                        <div class="six columns">
-                            <button id="xtGenerate" type="button" onclick="generate()" class="button-primary"></button>
-                            <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary" hidden></button>
-                        </div>
-                        <div class="six columns">
-                            <button id="xtClearForm" type="button" onclick="clearForm('qrForm')" class="button u-pull-right"></button>
-                        </div>
+                            <button id="xtGenerate" type="button" onclick="generate()" class="button-primary m-pull-left"></button>
+                            <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary m-pull-left" hidden></button>
+                            <button id="xtClearForm" type="button" onclick="clearForm('qrForm')" class="button m-pull-right"></button>
                     </div>
                     <div id="twoFactorResult" class="center" hidden>
                         <label>
