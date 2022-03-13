@@ -77,20 +77,21 @@
                             <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
                             <button id="xtLoadQrImage" type="button" class="button-primary" onclick="scanFromImage()"></button>
                         </div>
-                        <!-- <div class="row" style="margin-top: -10px;">
-                            <img id="xttScanQrHint" class="scanQr" src="images/scan.png" onclick="scanFromCamera()" title="">
-                            <button id="xtLoadQrImage" type="button" class="button-primary" onclick="scanFromImage()"></button>
-                        </div> -->
                     </div>
                     <div id="pharseInputs">
                         <label>
                             <span id="xtPharse"></span>
                         </label>
                         <input type="password" name="pharse" id="xhtPharseHint" class="u-full-width">
-                        <label>
-                            <span id="xtPharseConfirm"></span>
+                        <label style="margin-bottom: 10px;">
+                            <input type="checkbox" name="showPhraseBox" style="margin-right: 6px;" onclick="showPhrase()"><span id="xtShowPassword"></span>
                         </label>
-                        <input type="password" name="pharseConfirm" class="u-full-width">
+                        <div id="pharseConfirmComponent">
+                            <label>
+                                <span id="xtPharseConfirm"></span>
+                            </label>
+                            <input type="password" name="pharseConfirm" class="u-full-width">
+                        </div>
                     </div>
                     <div id="twoFactorInputs">
                         <span id="xt2faInfo"></span>
@@ -412,6 +413,8 @@
             const cameras = document.getElementById('cameras');
             const cameraReaderControls = document.getElementById('cameraReaderControls');
             const imageReaderControls = document.getElementById('imageReaderControls');
+            const pharseConfirmComponent = document.getElementById('pharseConfirmComponent');
+
             var option = document.createElement('option');
             var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
             var isChrome = !!window.chrome;
@@ -423,6 +426,7 @@
             var pages = ['Tools', 'Info', 'Donate'];
             var suppressHashChange = false;
             var baseTitle = document.title;
+            var confirmPhrase = true;
 
             const smImage = 1;
             const smHtml = 2;
@@ -537,13 +541,19 @@
             }
 
             function doEnc() {
+                var plain = document.qrForm.plainText.value;
+
+                if (!plain) {
+                    showValidationError('xtErrSecretEmpty');
+                    return;
+                }
+
                 var pharse = document.qrForm.pharse.value;
                 var pharseConfim = document.qrForm.pharseConfirm.value;
 
                 if (!validatePharse(pharse, pharseConfim))
                     return;
 
-                var plain = document.qrForm.plainText.value;
                 var encrypted = GibberishAES.enc(plain, pharse);
 
                 if (document.qrForm.qrLabel.value.length > 0 && document.qrForm.isEmbed.checked) {
@@ -554,16 +564,22 @@
             }
 
             function decrypt() {
+                clearValidationError();
                 var pharse = document.qrForm.pharse.value;
-                var pharseConfim = document.qrForm.pharseConfirm.value;
-
-                if (!validatePharse(pharse, pharseConfim))
-                    return;
-
-                var plain = '';
                 var encText = document.qrForm.qrEncryptedText.value;
+                if (!encText) {
+                    showValidationError('xtErrEncryptedDataEmpty');
+                    return;
+                }
+
+                if (!pharse) {
+                    showValidationError('xtErrPassphraseEmpty');
+                    return;
+                }
+
                 var encArr = encText.split('-ENC BLOCK-');
                 var enc = encArr[encArr.length - 1].trim();
+                var plain = '';
 
                 try {
                     plain = GibberishAES.dec(enc, pharse);
@@ -863,6 +879,9 @@
                 hide(xtDecrypt);
                 hide(decryptInputs);
                 hide(twoFactorInputs);
+                show(pharseConfirmComponent);
+                getElement('xhtPharseHint').placeholder = translations['xhtPharseHint'];
+                showPhrase();
             }
 
             function setDecryptionMode() {
@@ -872,6 +891,9 @@
                 hide(xtGenerate);
                 show(xtDecrypt);
                 hide(twoFactorInputs);
+                hide(pharseConfirmComponent);
+                getElement('xhtPharseHint').placeholder = '';
+                showPhrase();
             }
 
             function setNoEncyptionMode() {
@@ -964,7 +986,8 @@
                     showValidationError('xtErrPharseTooShort');
                     return false;
                 }
-                if (pharse != pharseConfirm) {
+
+                if (confirmPhrase && pharse != pharseConfirm) {
                     showValidationError('xtErrPharseNotMatch');
                     return false;
                 }
@@ -1172,6 +1195,21 @@
                 else {
                     currentScanInfoId = null;
                     hide(scanInfo);
+                }
+            }
+
+            function showPhrase() {
+                if (document.qrForm.showPhraseBox.checked) {
+                    document.qrForm.pharse.type = "text";
+                    hide(pharseConfirmComponent);
+                    clearValidationError();
+                    confirmPhrase = false;
+                } else {
+                    document.qrForm.pharse.type = "password";
+                    confirmPhrase = true;
+                    if (currentMode == 'xtEncryption') {
+                        show(pharseConfirmComponent);
+                    }
                 }
             }
 

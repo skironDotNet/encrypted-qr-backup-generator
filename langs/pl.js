@@ -48,7 +48,11 @@ var translations = {
     xtErr2FaSecretKeyNotPresent: 'Wklej Sekretny Klucz!',
     xt2faPleaseScan: 'Zeskanuj poniższy kod w aplikacji uwierzytelnienia dwuskładnikowego',
     xt2faInfo: 'Jeżeli posiadasz kopię zapasową klucza uwierzytelnienia dwuskładnikowego, to zamiast wpisywać kod do aplikacji 2FA, możesz wkleić go tu i wygenerować kod do szybkiego zeskanowania w dowolnej aplikacji 2FA, na przykład w "Google Authenticator".',
-
+    xtShowPassword: 'Show?',
+    xtErrEncryptedDataEmpty: 'Please enter Encrypted Data',
+    xtErrPassphraseEmpty: 'Please enter Passphrase',
+    xtErrSecretEmpty: 'Please enter Secret to Encrypt',
+    
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzie ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
