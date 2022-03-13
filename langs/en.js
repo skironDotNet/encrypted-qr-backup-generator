@@ -38,20 +38,20 @@ var translations = {
     xtErrGenericDecryptError: "Can't decrypt - likely entered text is not valid AES256 base64 encoded encrypted text",
     xtDecQrData: 'Decrypted Secret',
     xtDonate: 'Donate',
-    xtDonationHeader: '<b>If you think this tool is useful, consider donating to the author. Each donation will help to maintain this tool and create new ones. Thanks!</b>',
+    xtDonationHeader: 'If you think this tool is useful, consider donating to the author. Each donation will help to maintain this tool and create new ones. Thanks!',
     xtHideDate: 'Hide the Date',
     xtQrDateCreatedLabel: 'Created: ',
     xtTwoFactorUtility: '2FA QR',
     xt2faAccountName: 'Account Name',
     xt2faSecretKey: 'Secret Key',
     xtErr2FaAccountNameTooShort: 'Account Name too short!',
-    xtErr2FaSecretKeyNotPresent: 'Paste the Secret Key!',
+    xtErr2FaSecretKeyNotPresent: 'Enter the Secret Key!',
     xt2faPleaseScan: 'Scan the following code in a two-factor authentication application',
     xt2faInfo: 'If you have a backup copy of a two-factor authentication key, instead of entering the code into the 2FA application, you can paste it here and generate the code to be quickly scanned in any 2FA application, for example in "Google Authenticator".',
-    xtShowPassword: 'Show?',
+    xtShowPassword: 'Show',
     xtErrEncryptedDataEmpty: 'Please enter Encrypted Data',
     xtErrPassphraseEmpty: 'Please enter Passphrase',
-    xtErrSecretEmpty: 'Please enter Secret to Encrypt',
+    xtErrSecretEmpty: 'Enter the secret to be encrypted',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
     xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
@@ -61,19 +61,19 @@ var translations = {
     xtSelectCamera: 'Select a camera to scan a QR',
     xtLoadQrFromImage: 'Load encrypted data from QR image',
     xtBadQrImage: 'Error scanning file, likely does not contain QR image or it is unreadable.',
-    xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
-    xtNoCameraPermission: 'Camera blocked by browser. You must allow to use camera. Please try again or check browser permission settings if not permanently blocked.',
+    xtNoCamerasDetected: 'No system or connected camera could be detected.',
+    xtNoCameraPermission: 'Camera blocked by browser. You must authorize the use of the camera. Please try again or check your browser\'s permission settings to see if they have been permanently blocked.',
     xtCameraBusyOrDisconnected: 'Selected camera is busy (used by other software, other browser, or browser tab);<br>or got disconnected after camera list created.<br><br>Original error message:',
     xtLoadingCameraList: 'Loading camera list...',
     xtInitializingCamera: 'Initializing camera...',
 
     xtCameraChromeError: 
         "Chrome based browsers do not allow camera access from file:/// location.<br>"
-        + "Must serve this file via some simple localhost server. You can use Web Server for Chrome<br>"
+        + "Must serve this file via some simple localhost server. You can use \"Web Server for Chrome\" plugin<br>"
         + "https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb/<br><br>"
         + "<img src=\"images/webserver.png\"/><br><br>"
-        + "Many other choices at <br>"
+        + "Many other choices at<br>"
         + "https://medium.com/swlh/need-a-local-static-server-here-are-several-options-bbbe77e59a11<br><br>"
         + "You can then access this tool locally like http://127.0.0.1:8887<br><br>"
-        + "Or use Firefox browser, it works as of Feb 2022",
+        + "Or just use Firefox browser.",
 }

@@ -38,20 +38,20 @@ var translations = {
     xtErrGenericDecryptError: "Nie mogę odszyfrować - prawdopodobnie wprowadzony tekst nie jest prawidłowym tekstem zaszyfrowanym AES256 kodowanym w base64",
     xtDecQrData: 'Odszyfrowany Sekret',
     xtDonate: 'Podaruj',
-    xtDonationHeader: '<b>Jeśli uważasz, że to narzędzie jest przydatne, rozważ darowiznę dla autora. Każda darowizna pomoże w utrzymaniu tego narzędzia i oraz w tworzeniu nowych. Dzięki!</b>',
+    xtDonationHeader: 'Jeśli uważasz, że to narzędzie jest przydatne, rozważ darowiznę dla autora. Każda darowizna pomoże w utrzymaniu tego narzędzia i oraz w tworzeniu nowych. Dzięki!',
     xtHideDate: 'Ukryj Datę',
     xtQrDateCreatedLabel: 'Utworzono: ',
     xtTwoFactorUtility: '2FA QR',
     xt2faAccountName: 'Nazwa Konta',
     xt2faSecretKey: 'Sekretny Klucz',
     xtErr2FaAccountNameTooShort: 'Nazwa konta zbyt krótka!',
-    xtErr2FaSecretKeyNotPresent: 'Wklej Sekretny Klucz!',
+    xtErr2FaSecretKeyNotPresent: 'Wpisz Sekretny Klucz!',
     xt2faPleaseScan: 'Zeskanuj poniższy kod w aplikacji uwierzytelnienia dwuskładnikowego',
     xt2faInfo: 'Jeżeli posiadasz kopię zapasową klucza uwierzytelnienia dwuskładnikowego, to zamiast wpisywać kod do aplikacji 2FA, możesz wkleić go tu i wygenerować kod do szybkiego zeskanowania w dowolnej aplikacji 2FA, na przykład w "Google Authenticator".',
-    xtShowPassword: 'Show?',
-    xtErrEncryptedDataEmpty: 'Please enter Encrypted Data',
-    xtErrPassphraseEmpty: 'Please enter Passphrase',
-    xtErrSecretEmpty: 'Please enter Secret to Encrypt',
+    xtShowPassword: 'Pokaż',
+    xtErrEncryptedDataEmpty: 'Wprowadź zaszyfrowane dane',
+    xtErrPassphraseEmpty: 'Wprowadź hasło',
+    xtErrSecretEmpty: 'Wprowadź sekret, który chcesz zaszyfrować',
     
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzie ciężko odczytać przez niektóre oprogramowanie',
     xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
@@ -61,19 +61,19 @@ var translations = {
     xtSelectCamera: 'Wybierz kamerę do zeskanowania QR',
     xtLoadQrFromImage: 'Załaduj zaszyfrowane dane z obrazu QR',
     xtBadQrImage: 'Błąd skanowania pliku, prawdopodobnie nie zawiera obrazu QR lub jest on nie czytelny.',
-    xtNoCamerasDetected: 'Unable to detect any system or attached cameras',
-    xtNoCameraPermission: 'Camera blocked by browser. You must allow to use camera. Please try again or check browser permission settings if not permanently blocked.',
+    xtNoCamerasDetected: 'Nie można wykryć żadnej kamery systemowej lub podłączonej.',
+    xtNoCameraPermission: 'Kamera zablokowana przez przeglądarkę. Musisz zezwolić na korzystanie z kamery. Spróbuj ponownie lub sprawdź ustawienia uprawnień przeglądarki, czy nie zostały zablokowane na stałe.',
     xtCameraBusyOrDisconnected: 'Wybrana kamera jest zajęta (używana przez inne oprogramowanie, inną przeglądarkę lub kartę przeglądarki); lub została rozłączona po utworzeniu listy kamer.<br><br>Oryginalny komunikat o błędzie:',
-    xtLoadingCameraList: 'Loading camera list...',
-    xtInitializingCamera: 'Initializing camera...',
+    xtLoadingCameraList: 'Ładowanie listy kamer...',
+    xtInitializingCamera: 'Inicjowanie kamery...',
 
     xtCameraChromeError: 
-    "Chrome based browsers do not allow camera access from file:/// location.<br>"
-    + "Must serve this file via some simple localhost server. You can use Web Server for Chrome<br>"
+    "Przeglądarki oparte na Chrome nie pozwalają na dostęp do kamery z lokalizacji file:///.<br>"
+    + "Musisz serwować ten plik przez jakiś prosty serwer localhost. Możesz użyć wtyczki \"Web Server for Chrome\"<br>"
     + "https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb/<br><br>"
     + "<img src=\"images/webserver.png\"/><br><br>"
-    + "Many other choices at <br>"
+    + "Wiele innych opcji na<br>"
     + "https://medium.com/swlh/need-a-local-static-server-here-are-several-options-bbbe77e59a11<br><br>"
-    + "You can then access this tool locally like http://127.0.0.1:8887<br><br>"
-    + "Or use Firefox browser, it works as of Feb 2022",
+    + "Następnie możesz uzyskać dostęp do tego narzędzia lokalnie, np. http://127.0.0.1:8887<br><br>"
+    + "Lub poprostu użyj przeglądarki Firefox.",
 }

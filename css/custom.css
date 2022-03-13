@@ -46,7 +46,7 @@ a:hover {
   cursor: pointer;
 }
 
-.selected {
+.selected, .bold {
   font-weight: bold;
 }
 
