@@ -768,11 +768,9 @@
             }
 
             function setModeName(name) {
-                if (currentMode != name) {
-                    hideReaderFloat();
-                }
                 currentMode = name;
                 highlightModeButton(name);
+                hideReaderFloat();
                 switch (name) {
                     case "xtDecryption":
                         setDecryptionMode();
@@ -1382,7 +1380,6 @@
 
                 loadInfoPage();
 
-                setModeName(getModeFromUrl()); //needed on first load from url hash
                 suppressHashChange = false; //need this as URL hash event can finish before lang reload
             };
 
@@ -1405,6 +1402,7 @@
 
             /*** End Lang Engine ***/
 
+            setModeName(getModeFromUrl()); //needed on first load from url hash
             securityCheck();
         </script>
     </body>
