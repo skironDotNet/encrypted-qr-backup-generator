@@ -262,7 +262,7 @@ video {
   width: 90%;
   word-wrap: break-word;
   margin: 20px auto;
-  border: solid gray 1px;
+  border: solid rgb(153, 153, 153) 2px;
   padding: 0.8rem;
 }
 
