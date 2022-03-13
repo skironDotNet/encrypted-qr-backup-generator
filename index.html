@@ -768,6 +768,9 @@
             }
 
             function setModeName(name) {
+                if (currentMode != name) {
+                    hideReaderFloat();
+                }
                 currentMode = name;
                 highlightModeButton(name);
                 switch (name) {
