@@ -39,7 +39,7 @@
         </div>
 
         <div class="container">
-            <div id="pageTools">
+            <div id="pageTools" hidden>
                 <form name="qrForm" autocomplete="off" action="#" method="POST">
                     <div id="baseInputs">
                         <label>
@@ -771,38 +771,38 @@
                 showSaveDialog(false);
                 switch (name) {
                     case "xtDecryption":
-                        setDecryptionMode();
-                        showPage('Tools');
-                        setUrlHash(currentLangCode, "decrypt")
                         setPageTitle(name);
+                        setDecryptionMode();
+                        setUrlHash(currentLangCode, "decrypt")
+                        showPage('Tools');
                         break;
                     case "xtNoEncryption":
-                        setNoEncyptionMode();
-                        showPage('Tools');
-                        setUrlHash(currentLangCode, "plain")
                         setPageTitle(name);
+                        setNoEncyptionMode();
+                        setUrlHash(currentLangCode, "plain")
+                        showPage('Tools');
                         break;
                     case "xtInfo":
-                        showPage('Info');
-                        setUrlHash(currentLangCode, "info")
                         setPageTitle(name);
+                        setUrlHash(currentLangCode, "info")
+                        showPage('Info');
                         break;
                     case "xtDonate":
-                        showPage('Donate');
-                        setUrlHash(currentLangCode, "donate")
                         setPageTitle(name);
+                        setUrlHash(currentLangCode, "donate")
+                        showPage('Donate');
                         break;
                     case "xtTwoFactorUtility":
-                        set2FaMode();
-                        showPage('Tools');
-                        setUrlHash(currentLangCode, "2fa")
                         setPageTitle(name);
+                        set2FaMode();
+                        setUrlHash(currentLangCode, "2fa")
+                        showPage('Tools');
                         break;
                     default:
-                        setEncryptionMode();
-                        showPage('Tools');
-                        setUrlHash(currentLangCode, "encrypt")
                         setPageTitle('xtEncryption');
+                        setEncryptionMode();
+                        setUrlHash(currentLangCode, "encrypt")
+                        showPage('Tools');
                         break;
                 }
             }
