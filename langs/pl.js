@@ -23,7 +23,6 @@ var translations = {
     xtCopyOthers: 'Prawa autorskie JavaScript załączone w kodach źródłowych.',
     xtNoWarranty: 'Bez gwarancji.',
     xtDownloadSource: 'Pobierz z GitHub',
-    xtSaveDialogCaption: 'Szczegóły',
     xtQrAreaWithDetails: 'Obszar QR ze szczegółami',
     xtQrImageOnly: 'Tylko obrazek QR',
     xtSaveConfirm: 'Zapisz',

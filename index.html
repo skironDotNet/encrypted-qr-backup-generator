@@ -138,10 +138,9 @@
                                 </label>
                                 <input id="adjustQrSize" type="number" onchange="adjustQr()">
                             </div>
-                            <div style="margin-bottom: 10px;">
-                                <b id="xtHideDate">Hide Date</b>
-                                <input id="hideDate" type="checkbox" onchange="hideDate()" style="margin: 5px;">
-                            </div>
+                            <label style="margin-bottom: 10px;">
+                                <input id="hideDate" type="checkbox" onchange="hideDate()" style="margin: 5px;"> <span id="xtHideDate"></span>
+                            </label>
                             <div>
                                 <button id="xtSaveQrImage" type="button" onclick="invokeSaveQrImage()" class="button-primary"></button>
                             </div>
@@ -165,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="readerFloat" class="readerFloat">
+                <div id="readerFloat" class="semi-overlay">
                     <div id="qr-input-layer" class="qr-input-layer">
                         <div id="cameraReaderControls" hidden>
                             <label for="cameras" id="xtSelectCamera"></label>
@@ -354,33 +353,29 @@
                     <span id="xtNoWarranty">No warranty.</span>
                 </div>
             </footer>
-            <div class="printHide">
-                <div id="saveOverlay">
-                    <div id="xtSaveDialogCaption"></div>
-                    <div class="saveOverlayBody">
-                        <div id="hideNoCanvas" hidden>
-                            <div>
-                                <input id="qrAreaWithDetails" name="imgType" type="radio" value="1" checked="checked">
-                                <label id="xtQrAreaWithDetails" for="qrAreaWithDetails"></label>
-                            </div>
-                            <div>
-                                <input id="qrImageOnly" name="imgType" type="radio" value="0">
-                                <label id="xtQrImageOnly" for="qrImageOnly"></label>
-                            </div>
+            <div id="saveOverlay" class="semi-overlay">
+                <div class="saveOverlay">
+                    <div id="hideNoCanvas" style="margin-bottom: 10px" hidden>
+                        <div>
+                            <input id="qrAreaWithDetails" name="imgType" type="radio" value="1" checked="checked">
+                            <label id="xtQrAreaWithDetails" for="qrAreaWithDetails"></label>
                         </div>
-                        <div style="margin-top: 10px">
-                            <label id="xtFileName" for="qrFileName"></label>
-                            <input id="qrFileName" type="text" class="u-full-width">
+                        <div>
+                            <input id="qrImageOnly" name="imgType" type="radio" value="0">
+                            <label id="xtQrImageOnly" for="qrImageOnly"></label>
                         </div>
-                        <div style="margin-top: 10px">
-                            <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary u-pull-right"></button>
-                            <button id="xtClose" type="button" onclick="showSaveDialog(false)" class="button u-pull-left"></button>
-                        </div>
+                    </div>
+                    <div>
+                        <label id="xtFileName" for="qrFileName"></label>
+                        <input id="qrFileName" type="text" class="u-full-width">
+                    </div>
+                        <div class="row stack-buttons">
+                        <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary u-pull-right"></button>
+                        <button id="xtClose" type="button" onclick="showSaveDialog(false)" class="button u-pull-left"></button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="cover"></div>
 
         <script type="text/javascript">
 
@@ -404,7 +399,6 @@
             var validationError = getElement('validationError');
             var saveDialog = getElement('saveOverlay');
             var hideNoCanvas = getElement('hideNoCanvas');
-            var cover = getElement('cover');
             var infoFrame = getElement('infoFrame');
             const scanError = getElement('scanError');
             const scanInfo = getElement('scanInfo');
@@ -771,6 +765,7 @@
                 currentMode = name;
                 highlightModeButton(name);
                 hideReaderFloat();
+                showSaveDialog(false);
                 switch (name) {
                     case "xtDecryption":
                         setDecryptionMode();
@@ -1085,11 +1080,9 @@
             function showSaveDialog(bool) {
                 if (bool) {
                     show(saveDialog);
-                    show(cover);
                 }
                 else {
                     hide(saveDialog);
-                    hide(cover)
                 }
             }
 

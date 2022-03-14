@@ -56,6 +56,10 @@ a:hover {
   margin-bottom: 20px;
 }
 
+.stack-buttons {
+  display: grid;
+}
+
 .navbar-inverse {
   border-radius: 0px;
   padding: 6px;
@@ -166,20 +170,15 @@ footer {
   margin-right: 0.5in;
 }
 
-#saveOverlay {
-  z-index: 1000;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  margin-left: -200px;
-  margin-top: -150px;
-  background-color: rgb(238, 245, 238);
+ .saveOverlay {
+  display: block;
+  background-color: rgb(233, 233, 233);
+  max-width: 400px;
+  word-wrap: break-word;
+  margin: 20px auto;
+  border: solid rgb(153, 153, 153) 2px;
   border-radius: 4px;
-  border: 2px solid rgb(153, 153, 153);
-  box-sizing: border-box;
-  padding: 0px;
-  display: none;
+  padding: 0.8rem;
 }
 
 .resave {
@@ -190,21 +189,6 @@ footer {
 #xtQrImageOnly {
   display: inline;
   margin-left: 8px;
-}
-
-#xtSaveDialogCaption {
-  font-weight: bold;
-  display: block;
-  width: 100%;
-  margin-top: 0px;
-  background-color: #5d5d5d;
-  text-align: center;
-  color: rgb(231, 231, 231);
-  line-height: 200%;
-}
-
-.saveOverlayBody {
-  padding: 18px;
 }
 
 .securityCheck {
@@ -218,24 +202,13 @@ footer {
   max-width: 500px;
 }
 
-#cover {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
 #xtHeadTitle {
   margin-bottom: 20px;
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.readerFloat {
+.semi-overlay {
   display: none;
   position: absolute;
   top: 0;
@@ -264,6 +237,10 @@ video {
   margin: 20px auto;
   border: solid rgb(153, 153, 153) 2px;
   padding: 0.8rem;
+}
+
+#adjustQrSize {
+  width: 100px;
 }
 
 @media (min-width: 550px)
@@ -392,6 +369,12 @@ td img {
 @media (min-width: 450px) {
   .m-pull-right {
     float: right;
+  }
+}
+
+@media (min-width: 300px) {
+  .stack-buttons {
+    display: block;
   }
 }
 
