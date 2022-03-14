@@ -762,6 +762,9 @@
             }
 
             function setModeName(name) {
+                if (currentMode == name) //do not reload forms when just lang change
+                    return;
+
                 currentMode = name;
                 highlightModeButton(name);
                 hideReaderFloat();
@@ -1372,7 +1375,7 @@
                 }
 
                 loadInfoPage();
-
+                setModeName(getModeFromUrl()); //needed on first load from url hash
                 suppressHashChange = false; //need this as URL hash event can finish before lang reload
             };
 
@@ -1395,7 +1398,6 @@
 
             /*** End Lang Engine ***/
 
-            setModeName(getModeFromUrl()); //needed on first load from url hash
             securityCheck();
         </script>
     </body>
