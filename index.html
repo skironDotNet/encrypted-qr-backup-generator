@@ -1374,6 +1374,11 @@
                         scanError.innerHTML = translations[currentScanErrorId] + currentScanErrorBareMessage;
                 }
 
+                if (currentMode == 'xtDecryption')
+                    getElement('xhtPharseHint').placeholder = '';
+                if (currentMode == 'xtNoEncryption')
+                    getElement('xhtPlainTextHint').placeholder = '';
+
                 loadInfoPage();
                 setModeName(getModeFromUrl()); //needed on first load from url hash
                 suppressHashChange = false; //need this as URL hash event can finish before lang reload
