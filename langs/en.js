@@ -53,7 +53,7 @@ var translations = {
     xtErrSecretEmpty: 'Enter the secret to be encrypted',
 
     xhtPlainTextHint: 'Private key(s) or seed(s) or anything to encrypt. Exceeding 1024 characters may result in QR being hard to read by certain software.',
-    xhtPharseHint: 'This must be a minimum 5 words (or 25 characters) to call it strong.',
+    xhtPharseHint: 'This has to have at least 5 words (or 25 characters) to be able to call it strong.',
     xhtEncryptedTextHint: 'Paste encrypted text from your QR, or click the QR icon to scan, or load from file.',
 
     xttScanQrHint: 'Scan QR code using camera',

@@ -1,5 +1,5 @@
 var translations = {
-    xtPharse: 'Mocne Hasło',
+    xtPharse: 'Hasło/Fraza',
     xtPharseConfirm: 'Potwierdź Hasło',
     xtPlainTextLabel: 'Sekret do zaszyfrowania',
     xtPlainTextLabel2: 'Tekst dla QR',
@@ -18,8 +18,8 @@ var translations = {
     xtSaveQrHtml: 'Zapisz jako HTML',
     xtPrint: 'Drukuj',
     xtAdjustQrSize: 'Rozmiar QR',
-    xtErrPharseTooShort: 'Mocne hasło za krótkie!',
-    xtErrPharseNotMatch: 'Mocne hasło nie pasuje do Potwierdź Hasło!',
+    xtErrPharseTooShort: 'Hasło/Fraza za krótkie!',
+    xtErrPharseNotMatch: 'Hasło/Fraza nie pasuje do Potwierdź Hasło!',
     xtCopyOthers: 'Prawa autorskie JavaScript załączone w kodach źródłowych.',
     xtNoWarranty: 'Bez gwarancji.',
     xtDownloadSource: 'Pobierz z GitHub',
@@ -53,7 +53,7 @@ var translations = {
     xtErrSecretEmpty: 'Wprowadź sekret, który chcesz zaszyfrować',
     
     xhtPlainTextHint: 'Klucz prywatny lub słowa "seed" lub cokolwiek do zaszyfrowania. Przekroczenie 1024 znaków może spowodować, że QR będzie ciężko odczytać przez niektóre oprogramowanie',
-    xhtPharseHint: 'To musi mieć minimum 5 słów (lub 25 znaków) żeby móc nazwać mocnym.',
+    xhtPharseHint: 'To musi mieć co najmniej 5 słów (lub 25 znaków), żeby móc nazwać silnym.',
     xhtEncryptedTextHint: 'Wklej zaszyfrowany tekst z twojego QR, lub kliknij ikonę QR żeby zeskanować, lub załaduj z pliku.',
 
     xttScanQrHint: 'Zeskanuj kod QR za pomocą kamery',
