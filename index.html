@@ -761,6 +761,7 @@
                 highlightModeButton(name);
                 hideReaderFloat();
                 showSaveDialog(false);
+                showQrSavebuttons(false);
                 switch (name) {
                     case "xtDecryption":
                         setPageTitle(name);
@@ -878,6 +879,7 @@
                 show(pharseConfirmComponent);
                 getElement('xhtPharseHint').placeholder = translations['xhtPharseHint'];
                 showPhrase();
+                showQrSavebuttons(true);
             }
 
             function setDecryptionMode() {
@@ -902,6 +904,7 @@
                 show(xtGenerate);
                 hide(xtDecrypt);
                 hide(twoFactorInputs);
+                showQrSavebuttons(true);
             }
 
             function set2FaMode() {
@@ -1153,6 +1156,12 @@
                 showScanError(null);
                 fileinput.value = null;
                 stopScanning();
+            }
+
+            function showQrSavebuttons(visible) {
+                getElement('xtSaveQrImage').style.visibility = 
+                getElement('xtSaveQrHtml').style.visibility = 
+                getElement('xtPrint').style.visibility = visible ? 'visible' : 'hidden';
             }
 
             function showScanError(id, bareMessage) {
