@@ -838,6 +838,11 @@
                 return getModeFromHashName(parsedUrl.hashObject[1])
             }
 
+            function changeUrlLang(langCode) {
+                var parsedUrl = parseURL(parent.location);
+                setUrlHash(langCode, parsedUrl.hashObject[1])
+            }
+
             function showPage(pageName) {
                 for (var i = 0; i < pages.length; i++) {
                     var pageNode = getElement('page' + pages[i]);
@@ -1296,6 +1301,7 @@
 
             function setLang(obj) {
                 loadLangFile(obj.id, updateLang);
+                changeUrlLang(obj.id);
             }
 
             function loadLangFile(langCode, callback) {
@@ -1324,7 +1330,6 @@
                 script.src = 'langs/' + currentLangCode + '.js?v=' + new Date().getTime();
                 script.id = 'langFile';
 
-                script.onreadystatechange = callback;
                 script.onload = callback;
 
                 head.appendChild(script);
@@ -1335,7 +1340,7 @@
                 var html = '';
                 langsAvailable.forEach(function (lang) {
                     if (langSelected == lang.Code)
-                        html += '<span><a id="' + lang.Code + '" class="selected" onclick="setLang(this)">' + lang.Name + '</a></span> | '
+                        html += '<span><a id="' + lang.Code + '" class="selected">' + lang.Name + '</a></span> | '
                     else
                         html += '<span><a id="' + lang.Code + '" onclick="setLang(this)">' + lang.Name + '</a></span> | '
                 }, this);
