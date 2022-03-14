@@ -130,19 +130,15 @@
                                 <div id="qrPrintDate" style="margin-top: 20px; font-size: small;"></div>
                             </div>
                         </div>
-                        <div class="row stack-buttons printHide">
+                        <div class="row printHide">
                             <label>
                                 <span id="xtAdjustQrSize"></span>
                             </label>
                             <input id="adjustQrSize" type="number" onchange="adjustQr()">
 
-                            <label style="display: inline-block;">
+                            <label style="display: inline-block; margin-bottom: 10px;">
                                 <input id="hideDate" type="checkbox" onchange="hideDate()" style="margin: 5px;"> <span id="xtHideDate"></span>
                             </label>
-
-                            <button id="xtSaveQrImage" type="button" onclick="invokeSaveQrImage()" class="button-primary"></button>
-                            <button id="xtSaveQrHtml" type="button" onclick="invokeSaveQrHtml()" class="button-primary"></button>
-                            <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
                         </div>
                         <a id="qrDownload" href="" download="" hidden></a>
                     </div>
@@ -152,8 +148,36 @@
                             <span id="xtDecQrData" hidden></span>
                         </label>
                         <textarea id="qrData" class="u-full-width" readonly></textarea>
-                        <div class="right">
+                        <div class="row right stack-buttons-dec">
+                            <button id="xtSaveQrImage" type="button" onclick="invokeSaveQrImage()" class="button-primary"></button>
+                            <button id="xtSaveQrHtml" type="button" onclick="invokeSaveQrHtml()" class="button-primary"></button>
+                            <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
                             <button id="xtClose" type="button" onclick="showResult(false)" class="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="test" class="centerX">
+
+                </div>
+                <div id="saveOverlay" class="semi-overlay">
+                    <div class="saveOverlay">
+                        <div id="hideNoCanvas" style="margin-bottom: 10px" hidden>
+                            <div>
+                                <input id="qrAreaWithDetails" name="imgType" type="radio" value="1" checked="checked">
+                                <label id="xtQrAreaWithDetails" for="qrAreaWithDetails"></label>
+                            </div>
+                            <div>
+                                <input id="qrImageOnly" name="imgType" type="radio" value="0">
+                                <label id="xtQrImageOnly" for="qrImageOnly"></label>
+                            </div>
+                        </div>
+                        <div>
+                            <label id="xtFileName" for="qrFileName"></label>
+                            <input id="qrFileName" type="text" class="u-full-width">
+                        </div>
+                            <div class="row stack-buttons">
+                            <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary u-pull-right"></button>
+                            <button id="xtClose" type="button" onclick="showSaveDialog(false)" class="button u-pull-left"></button>
                         </div>
                     </div>
                 </div>
@@ -346,28 +370,6 @@
                     <span id="xtNoWarranty">No warranty.</span>
                 </div>
             </footer>
-            <div id="saveOverlay" class="semi-overlay">
-                <div class="saveOverlay">
-                    <div id="hideNoCanvas" style="margin-bottom: 10px" hidden>
-                        <div>
-                            <input id="qrAreaWithDetails" name="imgType" type="radio" value="1" checked="checked">
-                            <label id="xtQrAreaWithDetails" for="qrAreaWithDetails"></label>
-                        </div>
-                        <div>
-                            <input id="qrImageOnly" name="imgType" type="radio" value="0">
-                            <label id="xtQrImageOnly" for="qrImageOnly"></label>
-                        </div>
-                    </div>
-                    <div>
-                        <label id="xtFileName" for="qrFileName"></label>
-                        <input id="qrFileName" type="text" class="u-full-width">
-                    </div>
-                        <div class="row stack-buttons">
-                        <button id="xtSaveConfirm" type="button" onclick="saveQr()" class="button-primary u-pull-right"></button>
-                        <button id="xtClose" type="button" onclick="showSaveDialog(false)" class="button u-pull-left"></button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <script type="text/javascript">
