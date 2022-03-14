@@ -121,8 +121,8 @@
                 </form>
 
                 <div id="qrResult" hidden>
-                    <div id="qrSection" class="row">
-                        <div id="printQr" class="nine columns">
+                    <div id="qrSection" >
+                        <div id="printQr">
                             <div id="qrHolder" style="background-color: white; border: 2px dashed black; padding: 20px; display: inline-block; margin-bottom: 20px; text-align: center; font-family: Arial; font-size: 15px; line-height: normal;">
                                 <div id=qrResultLabel style="font-weight: bold; margin-bottom: 15px; word-break: break-all;">Label</div>
                                 <img id="mainQr" alt="Encrypted QR" style="vertical-align: top;" />
@@ -130,28 +130,21 @@
                                 <div id="qrPrintDate" style="margin-top: 20px; font-size: small;"></div>
                             </div>
                         </div>
+                        <div class="row stack-buttons printHide">
+                            <label>
+                                <span id="xtAdjustQrSize"></span>
+                            </label>
+                            <input id="adjustQrSize" type="number" onchange="adjustQr()">
 
-                        <div class="three columns right printHide">
-                            <div style="display: inline-block">
-                                <label>
-                                    <span id="xtAdjustQrSize" class="u-pull-left"></span>
-                                </label>
-                                <input id="adjustQrSize" type="number" onchange="adjustQr()">
-                            </div>
-                            <label style="margin-bottom: 10px;">
+                            <label style="display: inline-block;">
                                 <input id="hideDate" type="checkbox" onchange="hideDate()" style="margin: 5px;"> <span id="xtHideDate"></span>
                             </label>
-                            <div>
-                                <button id="xtSaveQrImage" type="button" onclick="invokeSaveQrImage()" class="button-primary"></button>
-                            </div>
-                            <div>
-                                <button id="xtSaveQrHtml" type="button" onclick="invokeSaveQrHtml()" class="button-primary"></button>
-                            </div>
-                            <div>
-                                <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
-                            </div>
-                            <a id="qrDownload" href="" download="" hidden></a>
+
+                            <button id="xtSaveQrImage" type="button" onclick="invokeSaveQrImage()" class="button-primary"></button>
+                            <button id="xtSaveQrHtml" type="button" onclick="invokeSaveQrHtml()" class="button-primary"></button>
+                            <button id="xtPrint" type="button" onclick="javascript:window.print();" class="button-primary"></button>
                         </div>
+                        <a id="qrDownload" href="" download="" hidden></a>
                     </div>
                     <div class="printHide">
                         <label>
