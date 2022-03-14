@@ -3,7 +3,7 @@ var translations = {
     xtPharseConfirm: 'Confirm Passphrase',
     xtPlainTextLabel: 'Secret to Encrypt',
     xtPlainTextLabel2: 'Text for QR',
-    xtEncQrData: 'QR Data',
+    xtEncQrData: 'Data in the QR',
     xtQrLabel: 'QR Label',
     xtQrDescription: 'QR Description',
     xtOptional: '(Optional)',
