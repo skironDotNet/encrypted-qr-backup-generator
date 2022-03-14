@@ -395,11 +395,11 @@
             const scanError = getElement('scanError');
             const scanInfo = getElement('scanInfo');
             const readerFloat = getElement('readerFloat');
-            const fileinput = document.getElementById('qr-input-file');
-            const cameras = document.getElementById('cameras');
-            const cameraReaderControls = document.getElementById('cameraReaderControls');
-            const imageReaderControls = document.getElementById('imageReaderControls');
-            const pharseConfirmComponent = document.getElementById('pharseConfirmComponent');
+            const fileinput = getElement('qr-input-file');
+            const cameras = getElement('cameras');
+            const cameraReaderControls = getElement('cameraReaderControls');
+            const imageReaderControls = getElement('imageReaderControls');
+            const pharseConfirmComponent = getElement('pharseConfirmComponent');
 
             var option = document.createElement('option');
             var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -675,7 +675,7 @@
                     if (hideInfoOnce) {
                         showScanInfo(null);
                         hideInfoOnce = false;
-                        let r = document.getElementById('reader');
+                        let r = getElement('reader');
                         r.firstChild.style = null; //first child is video and I must remove hardcoded width by html5-qrcode lib to apply my 100% to allow dynamic resizing
                     }
                 })
