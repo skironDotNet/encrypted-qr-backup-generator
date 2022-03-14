@@ -140,6 +140,10 @@ footer {
   margin-bottom: 10px;
 }
 
+#qrData {
+  background-color: whitesmoke;
+}
+
 @media print {
   body {
     background-color: white;
@@ -245,7 +249,8 @@ video {
 }
 
 #adjustQrSize {
-  width: 100px;
+  width: 95px;
+  margin-right: 35px;
 }
 
 @media (min-width: 550px)
