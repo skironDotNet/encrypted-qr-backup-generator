@@ -26,7 +26,7 @@
             <div class="container">
                 <div id="langMenu"></div>
                 <div id="xtHeadTitle"></div>
-                <div id="modes">
+                <div id="modes" class="stack-buttons">
                     <button id="xtEncryption" class="button button-page" onclick="setMode(this)" disabled="disabled"></button>
                     <button id="xtDecryption" onclick="setMode(this)"></button>
                     <button id="xtNoEncryption" onclick="setMode(this)"></button>
@@ -106,10 +106,10 @@
                         </label>
                         <input type="text" name="twoFactorSecretKey" class="u-full-width" onkeypress="hide(twoFactorResult)">
                     </div>
-                    <div class="row">
-                            <button id="xtGenerate" type="button" onclick="generate()" class="button-primary m-pull-left"></button>
-                            <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary m-pull-left" hidden></button>
-                            <button id="xtClearForm" type="button" onclick="clearForm('qrForm')" class="button m-pull-right"></button>
+                    <div class="row stack-buttons-dec">
+                            <button id="xtGenerate" type="button" onclick="generate()" class="button-primary u-pull-left"></button>
+                            <button id="xtDecrypt" type="button" onclick="decrypt()" class="button-primary u-pull-left" hidden></button>
+                            <button id="xtClearForm" type="button" onclick="clearForm('qrForm')" class="button u-pull-right"></button>
                     </div>
                     <div id="twoFactorResult" class="center" hidden>
                         <label>
